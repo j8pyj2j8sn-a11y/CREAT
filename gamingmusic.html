@@ -1650,13 +1650,17 @@ currentIndex = index;
 
 player.src = card.dataset.song;
 
-player.play();
+player.play().catch(()=>{});
+
+
+background.style.transition="background .6s ease";
 
 background.style.background=
 
 `radial-gradient(circle at top,
 ${card.dataset.color},
 #050505 75%)`;
+
 
 }
 
@@ -1679,6 +1683,12 @@ card.classList.add("active");
 player.pause();
 
 card.classList.remove("active");
+
+card.style.boxShadow="";
+
+background.style.background=
+
+"radial-gradient(circle at top,#121212,#050505 75%)";
 
 }
 
