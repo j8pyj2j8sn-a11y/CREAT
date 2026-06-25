@@ -4,223 +4,18 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>WE CREATE • Music</title>
+<title>WE CREATE • Game Music</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-<div class="background-blur"></div>
-
-<div class="background-gradient"></div>
-
-<div class="glass-overlay"></div>
-
-<header>
-
-<div class="logo">
-
-<div class="logo-circle"></div>
-
-<span>WE CREATE</span>
-
-</div>
-
-<nav>
-
-<a href="#">Home</a>
-
-<a href="#">Music</a>
-
-<a href="#">About</a>
-
-</nav>
-
-</header>
-
-<main>
-
-<section class="hero">
-
-<h4>
-DISCOVER • LISTEN • DOWNLOAD
-</h4>
-
-<h1>
-
-WE CREATE
-
-<span>FOR YOU</span>
-
-</h1>
-
-<p>
-
-Explore a curated collection of meme sounds,
-ambient music,
-royalty-free tracks
-and cinematic audio.
-
-</p>
-
-</section>
-
-<section class="music-container">
-
-<div class="section-title">
-
-Music Collection
-
-</div>
-
-<div class="music-list">
-
-<!-- SONG 1 -->
-
-<div class="song-card"
-data-song="songs/song1.mp3"
-data-color="#7A5CFF">
-
-<img
-src="covers/cover1.jpg"
-class="cover">
-
-<div class="song-info">
-
-<h2>Midnight Echo</h2>
-
-<h3>Lounge Music</h3>
-
-</div>
-
-<div class="equalizer">
-
-<span></span>
-<span></span>
-<span></span>
-
-</div>
-
-</div>
-
-<!-- SONG 2 -->
-
-<div class="song-card"
-data-song="songs/song2.mp3"
-data-color="#FF4DA6">
-
-<img
-src="covers/cover2.jpg"
-class="cover">
-
-<div class="song-info">
-
-<h2>Aurora Dreams</h2>
-
-<h3>Ambient</h3>
-
-</div>
-
-<div class="equalizer">
-
-<span></span>
-<span></span>
-<span></span>
-
-</div>
-
-</div>
-
-<!-- SONG 3 -->
-
-<div class="song-card"
-data-song="songs/song3.mp3"
-data-color="#00E5FF">
-
-<img
-src="covers/cover3.jpg"
-class="cover">
-
-<div class="song-info">
-
-<h2>Silent Rain</h2>
-
-<h3>Nature</h3>
-
-</div>
-
-<div class="equalizer">
-
-<span></span>
-<span></span>
-<span></span>
-
-</div>
-
-</div>
-
-<!-- SONG 4 -->
-
-<div class="song-card"
-data-song="songs/song4.mp3"
-data-color="#33FF99">
-
-<img
-src="covers/cover4.jpg"
-class="cover">
-
-<div class="song-info">
-
-<h2>Ocean Waves</h2>
-
-<h3>Relax</h3>
-
-</div>
-
-<div class="equalizer">
-
-<span></span>
-<span></span>
-<span></span>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-<div class="search-bar">
-
-<input
-type="text"
-id="search"
-placeholder="Search songs, artists or albums...">
-
-</div>
-
-<audio id="player"></audio>
-
-<script src="script.js"></script>
-
-/*============================
-
-WE CREATE
-Premium Music Player
-
-=============================*/
+<style>
 
 *{
 margin:0;
@@ -237,38 +32,17 @@ body{
 
 background:#050505;
 
-color:white;
+color:#fff;
 
-overflow:hidden;
-
-height:100vh;
-
-transition:1s ease;
+overflow-x:hidden;
 
 }
 
 /* Background */
 
-.background-gradient{
+body::before{
 
-position:fixed;
-
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-background:
-radial-gradient(circle at top,#141414 0%,#050505 70%);
-
-z-index:-3;
-
-transition:1s ease;
-
-}
-
-.background-blur{
+content:"";
 
 position:fixed;
 
@@ -280,19 +54,21 @@ linear-gradient(
 
 180deg,
 
-rgba(0,0,0,.4),
+rgba(0,0,0,.95),
+
+rgba(0,0,0,.75),
+
+rgba(0,0,0,.35),
 
 rgba(0,0,0,.95)
 
 );
 
-backdrop-filter:blur(60px);
-
 z-index:-2;
 
 }
 
-.glass-overlay{
+.bg{
 
 position:fixed;
 
@@ -300,17 +76,11 @@ inset:0;
 
 background:
 
-linear-gradient(
+radial-gradient(circle at top,#222,#050505 70%);
 
-180deg,
+transition:1s;
 
-rgba(255,255,255,.03),
-
-rgba(255,255,255,0)
-
-);
-
-pointer-events:none;
+z-index:-3;
 
 }
 
@@ -321,11 +91,12 @@ header{
 position:fixed;
 
 top:0;
+
 left:0;
 
 width:100%;
 
-padding:25px 50px;
+padding:22px 60px;
 
 display:flex;
 
@@ -333,21 +104,17 @@ justify-content:space-between;
 
 align-items:center;
 
-z-index:100;
-
 backdrop-filter:blur(20px);
+
+background:rgba(0,0,0,.18);
+
+z-index:1000;
 
 }
 
 .logo{
 
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-font-size:24px;
+font-size:28px;
 
 font-weight:800;
 
@@ -355,28 +122,17 @@ letter-spacing:2px;
 
 }
 
-.logo-circle{
+.logo span{
 
-width:14px;
-height:14px;
-
-border-radius:50%;
-
-background:#00eaff;
-
-box-shadow:
-
-0 0 20px #00eaff;
+color:#00E5FF;
 
 }
-
-/* Navigation */
 
 nav{
 
 display:flex;
 
-gap:40px;
+gap:35px;
 
 }
 
@@ -394,7 +150,7 @@ transition:.3s;
 
 nav a:hover{
 
-color:#00eaff;
+color:#00E5FF;
 
 }
 
@@ -402,37 +158,33 @@ color:#00eaff;
 
 .hero{
 
-padding-top:140px;
+padding-top:150px;
 
-padding-left:70px;
+text-align:center;
 
-max-width:700px;
-
-animation:fadeUp 1s ease;
+padding-bottom:60px;
 
 }
 
 .hero h4{
 
-color:#00eaff;
-
 letter-spacing:5px;
 
-margin-bottom:20px;
+color:#00E5FF;
 
 font-size:14px;
+
+margin-bottom:20px;
 
 }
 
 .hero h1{
 
-font-size:95px;
+font-size:85px;
 
 font-weight:900;
 
 line-height:.9;
-
-margin-bottom:30px;
 
 }
 
@@ -440,89 +192,65 @@ margin-bottom:30px;
 
 display:block;
 
-color:#8fefff;
+color:#d8d8d8;
 
 }
 
 .hero p{
 
-font-size:20px;
+margin:auto;
+
+margin-top:25px;
+
+max-width:720px;
+
+font-size:19px;
 
 line-height:1.8;
 
-color:#d5d5d5;
-
-max-width:650px;
+color:#c5c5c5;
 
 }
 
 /* Music Section */
 
-.music-container{
+.music{
 
-margin-top:80px;
-
-padding:0 70px 140px;
-
-height:55vh;
-
-overflow-y:auto;
-
-scrollbar-width:none;
+padding:0 60px 140px;
 
 }
 
-.music-container::-webkit-scrollbar{
+.music h2{
 
-display:none;
+font-size:28px;
 
-}
-
-.section-title{
-
-font-size:26px;
-
-font-weight:700;
-
-margin-bottom:30px;
+margin-bottom:25px;
 
 }
 
-/* Music Cards */
-
-.music-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:20px;
-
-}
-
-.song-card{
+.card{
 
 display:flex;
 
 align-items:center;
 
-gap:20px;
+gap:18px;
 
 padding:18px;
 
-border-radius:28px;
+margin-bottom:18px;
 
-background:
-
-rgba(255,255,255,.05);
-
-backdrop-filter:blur(20px);
+background:rgba(255,255,255,.05);
 
 border:1px solid rgba(255,255,255,.08);
 
-cursor:pointer;
+border-radius:24px;
+
+backdrop-filter:blur(20px);
 
 transition:.35s;
+
+cursor:pointer;
 
 position:relative;
 
@@ -530,65 +258,15 @@ overflow:hidden;
 
 }
 
-.song-card:hover{
+.card:hover{
 
-transform:translateY(-4px);
+transform:translateY(-3px);
 
-background:
-
-rgba(255,255,255,.08);
+background:rgba(255,255,255,.08);
 
 }
 
-/* RGB Glow */
-
-.song-card::before{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-padding:1px;
-
-border-radius:28px;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-#00ffff,
-
-#4d7cff,
-
-#ff00ff,
-
-#00ffff
-
-);
-
-background-size:300%;
-
-animation:rgbMove 6s linear infinite;
-
--webkit-mask:
-
-linear-gradient(#fff 0 0) content-box,
-
-linear-gradient(#fff 0 0);
-
--webkit-mask-composite:xor;
-
-pointer-events:none;
-
-}
-
-/* Album */
-
-.cover{
+.card img{
 
 width:75px;
 
@@ -598,103 +276,63 @@ border-radius:18px;
 
 object-fit:cover;
 
-transition:.4s;
-
 }
 
-.song-card:hover .cover{
-
-transform:scale(1.08);
-
-}
-
-/* Text */
-
-.song-info{
+.info{
 
 flex:1;
 
 }
 
-.song-info h2{
+.info h3{
 
-font-size:20px;
+font-size:21px;
 
-margin-bottom:8px;
-
-}
-
-.song-info h3{
-
-font-size:15px;
-
-font-weight:400;
-
-color:#bdbdbd;
+margin-bottom:6px;
 
 }
 
-/* Equalizer */
+.info p{
 
-.equalizer{
+color:#bfbfbf;
+
+}
+
+.download{
+
+width:44px;
+
+height:44px;
+
+border-radius:50%;
 
 display:flex;
 
-align-items:flex-end;
+justify-content:center;
 
-gap:5px;
+align-items:center;
 
-height:28px;
+background:rgba(255,255,255,.08);
 
-opacity:0;
+font-size:22px;
 
 transition:.3s;
 
 }
 
-.song-card.active .equalizer{
+.download:hover{
 
-opacity:1;
+background:#00E5FF;
 
-}
+color:black;
 
-.equalizer span{
-
-width:4px;
-
-background:#00ffff;
-
-border-radius:10px;
-
-animation:equalizer .8s infinite alternate;
+transform:scale(1.08);
 
 }
 
-.equalizer span:nth-child(1){
+/* Search */
 
-height:10px;
-
-}
-
-.equalizer span:nth-child(2){
-
-height:22px;
-
-animation-delay:.2s;
-
-}
-
-.equalizer span:nth-child(3){
-
-height:15px;
-
-animation-delay:.4s;
-
-}
-
-/* Bottom Search */
-
-.search-bar{
+.search{
 
 position:fixed;
 
@@ -706,25 +344,21 @@ transform:translateX(-50%);
 
 width:min(700px,92%);
 
-z-index:999;
-
 }
 
-.search-bar input{
+.search input{
 
 width:100%;
 
-padding:18px 24px;
-
-border-radius:50px;
+padding:18px 22px;
 
 border:none;
 
 outline:none;
 
-background:
+border-radius:50px;
 
-rgba(255,255,255,.08);
+background:rgba(255,255,255,.08);
 
 backdrop-filter:blur(20px);
 
@@ -734,63 +368,9 @@ font-size:17px;
 
 }
 
-.search-bar input::placeholder{
+.search input::placeholder{
 
-color:#b8b8b8;
-
-}
-
-/* Animations */
-
-@keyframes rgbMove{
-
-0%{
-
-background-position:0%;
-
-}
-
-100%{
-
-background-position:300%;
-
-}
-
-}
-
-@keyframes equalizer{
-
-from{
-
-transform:scaleY(.5);
-
-}
-
-to{
-
-transform:scaleY(1.4);
-
-}
-
-}
-
-@keyframes fadeUp{
-
-from{
-
-opacity:0;
-
-transform:translateY(40px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
+color:#bbb;
 
 }
 
@@ -810,12 +390,6 @@ display:none;
 
 }
 
-.hero{
-
-padding:120px 25px 0;
-
-}
-
 .hero h1{
 
 font-size:55px;
@@ -826,562 +400,107 @@ font-size:55px;
 
 font-size:16px;
 
+padding:0 20px;
+
 }
 
-.music-container{
+.music{
 
 padding:0 20px 120px;
 
-height:58vh;
-
 }
 
-.cover{
+.card img{
 
 width:60px;
+
 height:60px;
 
 }
 
-.song-info h2{
-
-font-size:17px;
-
 }
 
-}
-/*==============================
+</style>
 
-WE CREATE
-Premium Music Player
+</head>
 
-Part 3A
+<body>
 
-===============================*/
+<div class="bg"></div>
 
-const player = document.getElementById("player");
+<header>
 
-const cards = document.querySelectorAll(".song-card");
+<div class="logo">
 
-const background = document.querySelector(".background-gradient");
+WE <span>CREATE</span>
 
-const search = document.getElementById("search");
+</div>
 
-let currentCard = null;
+<nav>
 
-let isPlaying = false;
+<a href="#">Home</a>
 
-let holdTimer = null;
+<a href="#">Game Music</a>
 
-let seeking = false;
+<a href="#">NCS</a>
 
-/* ===========================
-PLAY SONG
-=========================== */
+<a href="#">Troll Wallet</a>
 
-cards.forEach(card=>{
+</nav>
 
-card.addEventListener("click",()=>{
+</header>
 
-if(currentCard===card){
+<section class="hero">
 
-if(isPlaying){
+<h4>
 
-player.pause();
+DISCOVER • LISTEN • DOWNLOAD
 
-card.classList.remove("active");
+</h4>
 
-isPlaying=false;
+<h1>
 
-}else{
+GAME
 
-player.play();
+<span>MUSIC</span>
 
-card.classList.add("active");
+</h1>
 
-isPlaying=true;
+<p>
 
-}
+Explore a premium collection of cinematic game music, ambient soundtracks, royalty-free audio and immersive background tracks.
 
-return;
+</p>
 
-}
+</section>
 
-cards.forEach(item=>{
+<section class="music">
 
-item.classList.remove("active");
+<h2>Latest Tracks</h2>
 
-});
+<div class="card">
 
-currentCard=card;
+<img src="covers/cover1.jpg">
 
-player.src=card.dataset.song;
+<div class="info">
 
-player.play();
+<h3>Midnight Echo</h3>
 
-card.classList.add("active");
+<p>Lounge Music • 03:42</p>
 
-isPlaying=true;
+</div>
 
-changeTheme(card.dataset.color);
+<div class="download">⬇</div>
 
-});
+</div>
 
-});
+</section>
 
-/* ===========================
-BACKGROUND CHANGE
-=========================== */
+<div class="search">
 
-function changeTheme(color){
+<input type="text" placeholder="Search music...">
 
-background.style.background=
-
-`radial-gradient(circle at top,
-${color}33 0%,
-#050505 75%)`;
-
-document.body.style.transition="1s";
-
-}
-
-/* ===========================
-SEARCH
-=========================== */
-
-search.addEventListener("keyup",()=>{
-
-const value=search.value.toLowerCase();
-
-cards.forEach(card=>{
-
-const title=
-
-card.querySelector("h2").innerText.toLowerCase();
-
-const artist=
-
-card.querySelector("h3").innerText.toLowerCase();
-
-if(title.includes(value)||artist.includes(value)){
-
-card.style.display="flex";
-
-}else{
-
-card.style.display="none";
-
-}
-
-});
-
-});
-
-/* ===========================
-RGB GLOW
-=========================== */
-
-cards.forEach(card=>{
-
-const color=card.dataset.color;
-
-card.style.boxShadow=
-
-`0 0 15px ${color}55`;
-
-});
-
-/*====================================
-
-PART 3B
-Premium Animations
-
-=====================================*/
-
-// ==========================
-// Equalizer Animation
-// ==========================
-
-player.addEventListener("play",()=>{
-
-if(currentCard){
-
-currentCard.classList.add("active");
-
-}
-
-});
-
-player.addEventListener("pause",()=>{
-
-if(currentCard){
-
-currentCard.classList.remove("active");
-
-}
-
-});
-
-player.addEventListener("ended",()=>{
-
-if(currentCard){
-
-currentCard.classList.remove("active");
-
-}
-
-isPlaying=false;
-
-});
-
-// ==========================
-// Album Zoom Animation
-// ==========================
-
-cards.forEach(card=>{
-
-card.addEventListener("mouseenter",()=>{
-
-const cover=card.querySelector(".cover");
-
-cover.style.transform="scale(1.08)";
-
-});
-
-card.addEventListener("mouseleave",()=>{
-
-if(card!==currentCard){
-
-const cover=card.querySelector(".cover");
-
-cover.style.transform="scale(1)";
-
-}
-
-});
-
-});
-
-// ==========================
-// Dynamic RGB Glow
-// ==========================
-
-function activateGlow(card){
-
-cards.forEach(item=>{
-
-item.style.boxShadow="none";
-
-});
-
-const color=card.dataset.color;
-
-card.style.boxShadow=`
-0 0 25px ${color},
-0 0 60px ${color}88,
-0 0 120px ${color}55`;
-
-}
-
-cards.forEach(card=>{
-
-card.addEventListener("click",()=>{
-
-activateGlow(card);
-
-});
-
-});
-
-// ==========================
-// Smooth Background
-// ==========================
-
-function smoothBackground(color){
-
-background.style.transition="1.2s ease";
-
-background.style.background=
-
-`radial-gradient(circle at top,
-${color}55,
-#050505 80%)`;
-
-}
-
-cards.forEach(card=>{
-
-card.addEventListener("click",()=>{
-
-smoothBackground(card.dataset.color);
-
-});
-
-});
-
-// ==========================
-// Active Card Scale
-// ==========================
-
-cards.forEach(card=>{
-
-card.addEventListener("click",()=>{
-
-cards.forEach(item=>{
-
-item.style.transform="scale(1)";
-
-});
-
-card.style.transform="scale(1.02)";
-
-});
-
-});
-
-// ==========================
-// Smooth Scroll
-// ==========================
-
-document.querySelector(".music-container").style.scrollBehavior="smooth";
-
-// ==========================
-// Search Animation
-// ==========================
-
-search.addEventListener("focus",()=>{
-
-search.parentElement.style.transform=
-"translateX(-50%) scale(1.03)";
-
-});
-
-search.addEventListener("blur",()=>{
-
-search.parentElement.style.transform=
-"translateX(-50%) scale(1)";
-
-});
-
-/*==================================
-
-PART 3C
-Premium Features
-
-===================================*/
-
-// =========================
-// Auto Next Song
-// =========================
-
-player.addEventListener("ended",()=>{
-
-let currentIndex=[...cards].indexOf(currentCard);
-
-let next=currentIndex+1;
-
-if(next>=cards.length){
-
-next=0;
-
-}
-
-cards[next].click();
-
-});
-
-// =========================
-// Long Press Seek
-// =========================
-
-cards.forEach(card=>{
-
-card.addEventListener("mousedown",(e)=>{
-
-holdTimer=setTimeout(()=>{
-
-seeking=true;
-
-},500);
-
-});
-
-card.addEventListener("mouseup",()=>{
-
-clearTimeout(holdTimer);
-
-seeking=false;
-
-});
-
-card.addEventListener("mouseleave",()=>{
-
-clearTimeout(holdTimer);
-
-seeking=false;
-
-});
-
-card.addEventListener("mousemove",(e)=>{
-
-if(!seeking)return;
-
-const rect=card.getBoundingClientRect();
-
-const percent=(e.clientX-rect.left)/rect.width;
-
-player.currentTime=player.duration*percent;
-
-});
-
-});
-
-// =========================
-// Mobile Long Press
-// =========================
-
-cards.forEach(card=>{
-
-card.addEventListener("touchstart",()=>{
-
-holdTimer=setTimeout(()=>{
-
-seeking=true;
-
-},500);
-
-});
-
-card.addEventListener("touchend",()=>{
-
-clearTimeout(holdTimer);
-
-seeking=false;
-
-});
-
-});
-
-// =========================
-// Progress Ring
-// =========================
-
-player.addEventListener("timeupdate",()=>{
-
-if(!currentCard)return;
-
-const cover=currentCard.querySelector(".cover");
-
-const progress=player.currentTime/player.duration;
-
-cover.style.boxShadow=
-
-`0 0 ${20+progress*35}px ${currentCard.dataset.color}`;
-
-});
-
-// =========================
-// Smooth Fade
-// =========================
-
-player.volume=1;
-
-function fadeIn(){
-
-player.volume=0;
-
-let volume=0;
-
-const fade=setInterval(()=>{
-
-volume+=0.05;
-
-player.volume=volume;
-
-if(volume>=1){
-
-clearInterval(fade);
-
-}
-
-},40);
-
-}
-
-player.addEventListener("play",fadeIn);
-
-// =========================
-// Keyboard Shortcuts
-// =========================
-
-document.addEventListener("keydown",(e)=>{
-
-if(e.code==="Space"){
-
-e.preventDefault();
-
-if(player.paused){
-
-player.play();
-
-}else{
-
-player.pause();
-
-}
-
-}
-
-});
-
-// =========================
-// Smooth Card Reveal
-// =========================
-
-const observer=new IntersectionObserver(entries=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.style.opacity=1;
-
-entry.target.style.transform="translateY(0)";
-
-}
-
-});
-
-});
-
-cards.forEach(card=>{
-
-card.style.opacity=0;
-
-card.style.transform="translateY(30px)";
-
-observer.observe(card);
-
-});
-
-// =========================
-// Loading Animation
-// =========================
-
-window.addEventListener("load",()=>{
-
-document.body.style.opacity=0;
-
-setTimeout(()=>{
-
-document.body.style.transition="opacity .8s";
-
-document.body.style.opacity=1;
-
-},100);
-
-});
-
+</div>
 
 </body>
 
