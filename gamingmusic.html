@@ -672,6 +672,69 @@ Explore a premium collection of cinematic game music, ambient soundtracks, royal
 <input type="text" placeholder="Search music...">
 
 </div>
+  <audio id="player"></audio>
+
+<script>
+
+const player=document.getElementById("player");
+
+const cards=document.querySelectorAll(".card");
+
+const background=document.querySelector(".bg");
+
+let current=null;
+
+cards.forEach(card=>{
+
+card.addEventListener("click",(e)=>{
+
+if(e.target.classList.contains("download")) return;
+
+const song=card.dataset.song;
+
+const color=card.dataset.color;
+
+if(current===card && !player.paused){
+
+player.pause();
+
+card.classList.remove("active");
+
+return;
+
+}
+
+cards.forEach(c=>c.classList.remove("active"));
+
+card.classList.add("active");
+
+current=card;
+
+player.src=song;
+
+player.play();
+
+background.style.background=
+
+`radial-gradient(circle at top,
+${color},
+#050505 75%)`;
+
+});
+
+});
+
+player.addEventListener("ended",()=>{
+
+if(current){
+
+current.classList.remove("active");
+
+}
+
+});
+
+</script>
 
 </body>
 
