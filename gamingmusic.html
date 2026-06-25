@@ -1620,43 +1620,73 @@ const cards=document.querySelectorAll(".card");
 
 const background=document.querySelector(".bg");
 
-let current=null;
+let current = null;
+let currentIndex = -1;
 
-cards.forEach(card=>{
+function playCard(index){
 
-card.addEventListener("click",(e)=>{
+const card = cards[index];
 
-if(e.target.classList.contains("download")) return;
+if(!card) return;
 
-const song=card.dataset.song;
+cards.forEach(c=>{
 
-const color=card.dataset.color;
+c.classList.remove("active");
 
-if(current===card && !player.paused){
+c.style.boxShadow="";
 
-player.pause();
-
-card.classList.remove("active");
-
-return;
-
-}
-
-cards.forEach(c=>c.classList.remove("active"));
+});
 
 card.classList.add("active");
 
-current=card;
+card.style.boxShadow=
 
-player.src=song;
+`0 0 25px ${card.dataset.color},
+0 0 80px ${card.dataset.color}66`;
+
+current = card;
+
+currentIndex = index;
+
+player.src = card.dataset.song;
 
 player.play();
 
 background.style.background=
 
 `radial-gradient(circle at top,
-${color},
+${card.dataset.color},
 #050505 75%)`;
+
+}
+
+cards.forEach((card,index)=>{
+
+card.addEventListener("click",(e)=>{
+
+if(e.target.classList.contains("download")) return;
+
+if(current===card){
+
+if(player.paused){
+
+player.play();
+
+card.classList.add("active");
+
+}else{
+
+player.pause();
+
+card.classList.remove("active");
+
+}
+
+return;
+
+}
+
+playCard(index);
 
 });
 
@@ -1664,14 +1694,29 @@ ${color},
 
 player.addEventListener("ended",()=>{
 
-if(current){
+if(currentIndex < cards.length-1){
 
-current.classList.remove("active");
+playCard(currentIndex+1);
+
+}else{
+
+cards.forEach(c=>{
+
+c.classList.remove("active");
+
+c.style.boxShadow="";
+
+});
+
+current=null;
+
+currentIndex=-1;
+
+background.style.background="";
 
 }
 
 });
-
 </script>
 
 </body>
