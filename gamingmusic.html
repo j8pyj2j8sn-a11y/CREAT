@@ -218,28 +218,23 @@ animation:metalFlow 6s linear infinite;
 .hero h1 span{
 
 display:block;
+background: linear-gradient(
+180deg,
+#fafafa 0%,
+#bdbdbd 5%,
+#6e6e6e 12%,
+#2b2b2b 25%,
+#0a0a0a 42%,
+#000000 50%,
+#101010 60%,
+#2c2c2c 75%,
+#7d7d7d 88%,
+#d9d9d9 96%,
+#f7f7f7 100%
+);
 
-  @keyframes strokeGlow{
-
-0%{
--webkit-text-stroke-color:#bcbcbc;
-}
-
-25%{
--webkit-text-stroke-color:#ffffff;
-}
-
-50%{
--webkit-text-stroke-color:#00e5ff;
-}
-
-75%{
--webkit-text-stroke-color:#ffffff;
-}
-
-100%{
--webkit-text-stroke-color:#bcbcbc;
-}
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 
 }
 
