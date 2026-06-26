@@ -482,7 +482,80 @@ height:82vh;
 }
 
 }
+ .titanium{
 
+position:relative;
+
+display:inline-block;
+
+background:linear-gradient(
+180deg,
+#f5f5f5 0%,
+#7b7b7b 15%,
+#1c1c1c 35%,
+#050505 50%,
+#1b1b1b 70%,
+#9d9d9d 100%
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+-webkit-text-stroke:1px transparent;
+
+filter:
+drop-shadow(0 2px 4px rgba(0,0,0,.45));
+
+}
+ .titanium::before{
+
+content:attr(class);
+
+content:"FOR YOU";
+
+position:absolute;
+
+left:0;
+top:0;
+
+color:transparent;
+
+-webkit-text-stroke:1px transparent;
+
+background:linear-gradient(
+90deg,
+#bcbcbc,
+#ffffff,
+#00e5ff,
+#ffffff,
+#ff2b6e,
+#ffffff,
+#bcbcbc
+);
+
+background-size:400% 100%;
+
+-webkit-background-clip:text;
+
+filter:blur(.2px);
+
+animation:titaniumBorder 8s linear infinite;
+
+pointer-events:none;
+
+}
+ @keyframes titaniumBorder{
+
+0%{
+background-position:0% 50%;
+}
+
+100%{
+background-position:400% 50%;
+}
+
+}
+ 
 </style>
 
 </head>
