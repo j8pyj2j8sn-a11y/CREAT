@@ -379,20 +379,22 @@ transform:rotate(360deg) scale(1.08);
 
 /* Download Button */
 
-.download{
-
-box-shadow:
-
-0 0 12px rgba(0,229,255,.25);
-
+.download svg{
+    width:24px;
+    height:24px;
+    filter:
+        drop-shadow(0 0 6px #00F5FF)
+        drop-shadow(0 0 12px #4F8CFF)
+        drop-shadow(0 0 18px #C44DFF);
+    transition:.3s;
 }
 
-.download:hover{
-
-box-shadow:
-
-0 0 25px #00E5FF;
-
+.download:hover svg{
+    transform:scale(1.15);
+    filter:
+        drop-shadow(0 0 10px #00F5FF)
+        drop-shadow(0 0 20px #4F8CFF)
+        drop-shadow(0 0 30px #C44DFF);
 }
 
 /* Equalizer */
