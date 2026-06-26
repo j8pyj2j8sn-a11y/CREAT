@@ -120,6 +120,8 @@ font-weight:800;
 
 letter-spacing:2px;
 
+white-space:nowrap;
+
 }
 
 .logo span{
@@ -615,13 +617,26 @@ color:#bbb;
 
 header{
 
-padding:20px;
+padding:16px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
 
 }
 
 nav{
 
-display:none;
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+justify-content:flex-end;
+
+}
+
+nav a{
+
+font-size:13px;
 
 }
 
