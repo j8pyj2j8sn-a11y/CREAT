@@ -1778,7 +1778,8 @@ const img = card.querySelector("img");
 
 const updateBackground = () => {
 const palette = colorThief.getPalette(img, 2);
-const glow = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+
+const glow = `rgb(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]})`;
 
 img.style.border = `2px solid ${glow}`;
 
