@@ -185,6 +185,36 @@ font-size:85px;
 font-weight:900;
 
 line-height:.9;
+display: block;
+
+    /* Black metallic gradient */
+    background: linear-gradient(
+    180deg,
+    #fafafa 0%,
+    #5a5a5a 8%,
+    #1c1c1c 20%,
+    #0a0a0a 35%,
+    #3f3f3f 50%,
+    #000000 65%,
+    #4d4d4d 80%,
+    #d9d9d9 92%,
+    #111111 100%
+);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+webkit-text-stroke: 2px red;
+animation: rgbStroke 4s linear infinite;
+}
+
+@keyframes rgbStroke{
+    0%   { -webkit-text-stroke-color: #ff0000; }
+    16%  { -webkit-text-stroke-color: #ff7f00; }
+    33%  { -webkit-text-stroke-color: #ffff00; }
+    50%  { -webkit-text-stroke-color: #00ff00; }
+    66%  { -webkit-text-stroke-color: #00ffff; }
+    83%  { -webkit-text-stroke-color: #0000ff; }
+    100% { -webkit-text-stroke-color: #ff00ff; }
+}
 
 }
 
