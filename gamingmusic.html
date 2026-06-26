@@ -1717,6 +1717,8 @@ const cards=document.querySelectorAll(".card");
 
 const background=document.querySelector(".bg");
 
+const colorThief = new ColorThief();
+
 let current = null;
 let currentIndex = -1;
 
@@ -1750,13 +1752,27 @@ player.src = card.dataset.song;
 player.play().catch(()=>{});
 
 
-background.style.transition="background .6s ease";
+const img = card.querySelector("img");
 
-background.style.background=
+const updateBackground = () => {
+    const palette = colorThief.getPalette(img, 2);
 
-`radial-gradient(circle at top,
-${card.dataset.color},
-#050505 75%)`;
+    background.style.transition = "background .8s ease";
+
+    background.style.background = `
+        radial-gradient(
+            circle at top,
+            rgb(${palette[0]}) 0%,
+            rgb(${palette[1]}) 45%,
+            #050505 100%
+        )`;
+};
+
+if (img.complete) {
+    updateBackground();
+} else {
+    img.onload = updateBackground;
+}
 
 
 }
