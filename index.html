@@ -520,28 +520,38 @@ top:0;
 
 color:transparent;
 
--webkit-text-stroke:1px transparent;
-
-background:linear-gradient(
-90deg,
-#bcbcbc,
-#ffffff,
-#00e5ff,
-#ffffff,
-#ff2b6e,
-#ffffff,
-#bcbcbc
-);
+-webkit-text-stroke:1px #d9d9d9;
 
 background-size:400% 100%;
 
--webkit-background-clip:text;
-
 filter:blur(.2px);
 
-animation:titaniumBorder 8s linear infinite;
+animation:strokeGlow 4s linear infinite;
 
 pointer-events:none;
+
+}
+ @keyframes strokeGlow{
+
+0%{
+-webkit-text-stroke-color:#bcbcbc;
+}
+
+25%{
+-webkit-text-stroke-color:#ffffff;
+}
+
+50%{
+-webkit-text-stroke-color:#00e5ff;
+}
+
+75%{
+-webkit-text-stroke-color:#ffffff;
+}
+
+100%{
+-webkit-text-stroke-color:#bcbcbc;
+}
 
 }
  @keyframes titaniumBorder{
