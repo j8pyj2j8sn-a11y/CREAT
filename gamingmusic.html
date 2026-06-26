@@ -1812,7 +1812,10 @@ cards.forEach((card,index)=>{
 
 card.addEventListener("click",(e)=>{
 
-if(e.target.classList.contains("download")) return;
+if (
+    e.target.closest(".download") ||
+    e.target.closest("audio")
+) return;
 
 if(current===card){
 
