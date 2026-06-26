@@ -384,9 +384,11 @@ color:white;
 animation:fadeUp 1.2s ease .4s both;
 }
 
-.hero h1 span{
+.hero h1 .for-you{
 
 display:block;
+
+position:relative;
 
 background:linear-gradient(
 160deg,
@@ -403,8 +405,8 @@ background:linear-gradient(
 
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-}
 
+}
 .description{
 
 margin-top:30px;
@@ -509,9 +511,7 @@ drop-shadow(0 2px 4px rgba(0,0,0,.45));
 }
  .titanium::before{
 
-content:attr(class);
-
-content:"FOR YOU";
+content:attr(data-text);
 
 position:absolute;
 
@@ -620,7 +620,7 @@ DISCOVER • LISTEN • DOWNLOAD
 
 <h1>
 WE CREATE
-<span class="titanium">FOR YOU</span>
+<span class="for-you" data-text="FOR YOU">FOR YOU</span>
 </h1>
 
 <div class="description">
