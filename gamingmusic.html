@@ -661,11 +661,12 @@ img.style.boxShadow = `
 `;
 
     background.style.transition = "background .8s ease";
+    // CHANGED TO RGBA VALUES BELOW TO REDUCE AMBIENT GLOW INTENSITY SIGNIFICANTLY
     background.style.background = `
         radial-gradient(
             circle at top,
-            rgb(${palette[0]}) 0%,
-            rgb(${palette[1]}) 45%,
+            rgba(${palette[0]}, 0.22) 0%,   /* Dimmed to 22% brightness */
+            rgba(${palette[1]}, 0.12) 45%,  /* Dimmed to 12% brightness */
             #050505 100%
         )`;
 };
