@@ -520,37 +520,38 @@ SCROLL DOWN
 </div>
 
 <script>
-
+const menuBtn = document.querySelector(".menu-btn");
+const nav = document.querySelector(".nav");
 const dropdowns = document.querySelectorAll(".dropdown");
 
+// Toggle Mobile Menu Drawer
+menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    nav.classList.toggle("menu-open");
+});
+
+// Dropdown Logic (Works for both Desktop and Mobile Drawer)
 dropdowns.forEach(dropdown => {
+    const button = dropdown.querySelector(".dropbtn");
 
-const button = dropdown.querySelector(".dropbtn");
+    button.addEventListener("click", (e) => {
+        e.stopPropagation();
 
-button.addEventListener("click",(e)=>{
+        dropdowns.forEach(item => {
+            if (item !== dropdown) {
+                item.classList.remove("active");
+            }
+        });
 
-e.stopPropagation();
-
-dropdowns.forEach(item=>{
-if(item!==dropdown){
-item.classList.remove("active");
-}
+        dropdown.classList.toggle("active");
+    });
 });
 
-dropdown.classList.toggle("active");
-
+// Close everything when clicking outside
+document.addEventListener("click", () => {
+    dropdowns.forEach(item => item.classList.remove("active"));
+    nav.classList.remove("menu-open");
 });
-
-});
-
-document.addEventListener("click",()=>{
-
-dropdowns.forEach(item=>{
-item.classList.remove("active");
-});
-
-});
-
 </script>
 
 </body>
