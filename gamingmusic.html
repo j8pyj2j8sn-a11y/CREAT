@@ -30,14 +30,23 @@ scroll-behavior:smooth;
 
 body{
 
-background:#050505;
+background:
+linear-gradient(
+to bottom,
+rgba(0,0,0,0) 35%,
+rgba(0,0,0,.30) 55%,
+rgba(0,0,0,.70) 75%,
+rgba(0,0,0,.95) 92%,
+#000 100%
+),
+url("BACKGROUND.jpg");
 
-color:#fff;
-
-overflow-x:hidden;
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
 
 }
-
 /* Background */
 
 body::before{
