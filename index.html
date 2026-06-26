@@ -411,6 +411,82 @@ font-size:13px;
 
 letter-spacing:4px;
 }
+ 
+ /*==========================
+  HAMBURGER SLIDE MENU
+==========================*/
+
+.mobile-menu{
+
+position:fixed;
+
+top:95px;
+left:50%;
+
+transform:translateX(-50%) translateY(-40px);
+
+width:88%;
+
+background:rgba(8,8,8,.97);
+
+backdrop-filter:blur(25px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:30px;
+
+overflow:hidden;
+
+opacity:0;
+visibility:hidden;
+
+transition:
+transform .45s ease,
+opacity .45s ease,
+visibility .45s;
+
+z-index:999;
+}
+
+.mobile-menu.active{
+
+opacity:1;
+visibility:visible;
+
+transform:translateX(-50%) translateY(0);
+}
+
+.mobile-menu a{
+
+display:block;
+
+padding:22px 30px;
+
+text-decoration:none;
+
+color:white;
+
+font-size:18px;
+
+font-weight:500;
+
+border-bottom:1px solid rgba(255,255,255,.05);
+
+transition:.3s;
+}
+
+.mobile-menu a:last-child{
+border-bottom:none;
+}
+
+.mobile-menu a:hover{
+
+background:#00eaff;
+
+color:#000;
+
+padding-left:45px;
+}
 
 /* MOBILE */
 
@@ -498,10 +574,30 @@ height:82vh;
 </div>
 
 <div class="right">
-<button class="menu-btn">☰</button>
+<button class="menu-btn" id="menuToggle">☰</button>
 </div>
 
 </div>
+
+ </div>    <!-- closes .right -->
+
+</div>    <!-- closes .topbar -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">Home</a>
+
+    <a href="meme-sounds.html">Troll Vault</a>
+
+    <a href="gamingmusic.html">Gaming Music</a>
+
+    <a href="cinematic.html">CineTone</a>
+
+    <a href="contact.html">Contact</a>
+
+</div>
+
+<div class="glass-box">
 
 <div class="glass-box">
 
@@ -537,9 +633,9 @@ SCROLL DOWN
 
 const dropdowns = document.querySelectorAll(".dropdown");
 
-dropdowns.forEach(dropdown => {
+dropdowns.forEach(dropdown=>{
 
-const button = dropdown.querySelector(".dropbtn");
+const button=dropdown.querySelector(".dropbtn");
 
 button.addEventListener("click",(e)=>{
 
@@ -553,7 +649,25 @@ item.classList.remove("active");
 
 dropdown.classList.toggle("active");
 
+menu.classList.remove("active");
+
 });
+
+});
+
+const menu=document.getElementById("mobileMenu");
+
+const menuBtn=document.getElementById("menuToggle");
+
+menuBtn.addEventListener("click",(e)=>{
+
+e.stopPropagation();
+
+dropdowns.forEach(item=>{
+item.classList.remove("active");
+});
+
+menu.classList.toggle("active");
 
 });
 
@@ -563,8 +677,18 @@ dropdowns.forEach(item=>{
 item.classList.remove("active");
 });
 
+menu.classList.remove("active");
+
 });
 
+menu.addEventListener("click",(e)=>{
+
+e.stopPropagation();
+
+});
+ 
+ });
+ 
 </script>
 
 </body>
