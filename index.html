@@ -305,11 +305,16 @@ animation:fadeUp 1.2s ease .4s both;
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
- webkit-text-stroke: 2px red;
-    animation: rgbStroke 4s linear infinite;
+    -webkit-text-stroke: 2px red;
+    text-shadow:
+    0 0 1px #ffffff,
+    0 0 2px #e5e4e2,
+    0 0 3px #cfcfcf;
+
+animation: rgbStroke 4s linear infinite;
 }
 
-@keyframes rgbStroke{
+@keyframes rgbStroke {
     0%   { -webkit-text-stroke-color: #ff0000; }
     16%  { -webkit-text-stroke-color: #ff7f00; }
     33%  { -webkit-text-stroke-color: #ffff00; }
