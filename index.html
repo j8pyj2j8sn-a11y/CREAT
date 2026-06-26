@@ -360,36 +360,83 @@ letter-spacing:4px;
 }
 
 /* MOBILE */
+@media(max-width: 1000px) {
+    body {
+        overflow-y: auto; /* Allows scrolling if the tablet screen is too short */
+    }
 
-@media(max-width:1000px){
+    /* Transform the desktop nav into a mobile drawer */
+    .nav {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 95px;
+        left: -100%; /* Hidden off-screen by default */
+        width: 100%;
+        height: calc(100vh - 95px);
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 30px;
+        gap: 20px;
+        align-items: flex-start;
+        transition: 0.4s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
 
-.nav{
-display:none;
-}
+    /* Class to slide the menu in */
+    .nav.menu-open {
+        left: 0;
+    }
 
-.topbar{
-padding:20px;
-}
+    .dropdown {
+        width: 100%;
+    }
 
-.hero{
-left:30px;
-right:30px;
-top:100px;
-}
+    .dropdown-content {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        margin-top: 10px;
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(0);
+        transition: all 0.3s ease;
+    }
 
-.hero h1{
-font-size:60px;
-}
+    .dropdown.active .dropdown-content {
+        max-height: 300px;
+        opacity: 1;
+        visibility: visible;
+    }
 
-.description{
-font-size:18px;
-}
+    .topbar {
+        padding: 20px;
+    }
 
-.glass-box{
-width:94%;
-height:82vh;
-}
+    .hero {
+        left: 30px;
+        right: 30px;
+        top: 80px;
+    }
 
+    .hero h1 {
+        font-size: 55px;
+    }
+
+    .description {
+        font-size: 18px;
+    }
+
+    .glass-box {
+        width: 94%;
+        height: auto;
+        min-height: 82vh;
+        padding-bottom: 80px;
+    }
 }
 
 </style>
