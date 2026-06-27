@@ -7,54 +7,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
-        body { 
-            min-height:100vh; background: #000; color: #fff; overflow: hidden;
-            opacity: 0; transition: opacity 0.8s ease-in-out;
-            background: linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)), url("background.jpg") center/cover;
-        }
+        body { min-height:100vh; background: linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)), url("background.jpg") center/cover no-repeat; opacity: 0; transition: opacity 0.8s ease-in-out; }
         body.loaded { opacity: 1; }
-
-        /* Navigation Styles */
-        .glass-box { position:absolute; top:110px; left:50%; transform:translateX(-50%); width:88%; height:80vh; border-radius:50px; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); padding:40px; }
-        .dropdown { position:relative; display:inline-block; }
-        .dropbtn { padding:14px 28px; border-radius:50px; background:#111; border:1px solid #333; color:#fff; cursor:pointer; }
-        .dropdown-content { position:absolute; top:60px; left:0; background:#222; border-radius:15px; overflow:hidden; opacity:0; visibility:hidden; transition:0.3s; z-index:999; }
+        
+        /* Glass Panel */
+        .glass-box { position:absolute; top:110px; left:50%; transform:translateX(-50%); width:88%; height:80vh; border-radius:50px; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); padding:55px; }
+        .hero-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:80px; }
+        
+        /* Dropdowns */
+        .hero-nav { display:flex; gap:22px; }
+        .dropdown { position:relative; }
+        .dropbtn { padding:14px 28px; border-radius:50px; background:#111; border:1px solid rgba(255,255,255,.18); color:#fff; cursor:pointer; font-weight:600; }
+        .dropdown-content { position:absolute; top:60px; left:0; min-width:200px; background:rgba(10,10,10,.95); backdrop-filter:blur(20px); border-radius:18px; opacity:0; visibility:hidden; transition:.3s ease; z-index:999; }
         .dropdown.active .dropdown-content { opacity:1; visibility:visible; }
         .dropdown-content a { display:block; padding:15px; color:white; text-decoration:none; }
         .dropdown-content a:hover { background:#00eaff; color:black; }
-
-        /* Quote Animation */
-        #quote-container { position:absolute; bottom:60px; left:50%; transform:translateX(-50%); font-style:italic; opacity:0; transition:opacity 1s ease; text-align:center; width:80%; font-size: 1.2rem; }
+        
+        /* Typography */
+        h1 { font-size:110px; font-weight:900; color:white; line-height:.92; }
+        #quote-box { position:absolute; bottom:50px; left:50%; transform:translateX(-50%); color:#d8d8d8; font-size:22px; opacity:0; transition:opacity 1s ease; }
     </style>
 </head>
 <body>
 
 <div class="glass-box">
-    <div class="hero">
-        <div class="hero-header">
-            <div class="hero-logo">WE CREATE</div>
-            <nav class="hero-nav">
-                <div class="dropdown">
-                    <button class="dropbtn">Troll Vault ▼</button>
-                    <div class="dropdown-content">
-                        <a href="meme-sounds.html">Meme Sounds</a>
-                        <a href="trending-trolls.html">Trending Trolls</a>
-                    </div>
-                </div>
-                <!-- Add other dropdowns here following the same pattern -->
-            </nav>
-        </div>
-        <h1>WE CREATE FOR YOU</h1>
+    <div class="hero-header">
+        <div style="color:white; font-size:28px; font-weight:800;">△ WE CREATE</div>
+        <nav class="hero-nav">
+            <div class="dropdown"><button class="dropbtn">Troll Vault ▼</button><div class="dropdown-content"><a href="meme-sounds.html">Meme Sounds</a><a href="trending-trolls.html">Trending Trolls</a><a href="classic-trolls.html">Classic Trolls</a></div></div>
+            <div class="dropdown"><button class="dropbtn">NCS ▼</button><div class="dropdown-content"><a href="gamingmusic.html">Gaming Music</a><a href="edm.html">EDM</a><a href="chill-music.html">Chill Music</a></div></div>
+            <div class="dropdown"><button class="dropbtn">EchoScapes ▼</button><div class="dropdown-content"><a href="rain.html">Rain</a><a href="forest.html">Forest</a><a href="ocean.html">Ocean</a></div></div>
+            <div class="dropdown"><button class="dropbtn">CineTone ▼</button><div class="dropdown-content"><a href="cinematic.html">Cinematic</a><a href="epic.html">Epic</a><a href="documentary.html">Documentary</a></div></div>
+        </nav>
     </div>
-
-    <div id="quote-container">
-        <p id="quote-text">"Creativity is intelligence having fun."</p>
-    </div>
+    <h1>WE CREATE <span style="display:block; color:#aaa;">FOR YOU</span></h1>
+    <div id="quote-box">"Creativity is intelligence having fun."</div>
 </div>
 
 <script>
     window.addEventListener('load', () => document.body.classList.add('loaded'));
-
     const dropdowns = document.querySelectorAll(".dropdown");
     dropdowns.forEach(d => {
         d.querySelector(".dropbtn").addEventListener("click", (e) => {
@@ -63,18 +54,19 @@
             d.classList.toggle("active");
         });
     });
-
+    document.addEventListener("click", () => dropdowns.forEach(d => d.classList.remove("active")));
     const quotes = ["Creativity is intelligence having fun.", "Design is the silent ambassador of your brand.", "Simplicity is the ultimate sophistication."];
     let qIdx = 0;
+    const qEl = document.getElementById('quote-box');
     setInterval(() => {
-        const qEl = document.getElementById('quote-container');
         qEl.style.opacity = 0;
         setTimeout(() => {
             qIdx = (qIdx + 1) % quotes.length;
-            document.getElementById('quote-text').innerText = `"${quotes[qIdx]}"`;
+            qEl.innerText = `"${quotes[qIdx]}"`;
             qEl.style.opacity = 1;
         }, 1000);
     }, 15000);
+    setTimeout(() => qEl.style.opacity = 1, 1000);
 </script>
 </body>
 </html>
