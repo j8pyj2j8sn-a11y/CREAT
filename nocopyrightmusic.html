@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LOUNGE - No Copyright Music</title>
+    <!-- Color Thief Library for Adaptive Ambient Lighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.4.0/color-thief.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #050505;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Ambient Dynamic Background Layers matching layout requirements */
+        .bg-image {
+            position: fixed;
+            inset: 0;
+            background: url('picture.jpg') center/cover no-repeat;
+            z-index: -3;
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            opacity: 0.4;
+            mix-blend-mode: screen;
+            transition: background 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* High-End Dim Overlay Layer when Music Plays */
+        .bg-dimmer {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            z-index: -1;
+            pointer-events: none;
+            transition: background 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Continuous Ambient Dimmings during Playback */
+        body.is-playing .bg-image {
+            opacity: 0.12;
+            transform: scale(1.04);
+        }
+        body.is-playing .bg-glow {
+            opacity: 0.20;
+        }
+        body.is-playing .bg-dimmer {
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        /* Liquid Glass Top Navigation Bar */
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(650px, 92%);
+            height: 64px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px) saturate(140%);
+            -webkit-backdrop-filter: blur(24px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 12px;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .nav-btn:active {
+            transform: scale(0.92);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Attractive Radiant LOUNGE Title */
+        .brand-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.4), 
+                         0 0 24px var(--active-accent, rgba(255, 255, 255, 0.2));
+            transition: text-shadow 0.8s ease;
+            padding-left: 6px;
+        }
+
+        /* Main Container for the 3D-Curved Horizontal Carousel */
+        .carousel-viewport {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            position: relative;
+            width: 260px;
+            height: 360px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Liquid Glass Cards styled explicitly to match image 3D curves */
+        .card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 360px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.5s ease, 
+                        border-color 0.5s ease,
+                        opacity 0.6s ease;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 18px;
+            pointer-events: none;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Active Dynamic Custom Glows matching Album Covers */
+        .card.active {
+            border-color: var(--glow-color, rgba(255,255,255,0.4));
+            box-shadow: 0 0 35px var(--glow-color-dim), 
+                        0 0 75px var(--glow-color-deep),
+                        inset 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+
+        body.is-playing .card.active img {
+            transform: scale(1.03);
+        }
+
+        /* Glass Progress Tracker Control Section */
+        .controls-footer {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(650px, 92%);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px) saturate(140%);
+            -webkit-backdrop-filter: blur(24px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 24px 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 100;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Seek Bar Container with Press & Hold Sensitivity */
+        .timeline-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.6), var(--active-accent, #ffffff));
+            border-radius: 3px;
+            pointer-events: none;
+            transition: width 0.1s linear;
+        }
+
+        .timeline-handle {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 0%;
+            width: 14px;
+            height: 14px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            pointer-events: none;
+            transition: left 0.1s linear;
+        }
+
+        /* Track Indicators (Minimalistic Navigation Dots) */
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 2px 0;
+        }
+
+        .dots-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            flex-shrink: 0;
+        }
+
+        .dot.active {
+            background: var(--active-accent, #ffffff);
+            transform: scale(1.3);
+            box-shadow: 0 0 8px var(--active-accent);
+        }
+
+        /* Optimization Profiles for Tablets & Desktops */
+        @media (min-width: 768px) {
+            .carousel-track {
+                width: 320px;
+                height: 440px;
+            }
+            .card {
+                width: 320px;
+                height: 440px;
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-dimmer"></div>
+
+    <header>
+        <!-- Home Button goes directly back to your root homepage index.html -->
+        <a href="index.html" class="nav-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </a>
+        <div class="brand-title">LOUNGE</div>
+        <button class="nav-btn" id="downloadBtn" aria-label="Download Playing Track">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v2H5z"/></svg>
+        </button>
+    </header>
+
+    <div class="carousel-viewport" id="viewport">
+        <div class="carousel-track" id="track">
+            <!-- Programmatically injected layout nodes -->
+        </div>
+    </div>
+
+    <div class="controls-footer">
+        <div class="timeline-container" id="timeline">
+            <div class="timeline-progress" id="progress"></div>
+            <div class="timeline-handle" id="handle"></div>
+        </div>
+        <div class="dots-container" id="dotsContainer"></div>
+    </div>
+
+    <audio id="audioPlayer" crossorigin="anonymous"></audio>
+
+    <script>
+        const trackCount = 30;
+        const track = document.getElementById('track');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const bgGlow = document.querySelector('.bg-glow');
+        const timeline = document.getElementById('timeline');
+        const progress = document.getElementById('progress');
+        const handle = document.getElementById('handle');
+        const colorThief = new ColorThief();
+
+        let songs = [];
+        let currentIndex = 0;
+        let isSeeking = false;
+
+        // Structured configuration array pulling from your requested files setup
+        for(let i = 1; i <= trackCount; i++) {
+            songs.push({
+                id: i,
+                src: `tracks/track${i}.mp3`,
+                cover: `albums/album${i}.jpg`
+            });
+        }
+
+        // Card generation pipeline
+        songs.forEach((song, idx) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.index = idx;
+            
+            const img = document.createElement('img');
+            img.src = song.cover;
+            img.alt = "";
+            img.crossOrigin = "anonymous";
+            
+            card.appendChild(img);
+            track.appendChild(card);
+
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (idx === 0 ? ' active' : '');
+            dotsContainer.appendChild(dot);
+        });
+
+        const cards = document.querySelectorAll('.card');
+        const dots = document.querySelectorAll('.dot');
+
+        // Apply physical depth transformations to replicate IMG_7137.jpeg
+        function updateCarousel() {
+            const radius = window.innerWidth < 768 ? 240 : 340; 
+            const angleStep = 24; 
+
+            cards.forEach((card, idx) => {
+                const offset = idx - currentIndex;
+                const angle = offset * angleStep;
+                
+                if (Math.abs(offset) > 4) {
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                    return;
+                }
+
+                card.style.opacity = '1';
+                card.style.pointerEvents = 'auto';
+
+                const rotateY = angle;
+                const translateZ = -Math.abs(offset) * 60 + (idx === currentIndex ? 40 : 0);
+                const translateX = offset * (window.innerWidth < 768 ? 75 : 105);
+
+                card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
+                
+                if(idx === currentIndex) {
+                    card.classList.add('active');
+                    dots[idx].classList.add('active');
+                    dots[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    extractColors(card.querySelector('img'));
+                } else {
+                    card.classList.remove('active');
+                    dots[idx].classList.remove('active');
+                }
+            });
+        }
+
+        // Color extraction logic for active color responsive backgrounds and border glows
+        function extractColors(img) {
+            const processColor = () => {
+                try {
+                    const palette = colorThief.getPalette(img, 3);
+                    const rgbActive = `rgb(${palette[0].join(',')})`;
+                    const dimActive = `rgba(${palette[0].join(',')}, 0.55)`;
+                    const deepActive = `rgba(${palette[1].join(',')}, 0.25)`;
+
+                    const currentCard = cards[currentIndex];
+                    currentCard.style.setProperty('--glow-color', rgbActive);
+                    currentCard.style.setProperty('--glow-color-dim', dimActive);
+                    currentCard.style.setProperty('--glow-color-deep', deepActive);
+                    document.documentElement.style.setProperty('--active-accent', rgbActive);
+
+                    // Sets the background glow color seamlessly to the current album color profile
+                    bgGlow.style.background = `radial-gradient(circle at center, rgb(${palette[0].join(',')}) 0%, rgb(${palette[1].join(',')}) 45%, #050505 100%)`;
+                } catch (e) {
+                    bgGlow.style.background = `radial-gradient(circle at center, #444 0%, #050505 100%)`;
+                }
+            };
+
+            if (img.complete) {
+                processColor();
+            } else {
+                img.onload = processColor;
+            }
+        }
+
+        function loadTrack(index) {
+            const previouslyPlaying = !audioPlayer.paused;
+            audioPlayer.src = songs[index].src;
+            if (previouslyPlaying) {
+                audioPlayer.play().catch(() => {});
+            }
+            updateProgress();
+        }
+
+        // Tap to Play / Tap to Pause handling
+        function togglePlayback() {
+            if (audioPlayer.paused) {
+                audioPlayer.play().then(() => {
+                    document.body.classList.add('is-playing');
+                }).catch(() => {});
+            } else {
+                audioPlayer.pause();
+                document.body.classList.remove('is-playing');
+            }
+        }
+
+        // Swipe Gestures
+        let startX = 0;
+        window.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+        window.addEventListener('touchend', e => {
+            const diffX = e.changedTouches[0].clientX - startX;
+            if (Math.abs(diffX) > 60) {
+                if (diffX > 0 && currentIndex > 0) currentIndex--;
+                else if (diffX < 0 && currentIndex < trackCount - 1) currentIndex++;
+                
+                updateCarousel();
+                loadTrack(currentIndex);
+            }
+        });
+
+        // Click Selection Configurations
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const index = parseInt(card.dataset.index);
+                if (index === currentIndex) {
+                    togglePlayback();
+                } else {
+                    currentIndex = index;
+                    updateCarousel();
+                    loadTrack(currentIndex);
+                    audioPlayer.play().then(() => {
+                        document.body.classList.add('is-playing');
+                    }).catch(() => {});
+                }
+            });
+        });
+
+        // Press & Hold Timeline Seeking Logic
+        function updateProgress() {
+            if (isSeeking || !audioPlayer.duration) return;
+            const pct = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progress.style.width = `${pct}%`;
+            handle.style.left = `${pct}%`;
+        }
+
+        function scrub(e) {
+            const rect = timeline.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            let offset = (clientX - rect.left) / rect.width;
+            offset = Math.max(0, Math.min(1, offset));
+            progress.style.width = `${offset * 100}%`;
+            handle.style.left = `${offset * 100}%`;
+            return offset;
+        }
+
+        timeline.addEventListener('mousedown', e => {
+            isSeeking = true;
+            audioPlayer.currentTime = scrub(e) * audioPlayer.duration;
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!isSeeking) return;
+            audioPlayer.currentTime = scrub(e) * audioPlayer.duration;
+        });
+
+        window.addEventListener('mouseup', () => isSeeking = false);
+
+        timeline.addEventListener('touchstart', e => {
+            isSeeking = true;
+            audioPlayer.currentTime = scrub(e) * audioPlayer.duration;
+        }, {passive: true});
+
+        timeline.addEventListener('touchmove', e => {
+            if (!isSeeking) return;
+            audioPlayer.currentTime = scrub(e) * audioPlayer.duration;
+        }, {passive: true});
+
+        timeline.addEventListener('touchend', () => isSeeking = false);
+
+        audioPlayer.addEventListener('timeupdate', updateProgress);
+        audioPlayer.addEventListener('ended', () => {
+            if (currentIndex < trackCount - 1) {
+                currentIndex++;
+                updateCarousel();
+                loadTrack(currentIndex);
+                audioPlayer.play().catch(() => {});
+            } else {
+                document.body.classList.remove('is-playing');
+            }
+        });
+
+        // Native Download Feature (Downloads current playing track)
+        downloadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const a = document.createElement('a');
+            a.href = songs[currentIndex].src;
+            a.download = `Track-${songs[currentIndex].id}.mp3`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
+        updateCarousel();
+        loadTrack(currentIndex);
+    </script>
+</body>
+</html>
