@@ -29,31 +29,31 @@ body {
   width: 88%;
   height: 80vh;
   border-radius: 50px;
-  
-  /* Full Transparency with subtle blur */
-  backdrop-filter: blur(15px);
-  background: rgba(255, 255, 255, 0.03); /* Extremely subtle frosted glass */
-  
-  /* Silver-RGB Border Technique */
+
+  /* Glass Transparency */
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05);
+
+  /* Border-Only RGB-Silver Effect */
   border: 2px solid transparent;
   background-clip: padding-box, border-box;
   background-origin: border-box;
   
-  /* Silver Metallic Gradient with subtle cool RGB hints */
+  /* Layer 1: Solid glass background, Layer 2: Silver/Cyan Border Gradient */
   background-image: 
-    linear-gradient(rgba(255,255,255,0.03), rgba(255,255,255,0.03)), 
-    linear-gradient(135deg, #1c1c1c 0%, #b0b0b0 40%, #e0e0e0 50%, #00eaff 60%, #b0b0b0 80%, #1c1c1c 100%);
+    linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)), 
+    linear-gradient(90deg, #1c1c1c, #b0b0b0, #e0e0e0, #00eaff, #e0e0e0, #b0b0b0, #1c1c1c);
   
-  background-size: 100%, 300% 300%;
-  animation: silverShimmer 8s linear infinite;
+  background-size: 100% 100%, 300% 100%;
+  animation: borderShimmer 8s linear infinite;
 
   transition: transform 0.2s ease-out;
   will-change: transform;
 }
 
-@keyframes silverShimmer {
-  0% { background-position: 0% 0%, 0% 50%; }
-  100% { background-position: 0% 0%, 300% 50%; }
+@keyframes borderShimmer {
+  0% { background-position: 0% 0%, 0% 0%; }
+  100% { background-position: 0% 0%, 300% 0%; }
 }
   
 /* LOGO & NAV */
