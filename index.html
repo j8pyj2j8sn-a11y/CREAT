@@ -1,150 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COMING SOON</title>
-    <style>
-        :root {
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.15);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WE CREATE | Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --transition-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+  --accent-rgb: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0066ff, #8b00ff, #ff0000);
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
 
-        body, html {
-            width: 100%; height: 100%;
-            overflow: hidden;
-            background-color: #000;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+body {
+  min-height:100vh;
+  overflow:hidden;
+  background: linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)), url("background.jpg");
+  background-size:cover;
+  background-position:center;
+}
 
-        /* Fixed Background: If soon.jpg is missing, it shows a dark gray fallback */
-        #bg-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #1a1a1a url('soon.jpg') no-repeat center center fixed;
-            background-size: cover;
-            animation: zoomBg 20s ease-out infinite alternate;
-            filter: blur(8px);
-            z-index: -1;
-        }
+/* PREMIUM GLASS BOX */
+.glass-box {
+  position:absolute; top:110px; left:50%;
+  transform:translateX(-50%);
+  width:88%; height:80vh;
+  border-radius:50px;
+  backdrop-filter:blur(20px);
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
 
-        /* Home Button Logo */
-        .logo-container {
-            position: absolute;
-            top: 40px; left: 40px;
-            z-index: 100;
-            text-decoration: none;
-            color: #fff;
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            padding: 15px 25px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-        }
+/* LOGO & NAV */
+.logo { display:flex; align-items:center; gap:12px; color:white; font-size:28px; font-weight:800; }
+.logo-icon { color:#00eaff; font-size:32px; }
 
-        .logo-container:hover {
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
+.hero-nav { display:flex; align-items:center; gap:22px; }
+.dropdown { position:relative; }
 
-        /* Glass Panel */
-        .glass-panel {
-            position: relative;
-            padding: 5rem 7rem;
-            border-radius: 50px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.05);
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+/* PREMIUM RGB BUTTONS */
+.dropbtn {
+  padding:14px 28px; border-radius:50px;
+  background: #111; color:#fff; font-weight:600; cursor:pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  position: relative; overflow: hidden;
+  transition: transform 0.6s var(--transition-smooth);
+}
 
-        .glass-panel:hover { transform: scale(1.02); }
+.dropbtn::before {
+  content: ""; position: absolute; inset: -2px;
+  background: var(--accent-rgb);
+  background-size: 400%;
+  border-radius: 50px;
+  opacity: 0; transition: opacity 0.3s;
+  z-index: -1; animation: rgbBorder 8s linear infinite;
+}
 
-        /* Animated border */
-        .glass-panel::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            border-radius: 52px;
-            padding: 2px;
-            background: linear-gradient(45deg, #a1c4fd, #c2e9fb, #a1c4fd);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: rotateBorder 4s linear infinite;
-        }
+.dropbtn:hover::before { opacity: 1; }
+.dropbtn:hover { transform: translateY(-3px); }
 
-        h1 {
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.03em;
-            background: linear-gradient(180deg, #fff 0%, #ccc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+/* DROPDOWN CONTENT */
+.dropdown-content {
+  position:absolute; top:60px; left:0; min-width:200px;
+  background:rgba(10,10,10,0.9); backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,0.1); border-radius:18px;
+  opacity:0; visibility:hidden; transform:translateY(10px);
+  transition:0.35s var(--transition-smooth);
+}
+.dropdown.active .dropdown-content { opacity:1; visibility:visible; transform:translateY(0); }
+.dropdown-content a { display:block; padding:15px 20px; color:white; text-decoration:none; transition:0.3s; }
+.dropdown-content a:hover { background:rgba(0,234,255,0.2); color:#00eaff; }
 
-        #hint {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            opacity: 0.5;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            transition: opacity 0.5s ease;
-        }
+/* ANIMATIONS */
+@keyframes rgbBorder { 0% { background-position: 0%; } 100% { background-position: 400%; } }
+@keyframes fadeUp { 0% { opacity:0; transform:translateY(30px); } 100% { opacity:1; transform:translateY(0); } }
 
-        @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
-        @keyframes rotateBorder { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
-    </style>
+.hero { padding: 55px; }
+.hero h1 { font-size:110px; font-weight:900; color:white; animation: fadeUp 1s var(--transition-smooth) both; }
+.tagline { color:#00eaff; letter-spacing:4px; margin-bottom:20px; }
+</style>
 </head>
 <body>
 
-    <div id="bg-container"></div>
-    
-    <a href="index.html" class="logo-container">WE CREATE</a>
-
-    <div class="glass-panel" id="card">
-        <h1>COMING SOON</h1>
-        <div id="hint">Tap to experience</div>
+<div class="glass-box">
+  <div class="hero">
+    <div class="hero-header" style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="logo"><div class="logo-icon">△</div> WE CREATE</div>
+      <div class="hero-nav">
+        <div class="dropdown"><button class="dropbtn">Troll Vault ▼</button>
+          <div class="dropdown-content"><a href="meme-sounds.html">Meme Sounds</a><a href="trending-trolls.html">Trending Trolls</a><a href="classic-trolls.html">Classic Trolls</a></div>
+        </div>
+        <div class="dropdown"><button class="dropbtn">NCS ▼</button>
+          <div class="dropdown-content"><a href="gamingmusic.html">Gaming Music</a><a href="edm.html">EDM</a><a href="chill-music.html">Chill Music</a></div>
+        </div>
+        <div class="dropdown"><button class="dropbtn">EchoScapes ▼</button>
+          <div class="dropdown-content"><a href="rain.html">Rain</a><a href="forest.html">Forest</a><a href="ocean.html">Ocean</a></div>
+        </div>
+        <div class="dropdown"><button class="dropbtn">CineTone ▼</button>
+          <div class="dropdown-content"><a href="cinematic.html">Cinematic</a><a href="epic.html">Epic</a><a href="documentary.html">Documentary</a></div>
+        </div>
+      </div>
     </div>
+    
+    <div style="margin-top: 100px;">
+        <div class="tagline">DISCOVER • LISTEN • DOWNLOAD</div>
+        <h1>WE CREATE<br>FOR YOU</h1>
+    </div>
+  </div>
+</div>
 
-    <audio id="bgm" loop>
-        <source src="BGM.mp3" type="audio/mpeg">
-    </audio>
+<script>
+const dropdowns = document.querySelectorAll(".dropdown");
+dropdowns.forEach(d => {
+  d.querySelector(".dropbtn").addEventListener("click", (e) => {
+    e.stopPropagation();
+    dropdowns.forEach(i => i !== d && i.classList.remove("active"));
+    d.classList.toggle("active");
+  });
+});
 
-    <script>
-        const card = document.getElementById('card');
-        const audio = document.getElementById('bgm');
-        const hint = document.getElementById('hint');
-        let played = false;
+const box = document.querySelector('.glass-box');
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 2;
+  const y = (e.clientY / window.innerHeight - 0.5) * 2;
+  box.style.transform = `translateX(-50%) perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
+});
 
-        card.addEventListener('click', () => {
-            if (!played) {
-                audio.volume = 0.3;
-                audio.play().then(() => {
-                    hint.innerText = "Experience Initialized";
-                    hint.style.opacity = '0.5';
-                    played = true;
-                }).catch(err => {
-                    console.log("Audio playback blocked by browser.");
-                });
-            }
-        });
-    </script>
+document.addEventListener("click", () => dropdowns.forEach(d => d.classList.remove("active")));
+</script>
 </body>
 </html>
