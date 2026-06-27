@@ -20,18 +20,18 @@ body {
   background-size:cover;
   background-position:center;
 }
-
-/* PREMIUM GLASS BOX */
-.glass-box {
-  position:absolute; top:110px; left:50%;
-  transform:translateX(-50%);
-  width:88%; height:80vh;
-  border-radius:50px;
-  backdrop-filter:blur(2px);
-  background: rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: transform 0.2s ease-out;
-  will-change: transform;
+  .glass-box {
+  position: relative;
+  width: 88%; height: 80vh;
+  border-radius: 50px;
+  backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s ease-out;
+  padding: 20px;
+  overflow: hidden;
+  will-change: transform;
+  animation: entrance 1.5s var(--transition-smooth) backwards;
 }
 
 /* LOGO & NAV */
