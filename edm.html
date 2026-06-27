@@ -23,7 +23,7 @@
             justify-content: center;
         }
 
-        /* Background with fallback color */
+        /* Background */
         #bg-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -33,16 +33,28 @@
             z-index: -1;
         }
 
-        .logo {
+        /* Home Button Logo */
+        .logo-container {
             position: absolute;
             top: 40px; left: 40px;
+            z-index: 10;
+            text-decoration: none;
+            color: #fff;
             font-weight: 700;
             letter-spacing: 2px;
             font-size: 1.2rem;
             text-transform: uppercase;
-            opacity: 0.8;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
+        .logo-container:hover {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Glass Panel */
         .glass-panel {
             padding: 5rem 7rem;
             border-radius: 50px;
@@ -98,7 +110,8 @@
 <body>
 
     <div id="bg-container"></div>
-    <div class="logo">WE CREATE</div>
+    
+    <a href="index.html" class="logo-container">WE CREATE</a>
 
     <div class="glass-panel" id="card">
         <h1>COMING SOON</h1>
@@ -123,7 +136,7 @@
                     hint.style.opacity = '0.5';
                     played = true;
                 }).catch(err => {
-                    console.log("Playback failed:", err);
+                    console.log("Audio playback requires user interaction:", err);
                 });
             }
         });
