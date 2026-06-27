@@ -1,678 +1,80 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WE CREATE</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
-
-body{
-min-height:100vh;
-overflow:hidden;
-
-background:
-linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)),
-url("background.jpg");
-
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-}
-
-/* TOP BAR */
-
-
-.logo{
-display:flex;
-align-items:center;
-gap:12px;
-
-color:white;
-font-size:28px;
-font-weight:800;
-}
-
-.logo-icon{
-color:#00eaff;
-font-size:32px;
-}
-
-.nav{
-display:flex;
-gap:35px;
-align-items:center;
-}
-
-.dropdown{
-position:relative;
-}
-
-.dropbtn{
-
-display:inline-flex;
-align-items:center;
-justify-content:center;
-
-padding:14px 28px;
-
-border-radius:50px;
-
-background:linear-gradient(
-180deg,
-#2b2b2b 0%,
-#151515 20%,
-#080808 50%,
-#1a1a1a 80%,
-#2d2d2d 100%
-);
-
-border:1px solid rgba(255,255,255,.18);
-
-color:#fff;
-
-font-size:15px;
-font-weight:600;
-
-cursor:pointer;
-
-position:relative;
-
-transition:.35s ease;
-
-box-shadow:
-0 8px 18px rgba(0,0,0,.45),
-inset 0 1px 1px rgba(255,255,255,.12);
-
-overflow:hidden;
-
-}
-
- .dropbtn::before{
-
-content:"";
-
-position:absolute;
-
-inset:-2px;
-
-border-radius:50px;
-
-padding:2px;
-
-background:linear-gradient(
-90deg,
-#ff0000,
-#ff7f00,
-#ffff00,
-#00ff00,
-#00ffff,
-#0066ff,
-#8b00ff,
-#ff0000
-);
-
-background-size:400%;
-
-animation:rgbBorder 8s linear infinite;
-
--webkit-mask:
-linear-gradient(#fff 0 0) content-box,
-linear-gradient(#fff 0 0);
-
--webkit-mask-composite:xor;
-mask-composite:exclude;
-
-pointer-events:none;
-
-}
-
-.dropbtn:hover{
-
-transform:translateY(-2px);
-
-box-shadow:
-0 0 10px rgba(255,0,0,.3),
-0 0 15px rgba(0,255,255,.25),
-0 8px 25px rgba(0,0,0,.45);
-
-}
-
- @keyframes rgbBorder{
-
-0%{
-background-position:0%;
-}
-
-100%{
-background-position:400%;
-}
-
-}
-
-.dropdown-content{
-
-position:absolute;
-top:55px;
-left:0;
-
-min-width:220px;
-
-background:rgba(10,10,10,.95);
-
-backdrop-filter:blur(20px);
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:18px;
-
-overflow:hidden;
-
-opacity:0;
-visibility:hidden;
-
-transform:translateY(15px);
-
-transition:.35s ease;
-
-z-index:999;
-}
-
-.dropdown.active .dropdown-content{
-opacity:1;
-visibility:visible;
-transform:translateY(0);
-}
-
-.dropdown-content a{
-
-display:block;
-
-padding:15px 18px;
-
-text-decoration:none;
-
-color:white;
-
-transition:.3s;
-}
-
-.dropdown-content a:hover{
-background:#00eaff;
-color:black;
-}
-
-.right{
-display:flex;
-gap:15px;
-align-items:center;
-}
-
-.vibe-btn{
-
-padding:14px 24px;
-
-border-radius:50px;
-
-background:rgba(0,0,0,.5);
-
-border:1px solid rgba(0,234,255,.4);
-
-color:white;
-
-cursor:pointer;
-}
-
-.menu-btn{
-
-width:55px;
-height:55px;
-
-border-radius:50%;
-
-background:rgba(0,0,0,.5);
-
-border:1px solid rgba(0,234,255,.4);
-
-color:white;
-
-font-size:22px;
-
-cursor:pointer;
-}
-
-/* GLASS PANEL */
-
-.glass-box{
-
-position:absolute;
-
-top:110px;
-left:50%;
-
-transform:translateX(-50%);
-
-width:88%;
-height:80vh;
-
-border-radius:50px;
-
-overflow:hidden;
- 
-
-backdrop-filter:blur(.5px);
-
-background:
-linear-gradient(
-to bottom,
-rgba(0,0,0,.98) 0%,
-rgba(0,0,0,.95) 0%,
-rgba(0,0,0,.70) 20%,
-rgba(0,0,0,.20) 40%,
-rgba(0,0,0,0) 50%
-);
-
-animation:panelReveal 1.5s ease forwards;
-}
-
-@keyframes panelReveal{
-
-from{
-opacity:0;
-transform:translate(-50%,40px);
-}
-
-to{
-opacity:1;
-transform:translate(-50%,0);
-}
-
-}
-
-/* HERO */
-
-.hero{
-
-position:absolute;
-
-top:20px;
-
-left:55px;
-right:55px;
-bottom:55px;
-
-display:flex;
-flex-direction:column;
-
-}
-
-.hero-header{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-margin-bottom:80px;
-
-width:100%;
-
-}
-
-.hero-logo{
-
-display:flex;
-align-items:center;
-gap:12px;
-
-color:#fff;
-
-font-size:28px;
-font-weight:800;
-
-}
-
-.hero-logo .logo-icon{
-
-font-size:32px;
-color:#00eaff;
-
-}
-
-.hero-nav{
-
-display:flex;
-align-items:center;
-gap:22px;
-
-}
-
-.tagline{
-
-color:#00eaff;
-
-font-size:15px;
-
-letter-spacing:4px;
-
-font-weight:600;
-
-margin-bottom:25px;
-
-animation:fadeUp 1.2s ease .2s both;
-}
-
-.hero h1{
-
-font-size:110px;
-
-font-weight:900;
-
-line-height:.92;
-
-color:white;
-
-animation:fadeUp 1.2s ease .4s both;
-}
-
-.hero h1 .for-you{
-
-display:block;
-
-position:relative;
-
-background:linear-gradient(
-160deg,
-#f5f5f5 0%,
-#8a8a8a 6%,
-#3a3a3a 15%,
-#1a1a1a 28%,
-#050505 50%,
-#111111 68%,
-#444444 82%,
-#bcbcbc 94%,
-#fdfdfd 100%
-);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-}
-.description{
-
-margin-top:30px;
-
-font-size:22px;
-
-line-height:1.8;
-
-color:#d8d8d8;
-
-max-width:650px;
-
-animation:fadeUp 1.2s ease .6s both;
-}
-
-@keyframes fadeUp{
-
-from{
-opacity:0;
-transform:translateY(30px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-.scroll{
-
-position:absolute;
-
-bottom:25px;
-left:50%;
-
-transform:translateX(-50%);
-
-color:white;
-
-font-size:13px;
-
-letter-spacing:4px;
-}
-
-/* MOBILE */
-
-@media(max-width:1000px){
-
-.nav{
-display:none;
-}
-
-.topbar{
-padding:20px;
-}
-
-.hero{
-left:30px;
-right:30px;
-top:100px;
-}
-
-.hero h1{
-font-size:60px;
-}
-
-.description{
-font-size:18px;
-}
-
-.glass-box{
-width:94%;
-height:82vh;
-}
-
-}
- .titanium{
-
-position:relative;
-
-display:inline-block;
-
-background:linear-gradient(
-180deg,
-#f5f5f5 0%,
-#7b7b7b 15%,
-#1c1c1c 35%,
-#050505 50%,
-#1b1b1b 70%,
-#9d9d9d 100%
-);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
--webkit-text-stroke:1px transparent;
-
-filter:
-drop-shadow(0 2px 4px rgba(0,0,0,.45));
-
-}
- .titanium::before{
-
-content:attr(data-text);
-
-position:absolute;
-
-left:0;
-top:0;
-
-color:transparent;
-
--webkit-text-stroke:1px #d9d9d9;
-
-background-size:400% 100%;
-
-filter:blur(.2px);
-
-animation:strokeGlow 4s linear infinite;
-
-pointer-events:none;
-
-}
- @keyframes strokeGlow{
-
-0%{
--webkit-text-stroke-color:#bcbcbc;
-}
-
-25%{
--webkit-text-stroke-color:#ffffff;
-}
-
-50%{
--webkit-text-stroke-color:#00e5ff;
-}
-
-75%{
--webkit-text-stroke-color:#ffffff;
-}
-
-100%{
--webkit-text-stroke-color:#bcbcbc;
-}
-
-}
- @keyframes titaniumBorder{
-
-0%{
-background-position:0% 50%;
-}
-
-100%{
-background-position:400% 50%;
-}
-
-}
- 
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WE CREATE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
+        body { 
+            min-height:100vh; background: #000; color: #fff; overflow: hidden;
+            opacity: 0; transition: opacity 0.8s ease-in-out;
+            background: linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)), url("background.jpg") center/cover;
+        }
+        body.loaded { opacity: 1; }
+
+        /* Navigation Styles */
+        .glass-box { position:absolute; top:110px; left:50%; transform:translateX(-50%); width:88%; height:80vh; border-radius:50px; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); padding:40px; }
+        .dropdown { position:relative; display:inline-block; }
+        .dropbtn { padding:14px 28px; border-radius:50px; background:#111; border:1px solid #333; color:#fff; cursor:pointer; }
+        .dropdown-content { position:absolute; top:60px; left:0; background:#222; border-radius:15px; overflow:hidden; opacity:0; visibility:hidden; transition:0.3s; z-index:999; }
+        .dropdown.active .dropdown-content { opacity:1; visibility:visible; }
+        .dropdown-content a { display:block; padding:15px; color:white; text-decoration:none; }
+        .dropdown-content a:hover { background:#00eaff; color:black; }
+
+        /* Quote Animation */
+        #quote-container { position:absolute; bottom:60px; left:50%; transform:translateX(-50%); font-style:italic; opacity:0; transition:opacity 1s ease; text-align:center; width:80%; font-size: 1.2rem; }
+    </style>
 </head>
 <body>
 
 <div class="glass-box">
+    <div class="hero">
+        <div class="hero-header">
+            <div class="hero-logo">WE CREATE</div>
+            <nav class="hero-nav">
+                <div class="dropdown">
+                    <button class="dropbtn">Troll Vault ▼</button>
+                    <div class="dropdown-content">
+                        <a href="meme-sounds.html">Meme Sounds</a>
+                        <a href="trending-trolls.html">Trending Trolls</a>
+                    </div>
+                </div>
+                <!-- Add other dropdowns here following the same pattern -->
+            </nav>
+        </div>
+        <h1>WE CREATE FOR YOU</h1>
+    </div>
 
-<div class="hero">
-
-<div class="hero-header">
-
-<div class="hero-logo">
-<div class="logo-icon">△</div>
-<div>WE CREATE</div>
-</div>
-
-<div class="hero-nav">
-
-<div class="dropdown">
-<button class="dropbtn">Troll Vault ▼</button>
-<div class="dropdown-content">
-<a href="meme-sounds.html">Meme Sounds</a>
-<a href="trending-trolls.html">Trending Trolls</a>
-<a href="classic-trolls.html">Classic Trolls</a>
-</div>
-</div>
-
-<div class="dropdown">
-<button class="dropbtn">NCS ▼</button>
-<div class="dropdown-content">
-<a href="gamingmusic.html">Gaming Music</a>
-<a href="edm.html">EDM</a>
-<a href="chill-music.html">Chill Music</a>
-</div>
-</div>
-
-<div class="dropdown">
-<button class="dropbtn">EchoScapes ▼</button>
-<div class="dropdown-content">
-<a href="rain.html">Rain</a>
-<a href="forest.html">Forest</a>
-<a href="ocean.html">Ocean</a>
-</div>
-</div>
-
-<div class="dropdown">
-<button class="dropbtn">CineTone ▼</button>
-<div class="dropdown-content">
-<a href="cinematic.html">Cinematic</a>
-<a href="epic.html">Epic</a>
-<a href="documentary.html">Documentary</a>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<div class="tagline">
-DISCOVER • LISTEN • DOWNLOAD
-</div>
-
-<h1>
-WE CREATE
-<span class="for-you" data-text="FOR YOU">FOR YOU</span>
-</h1>
-
-<div class="description">
-Explore a curated collection of meme sounds,
-ambient music, royalty-free tracks and cinematic audio.
-</div>
-
+    <div id="quote-container">
+        <p id="quote-text">"Creativity is intelligence having fun."</p>
+    </div>
 </div>
 
 <script>
+    window.addEventListener('load', () => document.body.classList.add('loaded'));
 
-const dropdowns = document.querySelectorAll(".dropdown");
+    const dropdowns = document.querySelectorAll(".dropdown");
+    dropdowns.forEach(d => {
+        d.querySelector(".dropbtn").addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdowns.forEach(i => i !== d && i.classList.remove("active"));
+            d.classList.toggle("active");
+        });
+    });
 
-dropdowns.forEach(dropdown => {
-
-const button = dropdown.querySelector(".dropbtn");
-
-button.addEventListener("click",(e)=>{
-
-e.stopPropagation();
-
-dropdowns.forEach(item=>{
-if(item!==dropdown){
-item.classList.remove("active");
-}
-});
-
-dropdown.classList.toggle("active");
-
-});
-
-});
-
-document.addEventListener("click",()=>{
-
-dropdowns.forEach(item=>{
-item.classList.remove("active");
-});
-
-});
-
+    const quotes = ["Creativity is intelligence having fun.", "Design is the silent ambassador of your brand.", "Simplicity is the ultimate sophistication."];
+    let qIdx = 0;
+    setInterval(() => {
+        const qEl = document.getElementById('quote-container');
+        qEl.style.opacity = 0;
+        setTimeout(() => {
+            qIdx = (qIdx + 1) % quotes.length;
+            document.getElementById('quote-text').innerText = `"${quotes[qIdx]}"`;
+            qEl.style.opacity = 1;
+        }, 1000);
+    }, 15000);
 </script>
-
 </body>
 </html>
