@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | Premium Teaser</title>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: var(--font-main);
+            color: #fff;
+        }
+
+        /* Background */
+        #bg-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('soon.jpg') center/cover no-repeat;
+            animation: zoomBg 20s ease-out infinite alternate;
+            filter: blur(5px);
+        }
+
+        /* Top Left Logo */
+        .logo {
+            position: absolute;
+            top: 40px; left: 40px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+            z-index: 10;
+        }
+
+        /* Centered Glass Panel */
+        .glass-panel {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 4rem 6rem;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .glass-panel:hover { transform: translate(-50%, -50%) scale(1.02); }
+
+        /* Animated RGB Border */
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 52px;
+            padding: 2px;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotateBorder 3s linear infinite;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #eee 0%, #aaa 50%, #eee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #hint {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
+        @keyframes rotateBorder { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div id="bg-container"></div>
+    <div class="logo">WE CREATE</div>
+
+    <div class="glass-panel" id="card">
+        <h1>COMING SOON...</h1>
+        <div id="hint">Tap to experience</div>
+    </div>
+
+    <audio id="bgm" loop>
+        <source src="BGM.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const card = document.getElementById('card');
+        const audio = document.getElementById('bgm');
+        const hint = document.getElementById('hint');
+        let played = false;
+
+        card.addEventListener('click', () => {
+            if (!played) {
+                audio.volume = 0.3;
+                audio.play();
+                hint.style.opacity = '0';
+                setTimeout(() => hint.innerText = "Enjoy the experience", 500);
+                hint.style.opacity = '0.3';
+                played = true;
+            }
+        });
+    </script>
+</body>
+</html>
