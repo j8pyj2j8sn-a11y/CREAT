@@ -1,5 +1,150 @@
-border-radius: 20px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(0px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMING SOON</title>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Fixed Background: If soon.jpg is missing, it shows a dark gray fallback */
+        #bg-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #1a1a1a url('soon.jpg') no-repeat center center fixed;
+            background-size: cover;
+            animation: zoomBg 20s ease-out infinite alternate;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        /* Home Button Logo */
+        .logo-container {
+            position: absolute;
+            top: 40px; left: 40px;
+            z-index: 100;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            padding: 15px 25px;
+            border-radius: 20px;
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo-container:hover {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Glass Panel */
+        .glass-panel {
+            position: relative;
+            padding: 5rem 7rem;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.05);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel:hover { transform: scale(1.02); }
+
+        /* Animated border */
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 52px;
+            padding: 2px;
+            background: linear-gradient(45deg, #a1c4fd, #c2e9fb, #a1c4fd);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotateBorder 4s linear infinite;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #hint {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
+        @keyframes rotateBorder { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="bg-container"></div>
+    
+    <a href="index.html" class="logo-container">WE CREATE</a>
+
+    <div class="glass-panel" id="card">
+        <h1>COMING SOON</h1>
+        <div id="hint">Tap to experience</div>
+    </div>
+
+    <audio id="bgm" loop>
+        <source src="BGM.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const card = document.getElementById('card');
+        const audio = document.getElementById('bgm');
+        const hint = document.getElementById('hint');
+        let played = false;
+
+        card.addEventListener('click', () => {
+            if (!played) {
+                audio.volume = 0.3;
+                audio.play().then(() => {
+                    hint.innerText = "Experience Initialized";
+                    hint.style.opacity = '0.5';
+                    played = true;
+                }).catch(err => {
+                    console.log("Audio playback blocked by browser.");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
