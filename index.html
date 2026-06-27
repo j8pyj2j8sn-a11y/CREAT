@@ -39,16 +39,6 @@ body {
   background-clip: padding-box, border-box;
   background-origin: border-box;
   
-  /* Layer 1: Solid glass background, Layer 2: Silver/Cyan Border Gradient */
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)), 
-    linear-gradient(90deg, #1c1c1c, #b0b0b0, #e0e0e0, #00eaff, #e0e0e0, #b0b0b0, #1c1c1c);
-  
-  background-size: 100% 100%, 300% 100%;
-  animation: borderShimmer 8s linear infinite;
-
-  transition: transform 0.2s ease-out;
-  will-change: transform;
 }
 
 @keyframes borderShimmer {
