@@ -78,9 +78,40 @@ body {
 .dropdown-content a { display:block; padding:12px 20px; color:white; text-decoration:none; font-size: 14px; transition:0.3s; }
 .dropdown-content a:hover { background:rgba(0,234,255,0.1); color:#00eaff; }
 
-.hero-text { margin-top: 100px; opacity: 0; animation: fadeUp 1s 0.8s forwards; }
-.tagline { color:#00eaff; letter-spacing:4px; margin-bottom:20px; }
-h1 { font-size:110px; font-weight:900; color:#000000; line-height: 0.9; }
+/* Hero Text Container */
+.hero-text { 
+  margin-top: 100px; 
+  opacity: 0; 
+  animation: fadeUp 1s 0.8s forwards; 
+}
+
+/* Tagline: Refined Silver */
+.tagline { 
+  color: #a0a0a0; /* Soft silver instead of neon */
+  letter-spacing: 6px; 
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 20px; 
+}
+
+/* H1: Titanium Black with Silver Border */
+h1 { 
+  font-size: 110px; 
+  font-weight: 900; 
+  line-height: 0.9;
+  
+  /* Titanium Black Gradient Fill */
+  background: linear-gradient(180deg, #333333 0%, #000000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Silver Border Effect */
+  -webkit-text-stroke: 1px rgba(192, 192, 192, 0.5);
+  
+  /* Subtle Drop Shadow for Depth */
+  filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.1));
+}
+  
 /* ANIMATIONS */
 @keyframes liquidBorder { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 @keyframes fadeUp { 0% { opacity:0; transform:translateY(30px); } 100% { opacity:1; transform:translateY(0); } }
