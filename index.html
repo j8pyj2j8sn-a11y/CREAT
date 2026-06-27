@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WE CREATE | Premium</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <style>
 :root {
   --transition-smooth: cubic-bezier(0.23, 1, 0.32, 1);
@@ -15,12 +13,7 @@
   --accent-glow: 0 0 30px rgba(0, 234, 255, 0.15);
 }
 
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Inter',sans-serif;
-}
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
 
 body {
   min-height:100vh;
@@ -43,16 +36,17 @@ body {
   backdrop-filter:blur(20px) saturate(180%);
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  transition: transform 0.2s ease-out, border 0.5s ease, background 0.5s ease;
+  transition: transform 0.2s ease-out, border 0.5s ease;
   will-change: transform;
 }
 
-.glass-box:hover {
-  border: 1px solid rgba(0, 234, 255, 0.3);
-  background: rgba(10, 10, 10, 0.7);
-}
+/* LOGO */
+.logo { display:flex; align-items:center; gap:12px; color:white; font-size:28px; font-weight:800; }
+.logo-icon { color:#00eaff; font-size:32px; }
 
-/* DROPBUTTONS */
+/* NAV / DROPDOWNS */
+.hero-nav { display:flex; align-items:center; gap:22px; }
+.dropdown { position:relative; }
 .dropbtn {
   padding:14px 28px;
   border-radius:50px;
@@ -63,34 +57,31 @@ body {
   cursor:pointer;
   transition: transform 0.6s var(--transition-smooth), box-shadow 0.6s var(--transition-smooth);
 }
+.dropbtn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.5), var(--accent-glow); }
 
-.dropbtn:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), var(--accent-glow);
+.dropdown-content {
+  position:absolute; top:65px; left:0; min-width:200px;
+  background:rgba(10,10,10,.95); backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08); border-radius:18px;
+  opacity:0; visibility:hidden; transform:translateY(15px);
+  transition:.35s var(--transition-smooth); z-index:999;
 }
+.dropdown.active .dropdown-content { opacity:1; visibility:visible; transform:translateY(0); }
+.dropdown-content a { display:block; padding:15px 18px; text-decoration:none; color:white; transition:.3s; }
+.dropdown-content a:hover { background:#00eaff; color:black; }
 
-/* ENTRANCE ANIMATIONS */
+/* ANIMATIONS */
 @keyframes fadeUp {
   0% { opacity: 0; transform: translateY(40px); filter: blur(10px); }
   100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
 }
-
-.tagline, .hero h1, .description {
-  animation: fadeUp 1.2s var(--transition-smooth) both;
-}
-
+.tagline, .hero h1, .description { animation: fadeUp 1.2s var(--transition-smooth) both; }
 .tagline { animation-delay: 0.2s; color:#00eaff; letter-spacing:4px; margin-bottom:25px; }
-.hero h1 { animation-delay: 0.4s; font-size:110px; font-weight:900; line-height:.92; color:white; }
-.description { animation-delay: 0.6s; margin-top:30px; font-size:22px; line-height:1.8; color:#d8d8d8; }
+.hero h1 { animation-delay: 0.4s; font-size:90px; font-weight:900; line-height:.92; color:white; }
+.description { animation-delay: 0.6s; margin-top:30px; font-size:22px; color:#d8d8d8; }
 
-/* Existing layout styles maintained */
-.hero { position:absolute; top:20px; left:55px; right:55px; bottom:55px; display:flex; flex-direction:column; }
-.hero-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:80px; }
-.hero-nav { display:flex; align-items:center; gap:22px; }
-.dropdown-content { position:absolute; top:55px; left:0; min-width:220px; background:rgba(10,10,10,.95); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.08); border-radius:18px; opacity:0; visibility:hidden; transform:translateY(15px); transition:.35s ease; z-index:999; }
-.dropdown.active .dropdown-content { opacity:1; visibility:visible; transform:translateY(0); }
-.dropdown-content a { display:block; padding:15px 18px; text-decoration:none; color:white; }
-.dropdown-content a:hover { background:#00eaff; color:black; }
+.hero { position:absolute; top:50px; left:55px; right:55px; }
+.hero-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:100px; }
 </style>
 </head>
 <body>
@@ -98,26 +89,21 @@ body {
 <div class="glass-box">
   <div class="hero">
     <div class="hero-header">
-      <div class="hero-logo">△ WE CREATE</div>
+      <div class="logo"><div class="logo-icon">△</div> WE CREATE</div>
       <div class="hero-nav">
-        <div class="dropdown">
-          <button class="dropbtn">Troll Vault ▼</button>
-          <div class="dropdown-content">
-            <a href="#">Meme Sounds</a>
-            <a href="#">Trending Trolls</a>
-          </div>
-        </div>
-        </div>
+        <div class="dropdown"><button class="dropbtn">Troll Vault ▼</button><div class="dropdown-content"><a href="#">Meme Sounds</a><a href="#">Trending</a></div></div>
+        <div class="dropdown"><button class="dropbtn">NCS ▼</button><div class="dropdown-content"><a href="#">Gaming</a><a href="#">EDM</a></div></div>
+        <div class="dropdown"><button class="dropbtn">EchoScapes ▼</button><div class="dropdown-content"><a href="#">Rain</a><a href="#">Forest</a></div></div>
+        <div class="dropdown"><button class="dropbtn">CineTone ▼</button><div class="dropdown-content"><a href="#">Cinematic</a><a href="#">Epic</a></div></div>
+      </div>
     </div>
-
     <div class="tagline">DISCOVER • LISTEN • DOWNLOAD</div>
-    <h1>WE CREATE <br><span class="for-you">FOR YOU</span></h1>
+    <h1>WE CREATE <br>FOR YOU</h1>
     <div class="description">Explore a curated collection of ambient music and cinematic audio.</div>
   </div>
 </div>
 
 <script>
-// Toggle Dropdowns
 const dropdowns = document.querySelectorAll(".dropdown");
 dropdowns.forEach(dropdown => {
   dropdown.querySelector(".dropbtn").addEventListener("click", (e) => {
@@ -127,7 +113,6 @@ dropdowns.forEach(dropdown => {
   });
 });
 
-// Premium Tilt Effect
 const box = document.querySelector('.glass-box');
 document.addEventListener('mousemove', (e) => {
   const x = (e.clientX / window.innerWidth - 0.5) * 5;
@@ -135,10 +120,7 @@ document.addEventListener('mousemove', (e) => {
   box.style.transform = `translateX(-50%) perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
 });
 
-document.addEventListener("click", () => {
-  dropdowns.forEach(item => item.classList.remove("active"));
-});
+document.addEventListener("click", () => dropdowns.forEach(item => item.classList.remove("active")));
 </script>
-
 </body>
 </html>
