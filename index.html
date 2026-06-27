@@ -21,17 +21,35 @@ body {
   background-position:center;
 }
 
-/* PREMIUM GLASS BOX */
 .glass-box {
-  position:absolute; top:110px; left:50%;
-  transform:translateX(-50%);
-  width:88%; height:80vh;
-  border-radius:50px;
-  backdrop-filter:blur(2px);
-  background: rgba(0,0,0,0.0.5);
-  border: 1px solid rgba(255,255,255,0.1);
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  height: 80vh;
+  border-radius: 50px;
+  
+  /* Glass Aesthetics */
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.4);
+  
+  /* RGB Border Technique */
+  border: 2px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: border-box;
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                    linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0066ff, #8b00ff, #ff0000);
+  background-size: 100%, 400%;
+  animation: rgbBorder 8s linear infinite;
+
   transition: transform 0.2s ease-out;
   will-change: transform;
+}
+
+@keyframes rgbBorder {
+  0% { background-position: 100% 0%, 0% 50%; }
+  100% { background-position: 100% 0%, 400% 50%; }
 }
 
 /* LOGO & NAV */
