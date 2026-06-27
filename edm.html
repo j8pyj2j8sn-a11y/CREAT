@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon | Liquid Glass</title>
+    <title>Coming Soon | Premium Teaser</title>
     <style>
         :root {
-            /* Deeper glass transparency */
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.15);
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -44,7 +43,6 @@
             opacity: 0.8;
         }
 
-        /* Liquid Glass Card */
         .glass-panel {
             padding: 5rem 7rem;
             border-radius: 50px;
@@ -60,7 +58,6 @@
 
         .glass-panel:hover { transform: scale(1.02); }
 
-        /* Animated border */
         .glass-panel::before {
             content: "";
             position: absolute;
@@ -93,6 +90,7 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             text-align: center;
+            transition: opacity 0.5s ease;
         }
 
         @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
@@ -106,7 +104,7 @@
     <div class="logo">WE CREATE</div>
 
     <div class="glass-panel" id="card">
-        <h1>COMIMG SOON</h1>
+        <h1>COMING SOON</h1>
         <div id="hint">Tap to experience</div>
     </div>
 
