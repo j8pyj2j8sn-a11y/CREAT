@@ -31,27 +31,31 @@ body {
   border-radius: 50px;
   
   /* Glass Aesthetics */
-  backdrop-filter: blur(1px);
-  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.6);
   
-  /* RGB Border Technique */
+  /* Titanium Silver Border Technique */
   border: 2px solid transparent;
   background-clip: padding-box, border-box;
   background-origin: border-box;
-  background-image: linear-gradient(rgba(0,0,0,0.04), rgba(0,0,0,0.0.1)), 
-                    linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0066ff, #8b00ff, #ff0000);
-  background-size: 100%, 400%;
-  animation: rgbBorder 8s linear infinite;
+  
+  /* Metallic Silver Gradient */
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+    linear-gradient(135deg, #1c1c1c 0%, #a8a8a8 45%, #ffffff 50%, #a8a8a8 55%, #1c1c1c 100%);
+  
+  background-size: 100%, 200% 200%;
+  animation: titaniumShimmer 6s linear infinite;
 
   transition: transform 0.2s ease-out;
   will-change: transform;
 }
 
-@keyframes rgbBorder {
-  0% { background-position: 100% 0%, 0% 50%; }
-  100% { background-position: 100% 0%, 400% 50%; }
+@keyframes titaniumShimmer {
+  0% { background-position: 0% 0%, 0% 50%; }
+  100% { background-position: 0% 0%, 200% 50%; }
 }
-
+  
 /* LOGO & NAV */
 .logo { display:flex; align-items:center; gap:12px; color:white; font-size:28px; font-weight:800; }
 .logo-icon { color:#00eaff; font-size:32px; }
