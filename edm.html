@@ -23,11 +23,12 @@
             justify-content: center;
         }
 
-        /* Background */
+        /* Fixed Background: If soon.jpg is missing, it shows a dark gray fallback */
         #bg-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #1a1a1a url('soon.jpg') center/cover no-repeat;
+            background: #1a1a1a url('soon.jpg') no-repeat center center fixed;
+            background-size: cover;
             animation: zoomBg 20s ease-out infinite alternate;
             filter: blur(8px);
             z-index: -1;
@@ -37,25 +38,28 @@
         .logo-container {
             position: absolute;
             top: 40px; left: 40px;
-            z-index: 10;
+            z-index: 100;
             text-decoration: none;
             color: #fff;
             font-weight: 700;
             letter-spacing: 2px;
             font-size: 1.2rem;
             text-transform: uppercase;
-            padding: 10px 20px;
+            padding: 15px 25px;
             border-radius: 20px;
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
         }
 
         .logo-container:hover {
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         /* Glass Panel */
         .glass-panel {
+            position: relative;
             padding: 5rem 7rem;
             border-radius: 50px;
             background: var(--glass-bg);
@@ -70,6 +74,7 @@
 
         .glass-panel:hover { transform: scale(1.02); }
 
+        /* Animated border */
         .glass-panel::before {
             content: "";
             position: absolute;
@@ -136,7 +141,7 @@
                     hint.style.opacity = '0.5';
                     played = true;
                 }).catch(err => {
-                    console.log("Audio playback requires user interaction:", err);
+                    console.log("Audio playback blocked by browser.");
                 });
             }
         });
