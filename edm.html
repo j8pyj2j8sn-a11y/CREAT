@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon | Premium Teaser</title>
+    <title>COMING SOON</title>
     <style>
         :root {
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.15);
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,17 +16,18 @@
             width: 100%; height: 100%;
             overflow: hidden;
             background-color: #000;
-            font-family: var(--font-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* Background with fallback color */
         #bg-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('soon.jpg') center/cover no-repeat;
+            background: #1a1a1a url('soon.jpg') center/cover no-repeat;
             animation: zoomBg 20s ease-out infinite alternate;
             filter: blur(8px);
             z-index: -1;
@@ -80,22 +80,19 @@
             background: linear-gradient(180deg, #fff 0%, #ccc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-align: center;
         }
 
         #hint {
             margin-top: 20px;
             font-size: 0.9rem;
-            opacity: 0.6;
+            opacity: 0.5;
             text-transform: uppercase;
             letter-spacing: 4px;
-            text-align: center;
             transition: opacity 0.5s ease;
         }
 
         @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
         @keyframes rotateBorder { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
-
     </style>
 </head>
 <body>
@@ -121,13 +118,13 @@
         card.addEventListener('click', () => {
             if (!played) {
                 audio.volume = 0.3;
-                audio.play();
-                hint.style.opacity = '0';
-                setTimeout(() => {
+                audio.play().then(() => {
                     hint.innerText = "Experience Initialized";
                     hint.style.opacity = '0.5';
-                }, 500);
-                played = true;
+                    played = true;
+                }).catch(err => {
+                    console.log("Playback failed:", err);
+                });
             }
         });
     </script>
