@@ -4,60 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WE CREATE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
         body { 
-            min-height:100vh; overflow:hidden;
-            background: linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)), url("background.jpg") center/cover no-repeat;
-            opacity: 0; transition: opacity 1.2s ease-in-out; /* Smooth entry transition */
+            min-height:100vh; overflow:hidden; background: linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)), url("background.jpg") center/cover no-repeat;
+            opacity: 0; transition: opacity 1.2s ease-in-out;
         }
         body.loaded { opacity: 1; }
 
-        /* Glass Panel */
-        .glass-box { position:absolute; top:110px; left:50%; transform:translateX(-50%); width:88%; height:80vh; border-radius:50px; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); padding:55px; }
+        /* TITANIUM TEXT */
+        .titanium { 
+            position:relative; display:inline-block; 
+            background:linear-gradient(180deg, #f5f5f5 0%, #7b7b7b 15%, #1c1c1c 35%, #050505 50%, #1b1b1b 70%, #9d9d9d 100%);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:900;
+        }
 
-        /* RGB Border Animation */
-        .dropbtn { padding:14px 28px; border-radius:50px; background:#111; border:1px solid rgba(255,255,255,.18); color:#fff; cursor:pointer; font-weight:600; position:relative; overflow:hidden; }
-        .dropbtn::before { content:""; position:absolute; inset:-2px; border-radius:50px; background:linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0066ff, #8b00ff, #ff0000); background-size:400%; animation:rgbBorder 8s linear infinite; -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; pointer-events:none; }
+        /* RGB BORDER BUTTONS */
+        .dropbtn { 
+            padding:14px 28px; border-radius:50px; background:#111; border:1px solid rgba(255,255,255,.18); 
+            color:#fff; cursor:pointer; position:relative; font-weight:600;
+        }
+        .dropbtn::before { 
+            content:""; position:absolute; inset:-2px; border-radius:50px; 
+            background:linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0066ff, #8b00ff, #ff0000);
+            background-size:400%; animation:rgbBorder 8s linear infinite; 
+            -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite:xor; pointer-events:none;
+        }
         @keyframes rgbBorder { 0% { background-position:0%; } 100% { background-position:400%; } }
 
-        /* Titanium Text */
-        .titanium { background:linear-gradient(180deg, #f5f5f5 0%, #7b7b7b 15%, #1c1c1c 35%, #050505 50%, #1b1b1b 70%, #9d9d9d 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-size:110px; font-weight:900; }
-
-        /* Dropdowns & Nav */
-        .hero-nav { display:flex; gap:22px; }
+        /* DROPDOWNS */
         .dropdown { position:relative; }
-        .dropdown-content { position:absolute; top:70px; left:0; min-width:200px; background:rgba(10,10,10,.95); backdrop-filter:blur(20px); border-radius:18px; opacity:0; visibility:hidden; transition:.3s ease; z-index:999; }
-        .dropdown.active .dropdown-content { opacity:1; visibility:visible; }
-        .dropdown-content a { display:block; padding:15px; color:white; text-decoration:none; }
+        .dropdown-content { 
+            position:absolute; top:65px; left:0; min-width:220px; background:rgba(10,10,10,.95); 
+            backdrop-filter:blur(20px); border-radius:18px; opacity:0; visibility:hidden; 
+            transform:translateY(15px); transition:.35s ease; z-index:999;
+        }
+        .dropdown.active .dropdown-content { opacity:1; visibility:visible; transform:translateY(0); }
+        .dropdown-content a { display:block; padding:15px 18px; color:white; text-decoration:none; }
         .dropdown-content a:hover { background:#00eaff; color:black; }
-        
+
+        /* QUOTES */
         #quote-box { position:absolute; bottom:50px; left:50%; transform:translateX(-50%); color:#d8d8d8; font-size:22px; opacity:0; transition:opacity 1s ease; }
     </style>
 </head>
 <body>
 
-<div class="glass-box">
-    <div class="hero-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:80px;">
+<div class="glass-box" style="position:absolute; top:110px; left:50%; transform:translateX(-50%); width:88%; height:80vh; border-radius:50px; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); padding:55px;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
         <div style="color:white; font-size:28px; font-weight:800;">△ WE CREATE</div>
-        <nav class="hero-nav">
-            <div class="dropdown"><button class="dropbtn">Troll Vault ▼</button><div class="dropdown-content"><a href="meme-sounds.html">Meme Sounds</a><a href="trending-trolls.html">Trending Trolls</a><a href="classic-trolls.html">Classic Trolls</a></div></div>
-            <div class="dropdown"><button class="dropbtn">NCS ▼</button><div class="dropdown-content"><a href="gamingmusic.html">Gaming Music</a><a href="edm.html">EDM</a><a href="chill-music.html">Chill Music</a></div></div>
-            <div class="dropdown"><button class="dropbtn">EchoScapes ▼</button><div class="dropdown-content"><a href="rain.html">Rain</a><a href="forest.html">Forest</a><a href="ocean.html">Ocean</a></div></div>
-            <div class="dropdown"><button class="dropbtn">CineTone ▼</button><div class="dropdown-content"><a href="cinematic.html">Cinematic</a><a href="epic.html">Epic</a><a href="documentary.html">Documentary</a></div></div>
+        <nav style="display:flex; gap:22px;">
+            <div class="dropdown"><button class="dropbtn">Troll Vault ▼</button><div class="dropdown-content"><a href="meme-sounds.html">Meme Sounds</a><a href="trending-trolls.html">Trending Trolls</a></div></div>
+            <div class="dropdown"><button class="dropbtn">NCS ▼</button><div class="dropdown-content"><a href="gamingmusic.html">Gaming Music</a><a href="edm.html">EDM</a></div></div>
+            <div class="dropdown"><button class="dropbtn">EchoScapes ▼</button><div class="dropdown-content"><a href="rain.html">Rain</a><a href="forest.html">Forest</a></div></div>
+            <div class="dropdown"><button class="dropbtn">CineTone ▼</button><div class="dropdown-content"><a href="cinematic.html">Cinematic</a><a href="epic.html">Epic</a></div></div>
         </nav>
     </div>
     
-    <h1 class="titanium">WE CREATE <span style="display:block; color:#aaa; font-size:0.6em;">FOR YOU</span></h1>
+    <h1 class="titanium" style="font-size:110px; margin-top:100px;">WE CREATE <span style="display:block; color:#aaa;">FOR YOU</span></h1>
     <div id="quote-box">"Creativity is intelligence having fun."</div>
 </div>
 
 <script>
-    // Entry Transition
     window.addEventListener('load', () => document.body.classList.add('loaded'));
-
-    // Dropdown Logic
     const dropdowns = document.querySelectorAll(".dropdown");
     dropdowns.forEach(d => {
         d.querySelector(".dropbtn").addEventListener("click", (e) => {
@@ -68,7 +78,6 @@
     });
     document.addEventListener("click", () => dropdowns.forEach(d => d.classList.remove("active")));
 
-    // Quote Cycler
     const quotes = ["Creativity is intelligence having fun.", "Design is the silent ambassador of your brand.", "Simplicity is the ultimate sophistication."];
     let qIdx = 0;
     const qEl = document.getElementById('quote-box');
