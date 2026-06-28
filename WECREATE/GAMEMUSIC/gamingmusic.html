@@ -52,7 +52,7 @@ nav a:hover{color:#00E5FF;}
 @keyframes premiumEntrance {0% {opacity: 0;transform: translateY(40px) scale(0.98);filter: blur(8px);}100% {opacity: 1;transform: translateY(0) scale(1);filter: blur(0);}}
 @keyframes atmosphericScale {0% {opacity: 0;transform: scale(1.12);}100% {opacity: 1;transform: scale(1);}}
 .info{flex:1;}
-.info h3{font-size:21px;margin-bottom:6px;}
+.info h3{font-size:21px;margin-bottom:6px;text-transform: capitalize;}
 .info p{color:#bfbfbf; font-size: 14px;}
 .download{width:44px;height:44px;border-radius:50%;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,.08);font-size:22px;transition:.3s;text-decoration: none;color: white;}
 .download:hover{background:#00E5FF;color:black;transform:scale(1.08);}
@@ -84,18 +84,24 @@ nav a:hover{color:#00E5FF;}
 
 <section class="music">
 <h2>Latest Tracks</h2>
-
 <script>
     const musicSection = document.querySelector('.music');
     for (let i = 1; i <= 30; i++) {
+        // Set paths
+        const songPath = `WECREATE/GAMEMUSIC/MUSIC/song${i}.mp3`;
+        const coverPath = `WECREATE/GAMEMUSIC/COVER/cover${i}.jpg`;
+        
+        // Extract filename from path (e.g., "song1")
+        const fileName = songPath.split('/').pop().split('.')[0];
+        
         const card = document.createElement('div');
         card.className = 'card';
-        card.dataset.song = `WECREATE/GAMEMUSIC/MUSIC/song${i}.mp3`;
+        card.dataset.song = songPath;
         card.innerHTML = `
-            <img src="WECREATE/GAMEMUSIC/COVER/cover${i}.jpg" crossorigin="anonymous">
-            <div class="info"><h3>Song ${i}</h3><p>Game Soundtrack</p></div>
+            <img src="${coverPath}" crossorigin="anonymous">
+            <div class="info"><h3>${fileName}</h3><p>Game Soundtrack</p></div>
             <div class="equalizer"><span></span><span></span><span></span></div>
-            <a class="download" href="WECREATE/GAMEMUSIC/MUSIC/song${i}.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+            <a class="download" href="${songPath}" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
         `;
         musicSection.appendChild(card);
     }
@@ -170,7 +176,6 @@ homeButton.addEventListener("click", (e) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Initialize cards after they are generated
 setTimeout(initPlayer, 100);
 </script>
 </body>
