@@ -135,13 +135,14 @@ cards.forEach((card, i) => {
     };
 }); 
 
-// Add these event listeners right here
 player.onpause = () => {
-    cards.forEach(c => c.classList.remove("active"));
+    cards.forEach(c => {
+        c.classList.remove("active");
+        c.style.boxShadow = ""; // This ensures the shadow also disappears
+    });
     bgImage.style.opacity = "1";
     background.style.background = "radial-gradient(circle at top,#222,#050505 70%)";
 };
-
 player.onplay = () => {
     if (current) {
         current.classList.add("active");
