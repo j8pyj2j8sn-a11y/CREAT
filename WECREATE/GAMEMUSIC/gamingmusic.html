@@ -123,18 +123,37 @@ function playCard(index){
     img.complete ? update() : img.onload = update;
 }
 
-cards.forEach((card,i)=>{
+cards.forEach((card, i) => {
     card.onclick = (e) => {
-        if(e.target.closest(".download")) return;
-        if(current === card){
+        if (e.target.closest(".download")) return;
+        if (current === card) {
+            // Only toggle audio; the player events below will handle the UI
             player.paused ? player.play() : player.pause();
-            card.classList.toggle("active");
         } else {
             playCard(i);
         }
     };
-});
+}); 
 
+player.onpause = () => {
+    cards.forEach(c => {
+        c.classList.remove("active");
+        c.style.boxShadow = ""; // This ensures the shadow also disappears
+    });
+    bgImage.style.opacity = "1";
+    background.style.background = "radial-gradient(circle at top,#222,#050505 70%)";
+};
+player.onplay = () => {
+    if (current) {
+        current.classList.add("active");
+        bgImage.style.opacity = "0.15";
+        const img = current.querySelector("img");
+        if (img.complete) {
+            const p = colorThief.getPalette(img, 2);
+            background.style.background = `radial-gradient(circle at top, rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.22) 0%, #050505 100%)`;
+        }
+    }
+};
 searchInput.oninput = (e) => {
     const q = e.target.value.toLowerCase();
     cards.forEach((c, i) => c.style.display = songNames[i].toLowerCase().includes(q) ? "flex" : "none");
