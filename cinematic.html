@@ -6,8 +6,10 @@
     <title>CREATORS SPACE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Titanium Theme Background */
         body {
-            background-image: url('creator.jpg');
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('creator.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -16,13 +18,15 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            animation: fadeIn 1.2s ease-out;
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Top Bar */
+        /* Dark Top Bar with Border */
         .top-bar {
             height: 70px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
+            background: #050505;
+            border-bottom: 1px solid #333;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -32,31 +36,33 @@
             z-index: 100;
         }
 
-        /* Title Area */
+        /* 110px Title that hides smoothly */
         #main-title {
-            padding: 2rem 2rem 1rem 2rem;
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            padding: 3rem 2rem;
+            transition: opacity 0.4s ease, transform 0.4s ease;
             will-change: opacity, transform;
             flex-shrink: 0;
         }
 
-        /* Card with THIN RGB Border */
-        .rgb-border-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid transparent;
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), linear-gradient(90deg, #ec4899, #8b5cf6, #06b6d4);
+        /* Liquid Glass Cards with Silver-RGB Border */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            background-clip: padding-box, border-box;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), linear-gradient(90deg, #9ca3af, #4b5563, #9ca3af);
             background-origin: border-box;
             background-clip: padding-box, border-box;
-            backdrop-filter: blur(10px);
         }
 
-        /* Silver-RGB Button Border */
-        .silver-rgb-border {
+        /* Silver-RGB Button */
+        .btn-rgb {
             position: relative;
-            background: #0a0a0a;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: #000;
+            border: 1px solid #555;
         }
-        .silver-rgb-border::before {
+        .btn-rgb::before {
             content: '';
             position: absolute;
             inset: -2px;
@@ -66,7 +72,6 @@
             animation: rotate 3s linear infinite;
         }
 
-        /* Playlist Container */
         #player-container {
             flex: 1;
             overflow-y: auto;
@@ -77,23 +82,19 @@
         }
 
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .animate-border-spin { animation: rotate 3s linear infinite; }
-        
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
 <body class="text-white font-sans">
 
     <nav class="top-bar">
-        <div class="text-xl font-bold tracking-widest uppercase">WE CREATE</div>
-        <button class="silver-rgb-border px-6 py-2 rounded-full text-xs font-semibold hover:bg-white/10 transition-all uppercase">
-            GO BACK
-        </button>
+        <div class="text-lg font-bold tracking-widest uppercase">WE CREATE</div>
+        <button class="btn-rgb px-6 py-2 rounded-full text-xs font-semibold uppercase">GO BACK</button>
     </nav>
 
     <header id="main-title">
-        <h1 class="text-[110px] font-black tracking-tighter opacity-90 leading-[0.9]">
+        <h1 class="text-[110px] font-black tracking-tighter leading-[0.9]">
             CREATORS<br>SPACE
         </h1>
     </header>
@@ -105,35 +106,23 @@
         const container = document.getElementById('player-container');
         const title = document.getElementById('main-title');
 
-        // Scroll Animation: Fade and move title up
         container.addEventListener('scroll', () => {
             const scrollPos = container.scrollTop;
-            const fadePoint = 100;
+            const fadePoint = 120;
             let opacity = Math.max(0, 1 - (scrollPos / fadePoint));
-            
             title.style.opacity = opacity;
             title.style.transform = `translateY(-${scrollPos * 0.5}px)`;
-            title.style.pointerEvents = opacity === 0 ? 'none' : 'auto';
         });
 
-        // Generate 50 Music Cards
         const songs = Array.from({length: 50}, (_, i) => `Soundscape Track ${i + 1}`);
         songs.forEach((song) => {
             const card = document.createElement('div');
-            card.className = "rgb-border-card p-6 rounded-3xl flex items-center justify-between hover:bg-black/50 transition-all cursor-pointer";
+            card.className = "glass-card p-6 rounded-2xl flex items-center justify-between";
             card.innerHTML = `
-                <div class="flex items-center gap-6">
-                    <div class="w-16 h-16 rounded-2xl bg-black/40 shadow-inner"></div>
-                    <span class="text-xl font-medium tracking-wide">${song}</span>
-                </div>
-                <div class="relative p-[2px] rounded-full overflow-hidden shrink-0">
-                    <div class="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-border-spin"></div>
-                    <button class="relative w-14 h-14 flex items-center justify-center rounded-full bg-[#0a0a0a] hover:bg-black transition-colors">
-                        <svg class="w-7 h-7 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                        </svg>
-                    </button>
-                </div>
+                <span class="text-xl font-medium tracking-wide">${song}</span>
+                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </button>
             `;
             container.appendChild(card);
         });
