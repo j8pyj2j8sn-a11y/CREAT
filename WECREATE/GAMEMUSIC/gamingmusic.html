@@ -160,7 +160,7 @@ text-align:center;
 padding-bottom:60px;
 }
 
-.hero h4, .hero h1, .hero p, .music h2 {
+.hero h4, .hero h1, .hero p {
   animation: premiumEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -212,12 +212,6 @@ animation-delay: 0.5s;
 /* Music Section Grid */
 .music{
 padding:0 60px 140px;
-}
-
-.music h2{
-font-size:28px;
-margin-bottom:25px;
-animation-delay: 0.6s;
 }
 
 .card{
@@ -395,11 +389,6 @@ flex:1;
 
 .info h3{
 font-size:21px;
-margin-bottom:6px;
-}
-
-.info p{
-color:#bfbfbf;
 }
 
 .download{
@@ -482,40 +471,8 @@ nav a{ font-size:13px; }
 .card img{ width:60px; height:60px; }
 }
 
-/* Hardware accelerated CSS cascade staggered load entries up to 30 elements */
-.card:nth-child(1) { animation-delay: 0.60s; }
-.card:nth-child(2) { animation-delay: 0.63s; }
-.card:nth-child(3) { animation-delay: 0.66s; }
-.card:nth-child(4) { animation-delay: 0.69s; }
-.card:nth-child(5) { animation-delay: 0.72s; }
-.card:nth-child(6) { animation-delay: 0.75s; }
-.card:nth-child(7) { animation-delay: 0.78s; }
-.card:nth-child(8) { animation-delay: 0.81s; }
-.card:nth-child(9) { animation-delay: 0.84s; }
-.card:nth-child(10) { animation-delay: 0.87s; }
-.card:nth-child(11) { animation-delay: 0.90s; }
-.card:nth-child(12) { animation-delay: 0.93s; }
-.card:nth-child(13) { animation-delay: 0.96s; }
-.card:nth-child(14) { animation-delay: 0.99s; }
-.card:nth-child(15) { animation-delay: 1.02s; }
-.card:nth-child(16) { animation-delay: 1.05s; }
-.card:nth-child(17) { animation-delay: 1.08s; }
-.card:nth-child(18) { animation-delay: 1.11s; }
-.card:nth-child(19) { animation-delay: 1.14s; }
-.card:nth-child(20) { animation-delay: 1.17s; }
-.card:nth-child(21) { animation-delay: 1.20s; }
-.card:nth-child(22) { animation-delay: 1.23s; }
-.card:nth-child(23) { animation-delay: 1.26s; }
-.card:nth-child(24) { animation-delay: 1.29s; }
-.card:nth-child(25) { animation-delay: 1.32s; }
-.card:nth-child(26) { animation-delay: 1.35s; }
-.card:nth-child(27) { animation-delay: 1.38s; }
-.card:nth-child(28) { animation-delay: 1.41s; }
-.card:nth-child(29) { animation-delay: 1.44s; }
-.card:nth-child(30) { animation-delay: 1.47s; }
-
+/* Hardware accelerated CSS cascade staggered load entries */
 </style>
-
 </head>
 
 <body>
@@ -524,20 +481,17 @@ nav a{ font-size:13px; }
 <div class="bg"></div>
 
 <header>
-
 <div class="logo">
   <a id="homeButton">
     <span class="we-text">WE</span> <span>CREATE</span>
   </a>
 </div>
-
 <nav>
     <a href="index.html" target="_blank">Home</a>
     <a href="nocopyrightmusic.html" target="_blank">NO COPYRIGHT MUSIC</a>
     <a href="https://ncs.io" target="_blank">NCS</a>
     <a href="nocopyright.html" target="_blank">Troll Wallet</a>
 </nav>
-
 </header>
 
 <section class="hero">
@@ -547,219 +501,18 @@ nav a{ font-size:13px; }
 </section>
 
 <section class="music">
-    
-<h2>Latest Tracks</h2>
-
-  <div class="card" data-song="songs/song1.mp3">
-    <img src="covers/cover1.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Midnight Echo</h3><p>Lounge Music • 03:42</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song1.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song2.mp3">
-    <img src="covers/cover2.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Cyber Pulse</h3><p>Synthwave • 04:15</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song2.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song3.mp3">
-    <img src="covers/cover3.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Neon Dreams</h3><p>Ambient Chill • 02:58</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song3.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song4.mp3">
-    <img src="covers/cover4.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Grid Runner</h3><p>Retro Electro • 03:10</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song4.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song5.mp3">
-    <img src="covers/cover5.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Solar Wind</h3><p>Deep Space • 05:21</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song5.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song6.mp3">
-    <img src="covers/cover6.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Hyper Drive</h3><p>Synthwave • 03:50</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song6.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song7.mp3">
-    <img src="covers/cover7.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Pixel Journey</h3><p>Retro Electro • 02:45</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song7.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song8.mp3">
-    <img src="covers/cover8.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Starlight Lounge</h3><p>Lounge Music • 04:02</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song8.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song9.mp3">
-    <img src="covers/cover9.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Cosmic Odyssey</h3><p>Deep Space • 04:40</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song9.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song10.mp3">
-    <img src="covers/cover10.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Shadow Runner</h3><p>Synthwave • 03:15</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song10.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song11.mp3">
-    <img src="covers/cover11.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Ethereal Waves</h3><p>Ambient Chill • 03:22</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song11.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song12.mp3">
-    <img src="covers/cover12.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Velocity</h3><p>Retro Electro • 02:55</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song12.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song13.mp3">
-    <img src="covers/cover13.jpg" crossorigin="anonymous">
-    <div class="info"><h3>After Hours</h3><p>Lounge Music • 04:10</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song13.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song14.mp3">
-    <img src="covers/cover14.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Nebula Drift</h3><p>Deep Space • 05:05</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song14.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song15.mp3">
-    <img src="covers/cover15.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Synth City</h3><p>Synthwave • 03:35</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song15.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song16.mp3">
-    <img src="covers/cover16.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Infinite Chill</h3><p>Ambient Chill • 03:01</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song16.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song17.mp3">
-    <img src="covers/cover17.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Laser Grid</h3><p>Retro Electro • 03:12</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song17.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song18.mp3">
-    <img src="covers/cover18.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Velvet Grooves</h3><p>Lounge Music • 04:18</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song18.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song19.mp3">
-    <img src="covers/cover19.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Dark Matter</h3><p>Deep Space • 04:55</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song19.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song20.mp3">
-    <img src="covers/cover20.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Overdrive</h3><p>Synthwave • 03:44</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song20.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song21.mp3">
-    <img src="covers/cover21.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Satin Sky</h3><p>Ambient Chill • 03:14</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song21.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song22.mp3">
-    <img src="covers/cover22.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Vector Run</h3><p>Retro Electro • 02:40</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song22.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song23.mp3">
-    <img src="covers/cover23.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Liquid Quartz</h3><p>Lounge Music • 04:30</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song23.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song24.mp3">
-    <img src="covers/cover24.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Event Horizon</h3><p>Deep Space • 05:42</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song24.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song25.mp3">
-    <img src="covers/cover25.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Outrun Spectrum</h3><p>Synthwave • 03:20</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song25.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song26.mp3">
-    <img src="covers/cover26.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Dreamscape</h3><p>Ambient Chill • 03:05</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song26.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song27.mp3">
-    <img src="covers/cover27.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Analog Pulse</h3><p>Retro Electro • 03:28</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song27.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song28.mp3">
-    <img src="covers/cover28.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Silk Horizon</h3><p>Lounge Music • 04:05</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song28.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#C44DFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song29.mp3">
-    <img src="covers/cover29.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Pulsar Eclipse</h3><p>Deep Space • 05:10</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song29.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
-  <div class="card" data-song="songs/song30.mp3">
-    <img src="covers/cover30.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Laser Highway</h3><p>Synthwave • 03:52</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="songs/song30.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-
+  <script>
+    for(let i=1; i<=30; i++){
+      document.write(`
+        <div class="card" data-song="MUSIC/song${i}.mp3">
+          <img src="COVER/cover${i}.jpg" crossorigin="anonymous">
+          <div class="info"><h3>Song ${i}</h3></div>
+          <div class="equalizer"><span></span><span></span><span></span></div>
+          <a class="download" href="MUSIC/song${i}.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+        </div>
+      `);
+    }
+  </script>
 </section>
 
 <div class="search">
@@ -815,7 +568,6 @@ img.style.boxShadow = `
     0 0 40px ${glow}
 `;
 
-// ALIGNED AND REMAPPED BOTH THE CARD GLOW & BACKGROUND GLOW TO COVER ART EXTRACTED PALETTE DYNAMICALLY
 card.style.boxShadow = `
     0 0 25px ${glow},
     0 0 80px rgba(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]}, 0.4)
@@ -878,8 +630,7 @@ searchInput.addEventListener("input", (e) => {
   const query = e.target.value.toLowerCase().trim();
   cards.forEach(card => {
     const title = card.querySelector(".info h3").textContent.toLowerCase();
-    const genre = card.querySelector(".info p").textContent.toLowerCase();
-    if (title.includes(query) || genre.includes(query)) {
+    if (title.includes(query)) {
       card.style.display = "flex";
     } else {
       card.style.display = "none";
