@@ -19,7 +19,6 @@
             overflow: hidden;
         }
 
-        /* Fixed Top Bar (No border bottom) */
         .top-bar {
             height: 70px;
             background: rgba(0, 0, 0, 0.6);
@@ -33,13 +32,13 @@
             z-index: 50;
         }
 
-        /* Title Animation Styles */
+        /* Title container - No margin-bottom to remove the gap/border effect */
         #main-title {
             transition: opacity 0.3s ease-out, transform 0.3s ease-out;
             will-change: opacity, transform;
             padding: 0 1.5rem;
-            margin-top: 2.5rem;
-            margin-bottom: 2.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0; 
         }
 
         .glass-card {
@@ -48,7 +47,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* RGB Border for Go Back Button */
         .silver-rgb-border {
             position: relative;
             background: #0a0a0a;
@@ -67,7 +65,7 @@
         #player-container {
             flex: 1;
             overflow-y: auto;
-            padding: 0 1.5rem 2rem 1.5rem;
+            padding: 2rem 1.5rem; /* Padding starts here immediately after the title */
             max-width: 900px;
             margin: 0 auto;
             width: 100%;
@@ -82,7 +80,6 @@
 </head>
 <body class="text-white font-sans">
 
-    <!-- Top Bar -->
     <nav class="top-bar">
         <div class="text-xl font-bold tracking-widest uppercase">WE CREATE</div>
         <button class="silver-rgb-border px-6 py-2 rounded-full text-xs font-semibold hover:bg-white/10 transition-all uppercase">
@@ -90,14 +87,12 @@
         </button>
     </nav>
 
-    <!-- Title -->
     <header id="main-title" class="max-w-7xl mx-auto">
         <h1 class="text-[110px] font-black tracking-tighter opacity-90 leading-[0.9]">
             CREATORS<br>SPACE
         </h1>
     </header>
 
-    <!-- Music List -->
     <main id="player-container" class="space-y-4">
     </main>
 
@@ -107,7 +102,7 @@
 
         container.addEventListener('scroll', () => {
             const scrollPos = container.scrollTop;
-            const fadePoint = 150; 
+            const fadePoint = 100; 
             let opacity = 1 - (scrollPos / fadePoint);
             opacity = Math.max(0, Math.min(1, opacity));
             
