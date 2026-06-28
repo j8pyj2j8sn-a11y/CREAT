@@ -80,27 +80,7 @@ const songNames = [
     "Song 21", "Song 22", "Song 23", "Song 24", "Song 25",
     "Song 26", "Song 27", "Song 28", "Song 29", "Song 30"
 ];
-    // Add this to your script section
-player.onpause = () => {
-    // Remove active class from all cards when paused
-    cards.forEach(c => c.classList.remove("active"));
-    // Reset background to default
-    bgImage.style.opacity = "1";
-    background.style.background = "radial-gradient(circle at top,#222,#050505 70%)";
-};
-
-player.onplay = () => {
-    // Re-apply active class if we just resumed a specific card
-    if (current) {
-        current.classList.add("active");
-        bgImage.style.opacity = "0.15";
-        // Re-run color logic if needed
-        const img = current.querySelector("img");
-        const p = colorThief.getPalette(img, 2);
-        background.style.background = `radial-gradient(circle at top, rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.22) 0%, #050505 100%)`;
-    }
-};
-
+   
 const container = document.getElementById("musicContainer");
 songNames.forEach((name, i) => {
     let num = i + 1;
@@ -143,18 +123,36 @@ function playCard(index){
     img.complete ? update() : img.onload = update;
 }
 
-cards.forEach((card,i)=>{
+cards.forEach((card, i) => {
     card.onclick = (e) => {
-        if(e.target.closest(".download")) return;
-        if(current === card){
+        if (e.target.closest(".download")) return;
+        if (current === card) {
+            // Only toggle audio; the player events below will handle the UI
             player.paused ? player.play() : player.pause();
-            card.classList.toggle("active");
         } else {
             playCard(i);
         }
     };
-});
+}); 
 
+// Add these event listeners right here
+player.onpause = () => {
+    cards.forEach(c => c.classList.remove("active"));
+    bgImage.style.opacity = "1";
+    background.style.background = "radial-gradient(circle at top,#222,#050505 70%)";
+};
+
+player.onplay = () => {
+    if (current) {
+        current.classList.add("active");
+        bgImage.style.opacity = "0.15";
+        const img = current.querySelector("img");
+        if (img.complete) {
+            const p = colorThief.getPalette(img, 2);
+            background.style.background = `radial-gradient(circle at top, rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.22) 0%, #050505 100%)`;
+        }
+    }
+};
 searchInput.oninput = (e) => {
     const q = e.target.value.toLowerCase();
     cards.forEach((c, i) => c.style.display = songNames[i].toLowerCase().includes(q) ? "flex" : "none");
