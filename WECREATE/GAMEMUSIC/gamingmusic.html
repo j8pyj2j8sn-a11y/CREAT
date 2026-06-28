@@ -4,28 +4,61 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WE CREATE • Game Music</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
 html{scroll-behavior:smooth;}
 body{background:#050505;color:#fff;overflow-x:hidden;}
 .bg-image {position: fixed;inset: 0;background: url("WECREATE/GAMEMUSIC/BACKGROUND.jpg") no-repeat center center;background-size: cover;z-index: -4;animation: atmosphericScale 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;transition: opacity 0.8s ease;}
-.bg{position:fixed;inset:0;background:radial-gradient(circle at top,#222,#050505 70%);transition:1s;z-index:-3;opacity: 0.65;}
-header{position:fixed;top:0;left:0;width:100%;padding:22px 60px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(0,0,0,.18);z-index:1000;}
+.bg{position:fixed;inset:0;background:radial-gradient(circle at top,#222,#050505 70%);transition:1s;z-index:-3;opacity: 0.65;animation: atmosphericScale 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;}
+header{position:fixed;top:0;left:0;width:100%;padding:22px 60px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(0,0,0,.18);z-index:1000;animation: premiumEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;animation-delay: 0.1s;}
 .logo{font-size:24px;font-weight:800;letter-spacing:2px;white-space:nowrap;}
-.logo a{color:white;text-decoration:none;cursor:pointer;}
+.logo a {color: inherit;text-decoration: none;display: flex;align-items: center;justify-content: center;padding: 8px 20px;background: rgba(255, 255, 255, .05);border: 1px solid rgba(255, 255, 255, .08);border-radius: 50px;backdrop-filter: blur(20px);position: relative;overflow: hidden;transition: transform .3s ease, box-shadow .3s ease;box-shadow: 0 0 15px rgba(0, 229, 255, 0.2), 0 0 40px rgba(0, 229, 255, 0.1);cursor: pointer;}
+.logo a:hover {transform: translateY(-2px);box-shadow: 0 0 25px #00E5FF, 0 0 60px rgba(0, 229, 255, 0.4);}
+.logo a::before {content: "";position: absolute;inset: 0;padding: 1.5px;border-radius: 50px;background: linear-gradient(90deg,#00eaff,#4d7cff,#9b5cff,#ff2f92,#00eaff);background-size: 300%;animation: rgbBorder 6s linear infinite;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite: xor;pointer-events: none;}
+.logo .we-text {color: #f5f5f5;margin-right: 6px;}
+.logo span{color:#00E5FF;}
 nav{display:flex;gap:35px;}
-nav a{color:white;text-decoration:none;font-weight:500;}
+nav a{color:white;text-decoration:none;font-weight:500;transition:.3s;}
+nav a:hover{color:#00E5FF;}
 .hero{padding-top:150px;text-align:center;padding-bottom:60px;}
-.hero h1{font-size:85px;font-weight:900;background: linear-gradient(180deg,#fafafa 0%,#5a5a5a 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.hero h4, .hero h1, .hero p, .music h2 {animation: premiumEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;}
+.hero h4{letter-spacing:5px;color:#00E5FF;font-size:14px;margin-bottom:20px;animation-delay: 0.2s;}
+.hero h1{font-size:85px;font-weight:900;line-height:.9;display: block;animation-delay: 0.35s;background: linear-gradient(180deg,#fafafa 0%,#5a5a5a 8%,#1c1c1c 20%,#3f3f3f 50%,#4d4d4d 80%,#d9d9d9 92%,#111111 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.hero h1 span{display:block;color:#d8d8d8;}
+.hero p{margin:auto;margin-top:25px;max-width:720px;font-size:19px;line-height:1.8;color:#c5c5c5;animation-delay: 0.5s;}
 .music{padding:0 60px 140px;}
-.card{display:flex;align-items:center;gap:18px;padding:18px;margin-bottom:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:24px;backdrop-filter:blur(20px);cursor:pointer;transition:.3s;}
-.card:hover{background:rgba(255,255,255,.1);}
-.card img{width:75px;height:75px;border-radius:60px;object-fit:cover;}
-.info h3{font-size:18px;}
-.download{margin-left:auto;text-decoration:none;color:white;padding:10px;background:rgba(255,255,255,.1);border-radius:50%;}
-.search{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);width:min(700px,92%);}
-.search input{width:100%;padding:18px 22px;border:none;border-radius:50px;background:rgba(255,255,255,.1);color:white;backdrop-filter:blur(20px);}
+.music h2{font-size:28px;margin-bottom:25px;animation-delay: 0.6s;}
+.card{display:flex;align-items:center;gap:18px;padding:18px;margin-bottom:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:24px;backdrop-filter:blur(20px);transition:.35s;cursor:pointer;position:relative;overflow:hidden;animation: premiumEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;}
+.card:hover{transform:translateY(-3px);background:rgba(255,255,255,.08);}
+.card::before{content:"";position:absolute;inset:0;padding:1px;border-radius:24px;background:linear-gradient(90deg,#00eaff,#4d7cff,#9b5cff,#ff2f92,#00eaff);background-size:300%;animation:rgbBorder 6s linear infinite;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;pointer-events:none;}
+.card img{transition:.4s;width:75px;height:75px;border-radius:60px;object-fit:cover;}
+.card:hover img{transform:scale(1.08);}
+.card.active img{animation:spinAlbum 12s linear infinite;box-shadow:0 0 30px rgba(255,255,255,.15);}
+@keyframes spinAlbum{from{transform:rotate(0deg) scale(1.08);}to{transform:rotate(360deg) scale(1.08);}}
+.download svg{width:24px;height:24px;filter:drop-shadow(0 0 6px #00F5FF) drop-shadow(0 0 12px #4F8CFF) drop-shadow(0 0 18px #C44DFF);transition:.3s;}
+.download:hover svg{transform:scale(1.15);filter:drop-shadow(0 0 10px #00F5FF) drop-shadow(0 0 20px #4F8CFF) drop-shadow(0 0 30px #C44DFF);}
+.equalizer{display:flex;gap:4px;align-items:flex-end;height:24px;margin-right:18px;opacity:0;transition:.3s;}
+.equalizer span{width:4px;border-radius:20px;background:#00E5FF;animation:equalizer .8s infinite alternate;}
+.equalizer span:nth-child(1){height:8px;}
+.equalizer span:nth-child(2){height:20px;animation-delay:.2s;}
+.equalizer span:nth-child(3){height:14px;animation-delay:.4s;}
+.card.active .equalizer{opacity:1;}
+.card.active{transform:translateY(-6px);background:rgba(255,255,255,.08);backdrop-filter:blur(12px);}
+@keyframes rgbBorder{0%{ background-position:0%; }100%{ background-position:300%; }}
+@keyframes equalizer{from{ transform:scaleY(.5); }to{ transform:scaleY(1.5); }}
+@keyframes premiumEntrance {0% {opacity: 0;transform: translateY(40px) scale(0.98);filter: blur(8px);}100% {opacity: 1;transform: translateY(0) scale(1);filter: blur(0);}}
+@keyframes atmosphericScale {0% {opacity: 0;transform: scale(1.12);}100% {opacity: 1;transform: scale(1);}}
+.info{flex:1;}
+.info h3{font-size:21px;margin-bottom:6px;text-transform: capitalize;}
+.info p{color:#bfbfbf; font-size: 14px;}
+.download{width:44px;height:44px;border-radius:50%;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,.08);font-size:22px;transition:.3s;text-decoration: none;color: white;}
+.download:hover{background:#00E5FF;color:black;transform:scale(1.08);}
+.search{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);width:min(700px,92%);z-index: 10;}
+.search input{width:100%;padding:18px 22px;border:none;outline:none;border-radius:50px;background:rgba(255,255,255,.08);backdrop-filter:blur(20px);color:white;font-size:17px;border: 1px solid rgba(255, 255, 255, .05);}
+.search input::placeholder{color:#bbb;}
 </style>
 </head>
 
@@ -34,60 +67,116 @@ nav a{color:white;text-decoration:none;font-weight:500;}
 <div class="bg"></div>
 
 <header>
-    <div class="logo"><a id="homeButton">WE <span>CREATE</span></a></div>
-    <nav>
-        <a href="index.html">Home</a>
-    </nav>
+<div class="logo"><a id="homeButton"><span class="we-text">WE</span> <span>CREATE</span></a></div>
+<nav>
+    <a href="index.html" target="_blank">Home</a>
+    <a href="nocopyrightmusic.html" target="_blank">NO COPYRIGHT MUSIC</a>
+    <a href="https://ncs.io" target="_blank">NCS</a>
+    <a href="nocopyright.html" target="_blank">Troll Wallet</a>
+</nav>
 </header>
 
 <section class="hero">
-    <h1>GAME<span>MUSIC</span></h1>
+<h4>DISCOVER • LISTEN • DOWNLOAD</h4>
+<h1>GAME<span>MUSIC</span></h1>
+<p>Explore a Premium Collection of Immersive Background Tracks</p>
 </section>
 
-<section class="music" id="musicContainer">
-    <h2>Latest Tracks</h2>
+<section class="music">
+<h2>Latest Tracks</h2>
+<script>
+    const musicSection = document.querySelector('.music');
+    for (let i = 1; i <= 30; i++) {
+        // Set paths
+        const songPath = `WECREATE/GAMEMUSIC/MUSIC/song${i}.mp3`;
+        const coverPath = `WECREATE/GAMEMUSIC/COVER/cover${i}.jpg`;
+        
+        // Extract filename from path (e.g., "song1")
+        const fileName = songPath.split('/').pop().split('.')[0];
+        
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.dataset.song = songPath;
+        card.innerHTML = `
+            <img src="${coverPath}" crossorigin="anonymous">
+            <div class="info"><h3>${fileName}</h3><p>Game Soundtrack</p></div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+            <a class="download" href="${songPath}" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+        `;
+        musicSection.appendChild(card);
+    }
+</script>
 </section>
 
 <div class="search"><input type="text" id="searchInput" placeholder="Search music..."></div>
 <audio id="player"></audio>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.4.0/color-thief.min.js"></script>
 <script>
-    // 1. ADD YOUR SONG NAMES HERE
-    const songList = [
-        "Song 1", "Song 2", "Song 3", "Song 4", "Song 5", 
-        "Song 6", "Song 7", "Song 8", "Song 9", "Song 10",
-        "Song 11", "Song 12", "Song 13", "Song 14", "Song 15",
-        "Song 16", "Song 17", "Song 18", "Song 19", "Song 20",
-        "Song 21", "Song 22", "Song 23", "Song 24", "Song 25",
-        "Song 26", "Song 27", "Song 28", "Song 29", "Song 30"
-    ];
+const player=document.getElementById("player");
+const background=document.querySelector(".bg");
+const bgImage=document.querySelector(".bg-image"); 
+const searchInput=document.getElementById("searchInput");
+const homeButton=document.getElementById("homeButton");
+const colorThief = new ColorThief();
+let current = null;
+let currentIndex = -1;
 
-    const container = document.getElementById('musicContainer');
-    const player = document.getElementById('player');
-
-    songList.forEach((name, index) => {
-        const i = index + 1;
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <img src="WECREATE/GAMEMUSIC/COVER/cover${i}.jpg">
-            <div class="info"><h3>${name}</h3></div>
-            <a class="download" href="WECREATE/GAMEMUSIC/MUSIC/song${i}.mp3" download>↓</a>
-        `;
-        
-        card.onclick = () => {
-            player.src = `WECREATE/GAMEMUSIC/MUSIC/song${i}.mp3`;
-            player.play();
-        };
-        container.appendChild(card);
-    });
-
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        const val = e.target.value.toLowerCase();
-        document.querySelectorAll('.card').forEach(c => {
-            c.style.display = c.innerText.toLowerCase().includes(val) ? 'flex' : 'none';
+function initPlayer() {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, index) => {
+        card.addEventListener("click", (e) => {
+            if (e.target.closest(".download") || e.target.closest("audio")) return;
+            if(current === card) {
+                if(player.paused){player.play();card.classList.add("active");bgImage.style.opacity = "0.15";}
+                else{player.pause();card.classList.remove("active");bgImage.style.opacity = "1";}
+                return;
+            }
+            playCard(index, cards);
         });
     });
+}
+
+function playCard(index, cards){
+    const card = cards[index];
+    cards.forEach(c=>{c.classList.remove("active");c.style.boxShadow="";});
+    card.classList.add("active");
+    current = card;
+    currentIndex = index;
+    player.src = card.dataset.song;
+    player.play();
+    bgImage.style.opacity = "0.15"; 
+    const img = card.querySelector("img");
+    const updateBackground = () => {
+        const palette = colorThief.getPalette(img, 2);
+        const glow = `rgb(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]})`;
+        card.style.boxShadow = `0 0 25px ${glow}`;
+        background.style.background = `radial-gradient(circle at top,rgba(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]}, 0.22) 0%,#050505 100%)`;
+    };
+    if (img.complete) updateBackground(); else img.onload = updateBackground;
+}
+
+player.addEventListener("ended", () => {
+    const cards = document.querySelectorAll(".card");
+    if(currentIndex < cards.length-1) playCard(currentIndex + 1, cards);
+});
+
+searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    document.querySelectorAll(".card").forEach(card => {
+        card.style.display = card.querySelector("h3").textContent.toLowerCase().includes(query) ? "flex" : "none";
+    });
+});
+
+homeButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    player.pause();
+    document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
+    bgImage.style.opacity = "0.65";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+setTimeout(initPlayer, 100);
 </script>
 </body>
 </html>
