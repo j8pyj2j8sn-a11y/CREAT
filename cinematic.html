@@ -6,72 +6,40 @@
     <title>CREATORS SPACE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Titanium Theme Background */
         body {
-            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('creator.jpg');
+            background-image: url('creator.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             height: 100vh;
-            margin: 0;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-            animation: fadeIn 1.2s ease-out;
+            margin: 0;
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Dark Top Bar with Border */
+        /* Fixed Top Bar */
         .top-bar {
             height: 70px;
-            background: #050505;
-            border-bottom: 1px solid #333;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            flex-shrink: 0;
+            z-index: 50;
         }
 
-        /* 110px Title that hides smoothly */
+        /* Title Area - Normal flow now */
         #main-title {
-            padding: 3rem 2rem;
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            padding: 2rem;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
             will-change: opacity, transform;
             flex-shrink: 0;
         }
 
-        /* Liquid Glass Cards with Silver-RGB Border */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            background-clip: padding-box, border-box;
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), linear-gradient(90deg, #9ca3af, #4b5563, #9ca3af);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-        }
-
-        /* Silver-RGB Button */
-        .btn-rgb {
-            position: relative;
-            background: #000;
-            border: 1px solid #555;
-        }
-        .btn-rgb::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(90deg, #ec4899, #8b5cf6, #06b6d4, #ec4899);
-            z-index: -1;
-            border-radius: 9999px;
-            animation: rotate 3s linear infinite;
-        }
-
+        /* The container that actually scrolls */
         #player-container {
             flex: 1;
             overflow-y: auto;
@@ -81,16 +49,23 @@
             width: 100%;
         }
 
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* Card with RGB-like Border */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.2s;
+        }
+
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
     </style>
 </head>
 <body class="text-white font-sans">
 
     <nav class="top-bar">
-        <div class="text-lg font-bold tracking-widest uppercase">WE CREATE</div>
-        <button class="btn-rgb px-6 py-2 rounded-full text-xs font-semibold uppercase">GO BACK</button>
+        <div class="text-xl font-bold tracking-widest uppercase">WE CREATE</div>
+        <button class="px-6 py-2 rounded-full border border-gray-500 hover:border-white transition-all text-xs uppercase font-bold">GO BACK</button>
     </nav>
 
     <header id="main-title">
@@ -100,7 +75,7 @@
     </header>
 
     <main id="player-container" class="space-y-4">
-    </main>
+        </main>
 
     <script>
         const container = document.getElementById('player-container');
@@ -108,19 +83,20 @@
 
         container.addEventListener('scroll', () => {
             const scrollPos = container.scrollTop;
-            const fadePoint = 120;
+            const fadePoint = 150;
             let opacity = Math.max(0, 1 - (scrollPos / fadePoint));
             title.style.opacity = opacity;
             title.style.transform = `translateY(-${scrollPos * 0.5}px)`;
         });
 
+        // Generate 50 songs
         const songs = Array.from({length: 50}, (_, i) => `Soundscape Track ${i + 1}`);
         songs.forEach((song) => {
             const card = document.createElement('div');
             card.className = "glass-card p-6 rounded-2xl flex items-center justify-between";
             card.innerHTML = `
                 <span class="text-xl font-medium tracking-wide">${song}</span>
-                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10">
+                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 </button>
             `;
