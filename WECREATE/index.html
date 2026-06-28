@@ -18,7 +18,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)), url("background.jpg") center/cover;
+  /* Updated background path: goes up one level to root */
+  background: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)), url("../background.jpg") center/cover;
 }
 
 /* PREMIUM LIQUID GLASS BOX */
@@ -84,17 +85,11 @@ body {
   font-weight: 900; 
   line-height: 0.9;
   margin: 0;
-
-  /* Metallic Black Gradient */
-  
   -webkit-text-stroke: 0.2px #E5E5E5;
   -webkit-text-fill-color: linear-gradient(180deg, #434343 0%, #050505 100%);
-
-  /* Depth */
   filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));
 }
 
-/* ANIMATIONS */
 @keyframes liquidBorder { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 @keyframes fadeUp { 0% { opacity:0; transform:translateY(30px); } 100% { opacity:1; transform:translateY(0); } }
 @keyframes entrance { 0% { opacity: 0; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }
@@ -106,17 +101,18 @@ body {
   <div class="hero-header" style="display:flex; justify-content:space-between; align-items:center;">
     <div class="logo"><div class="logo-icon">△</div> WE CREATE</div>
     <div class="hero-nav">
+      <!-- Updated all links to look inside the HTMH folder -->
       <div class="dropdown"><button class="dropbtn">LOUNGE ▼</button>
-        <div class="dropdown-content"><a href="meme-sounds.html">Meme Sounds</a><a href="trending-trolls.html">Trending Trolls</a><a href="classic-trolls.html">Classic Trolls</a></div>
+        <div class="dropdown-content"><a href="HTMH/meme-sounds.html">Meme Sounds</a><a href="HTMH/trending-trolls.html">Trending Trolls</a><a href="HTMH/classic-trolls.html">Classic Trolls</a></div>
       </div>
       <div class="dropdown"><button class="dropbtn">NCS ▼</button>
-        <div class="dropdown-content"><a href="gamingmusic.html">Gaming Music</a><a href="edm.html">EDM</a><a href="chill-music.html">Chill Music</a></div>
+        <div class="dropdown-content"><a href="HTMH/gamingmusic.html">Gaming Music</a><a href="HTMH/edm.html">EDM</a><a href="HTMH/chill-music.html">Chill Music</a></div>
       </div>
       <div class="dropdown"><button class="dropbtn">AMBIENT ▼</button>
-        <div class="dropdown-content"><a href="rain.html">Rain</a><a href="forest.html">Forest</a><a href="ocean.html">Ocean</a></div>
+        <div class="dropdown-content"><a href="HTMH/rain.html">Rain</a><a href="HTMH/forest.html">Forest</a><a href="HTMH/ocean.html">Ocean</a></div>
       </div>
       <div class="dropdown"><button class="dropbtn">TROLL TUNE ▼</button>
-        <div class="dropdown-content"><a href="cinematic.html">Cinematic</a><a href="epic.html">Epic</a><a href="documentary.html">Documentary</a></div>
+        <div class="dropdown-content"><a href="HTMH/cinematic.html">Cinematic</a><a href="HTMH/epic.html">Epic</a><a href="HTMH/documentary.html">Documentary</a></div>
       </div>
     </div>
   </div>
@@ -128,7 +124,6 @@ body {
 </div>
 
 <script>
-// Handle Dropdown Toggling
 document.querySelectorAll(".dropdown").forEach(d => {
   d.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -138,7 +133,6 @@ document.querySelectorAll(".dropdown").forEach(d => {
   });
 });
 
-// Parallax Effect
 const box = document.querySelector('.glass-box');
 document.addEventListener('mousemove', (e) => {
   const x = (e.clientX / window.innerWidth - 0.5) * 15;
@@ -146,7 +140,6 @@ document.addEventListener('mousemove', (e) => {
   box.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
 });
 
-// Close when clicking outside
 document.addEventListener("click", () => document.querySelectorAll(".dropdown").forEach(d => d.classList.remove("active")));
 </script>
 </body>
