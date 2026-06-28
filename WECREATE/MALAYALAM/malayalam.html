@@ -87,16 +87,24 @@ const songNames = [
 const container = document.getElementById("musicContainer");
 songNames.forEach((name, i) => {
     let num = i + 1;
+    // Ensure this path matches where your .m4a files are actually stored
+    const filePath = `WECREATE/MALAYALAM/DIALOGUES/song${num}.m4a`; 
+    
     container.innerHTML += `
-        <div class="card" data-song="WECREATE/MALAYALAM/DIALOGUES/song${num}.m4a">
+        <div class="card" data-song="${filePath}">
             <img src="COVER/cover${num}.jpg" crossorigin="anonymous">
             <div class="info"><h3>${name}</h3></div>
             <div class="equalizer"><span></span><span></span><span></span></div>
-            <a class="download" href="WECREATE/MALAYALAM/song${num}.m4a" download onclick="event.stopPropagation()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+            <a class="download" href="${filePath}" download onclick="event.stopPropagation()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </a>
         </div>
     `;
 });
-
 const player=document.getElementById("player");
 const cards=document.querySelectorAll(".card");
 const background=document.querySelector(".bg");
