@@ -80,6 +80,26 @@ const songNames = [
     "Song 21", "Song 22", "Song 23", "Song 24", "Song 25",
     "Song 26", "Song 27", "Song 28", "Song 29", "Song 30"
 ];
+    // Add this to your script section
+player.onpause = () => {
+    // Remove active class from all cards when paused
+    cards.forEach(c => c.classList.remove("active"));
+    // Reset background to default
+    bgImage.style.opacity = "1";
+    background.style.background = "radial-gradient(circle at top,#222,#050505 70%)";
+};
+
+player.onplay = () => {
+    // Re-apply active class if we just resumed a specific card
+    if (current) {
+        current.classList.add("active");
+        bgImage.style.opacity = "0.15";
+        // Re-run color logic if needed
+        const img = current.querySelector("img");
+        const p = colorThief.getPalette(img, 2);
+        background.style.background = `radial-gradient(circle at top, rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.22) 0%, #050505 100%)`;
+    }
+};
 
 const container = document.getElementById("musicContainer");
 songNames.forEach((name, i) => {
