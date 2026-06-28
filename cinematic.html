@@ -6,60 +6,53 @@
     <title>CREATORS SPACE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Background Image setup */
+        /* Force dark background and apply the creator.jpg as a fixed background */
         body {
             background-image: url('creator.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            background-repeat: no-repeat;
+            min-height: 100vh;
+            color: white;
         }
 
-        /* Liquid Glass effect */
+        /* The Essential Glassmorphism Style */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.05); /* Very light semi-transparent white */
+            backdrop-filter: blur(15px);           /* The crucial blur effect */
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Smooth scrolling */
         html { scroll-behavior: smooth; }
         
         /* RGB Border Animation */
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .animate-border-spin { animation: rotate 3s linear infinite; }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
     </style>
 </head>
-<body class="text-white min-h-screen p-6 font-sans">
+<body class="p-6 font-sans">
 
     <header class="max-w-2xl mx-auto mb-10 flex items-center justify-between">
         <h1 class="text-xl font-light tracking-[0.2em] opacity-90">CREATORS SPACE</h1>
-        <nav>
-            <a href="#" class="text-sm font-light opacity-80 hover:opacity-100 transition-opacity border border-white/20 px-4 py-2 rounded-full glass-card">WE CREATE</a>
-        </nav>
+        <button class="text-sm font-light opacity-80 hover:opacity-100 transition-opacity border border-white/20 px-4 py-2 rounded-full glass-card">WE CREATE</button>
     </header>
 
     <main id="player-container" class="max-w-2xl mx-auto space-y-4">
         </main>
 
     <script>
-        // Array of 50 custom song names
         const songs = Array.from({length: 50}, (_, i) => `Soundscape Track ${i + 1}`);
         const container = document.getElementById('player-container');
 
         songs.forEach((song) => {
             const card = document.createElement('div');
+            // Added glass-card class here
             card.className = "glass-card p-4 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-white/10 transition-all";
             
             card.innerHTML = `
                 <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-black/40 shadow-inner"></div>
+                    <div class="w-12 h-12 rounded-lg bg-black/20 shadow-inner"></div>
                     <span class="text-md font-medium tracking-wide">${song}</span>
                 </div>
                 
