@@ -6,23 +6,24 @@
     <title>CREATORS SPACE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* 1. Opening Animation */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
         body {
-            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('creator.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: #050505 url('creator.jpg') center/cover fixed;
             height: 100vh;
             margin: 0;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Prevents whole page from scrolling */
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
         }
 
+        /* 2. Top Bar (Dark, Sticky) */
         .top-bar {
             height: 70px;
-            background: #050505;
-            border-bottom: 1px solid #333;
+            background: #000;
+            border-bottom: 1px solid #222;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -31,13 +32,15 @@
             z-index: 100;
         }
 
-        /* Title Area: Stays static at the top of the scroll container */
-        #header-container {
+        /* 3. Title (110px, 2 lines) */
+        #main-title {
             padding: 2rem;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            will-change: opacity, transform;
             flex-shrink: 0;
         }
 
-        /* SCROLLABLE AREA: This is the ONLY part that moves */
+        /* 4. Scrollable Container */
         #scroll-container {
             flex: 1;
             overflow-y: auto;
@@ -47,11 +50,22 @@
             width: 100%;
         }
 
-        /* Glass Cards */
+        /* 5. Liquid Glass Card with RGB Border */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid transparent;
+            /* RGB Border Effect */
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                              linear-gradient(90deg, #ec4899, #8b5cf6, #06b6d4);
         }
 
         ::-webkit-scrollbar { width: 6px; }
@@ -61,12 +75,12 @@
 <body class="text-white font-sans">
 
     <nav class="top-bar">
-        <div class="text-lg font-bold tracking-widest uppercase">WE CREATE</div>
-        <button class="px-6 py-2 rounded-full border border-gray-600 text-xs font-bold uppercase hover:bg-white/10 transition">GO BACK</button>
+        <div class="text-xl font-bold tracking-widest">WE CREATE</div>
+        <button class="px-6 py-2 rounded-full border border-gray-700 text-xs font-bold uppercase hover:border-white transition">GO BACK</button>
     </nav>
 
     <div id="scroll-container">
-        <header id="header-container">
+        <header id="main-title">
             <h1 class="text-[110px] font-black tracking-tighter leading-[0.9]">
                 CREATORS<br>SPACE
             </h1>
@@ -77,15 +91,23 @@
     </div>
 
     <script>
+        // Scroll Animation
+        const container = document.getElementById('scroll-container');
+        const title = document.getElementById('main-title');
+
+        container.addEventListener('scroll', () => {
+            const scrollPos = container.scrollTop;
+            title.style.opacity = Math.max(0, 1 - (scrollPos / 150));
+            title.style.transform = `translateY(-${scrollPos * 0.5}px)`;
+        });
+
         // Generate 50 songs
-        const container = document.getElementById('player-container');
         const songs = Array.from({length: 50}, (_, i) => `Soundscape Track ${i + 1}`);
-        
         songs.forEach((song) => {
             const card = document.createElement('div');
-            card.className = "glass-card p-6 rounded-2xl flex items-center justify-between";
+            card.className = "glass-card";
             card.innerHTML = `
-                <span class="text-xl font-medium tracking-wide">${song}</span>
+                <span class="text-xl font-medium">${song}</span>
                 <button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 </button>
