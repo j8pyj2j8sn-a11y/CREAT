@@ -73,21 +73,23 @@ nav a:hover{ color:#00E5FF; }
 <script>
 // --- EDIT YOUR 30 NAMES HERE ---
 const songNames = [
-    "ഉന്നം പിഴക്കരുത്", "എടാ ബാലകൃഷ്ണാ.", "എടാ നാറി നിനക്ക്...", "സോറി ആളുമാറി", 
-    "മിണ്ടാതിരോയെടാ പട്ടി", "ഗ്രഹണിയും ആസ്മയും", "പിടിക്കവനെ", "സഖാക്കളെ,കേരള...", 
-    "ഒരു മൂർഖനെയാണ്...", "ഇതിപ്പോ മരപ്പട്ടിയും അല്ല", "എന്താത്,തമ്പുരാനറിയാ.."
-];
+    "Battle Theme", "Lobby Ambience", "Victory Song", "Main Menu", "Secret Level", 
+    "Boss Fight", "Forest Zone", "Ice Cave", "Cyber City", "Retro Chase",
+    "Song 11", "Song 12", "Song 13", "Song 14", "Song 15",
+    "Song 16", "Song 17", "Song 18", "Song 19", "Song 20",
+    "Song 21", "Song 22", "Song 23", "Song 24", "Song 25",
+    "Song 26", "Song 27", "Song 28", "Song 29", "Song 30"
 ];
 
 const container = document.getElementById("musicContainer");
 songNames.forEach((name, i) => {
     let num = i + 1;
     container.innerHTML += `
-        <div class="card" data-song="DIALOGUES/song${num}.m4a">
+        <div class="card" data-song="MUSIC/song${num}.mp3">
             <img src="COVER/cover${num}.jpg" crossorigin="anonymous">
             <div class="info"><h3>${name}</h3></div>
             <div class="equalizer"><span></span><span></span><span></span></div>
-            <a class="download" href="DIALOGUES/song${num}.m4a" download onclick="event.stopPropagation()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+            <a class="download" href="MUSIC/song${num}.mp3" download onclick="event.stopPropagation()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
         </div>
     `;
 });
