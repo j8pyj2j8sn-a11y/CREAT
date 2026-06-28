@@ -6,60 +6,92 @@
     <title>CREATORS SPACE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Force dark background and apply the creator.jpg as a fixed background */
+        /* Fixed background image that doesn't move */
         body {
             background-image: url('creator.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            min-height: 100vh;
-            color: white;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        /* The Essential Glassmorphism Style */
+        /* Glassmorphism style for cards */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05); /* Very light semi-transparent white */
-            backdrop-filter: blur(15px);           /* The crucial blur effect */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        html { scroll-behavior: smooth; }
-        
+
+        /* Isolated scrollable container for the 50 songs */
+        #player-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 2rem;
+            max-width: 672px; /* max-w-2xl */
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Custom scrollbar */
+        #player-container::-webkit-scrollbar { width: 8px; }
+        #player-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        #player-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
         /* RGB Border Animation */
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .animate-border-spin { animation: rotate 3s linear infinite; }
     </style>
 </head>
-<body class="p-6 font-sans">
+<body class="text-white font-sans p-6">
 
-    <header class="max-w-2xl mx-auto mb-10 flex items-center justify-between">
+    <header class="max-w-2xl mx-auto mb-10 flex items-center justify-between shrink-0">
         <h1 class="text-xl font-light tracking-[0.2em] opacity-90">CREATORS SPACE</h1>
-        <button class="text-sm font-light opacity-80 hover:opacity-100 transition-opacity border border-white/20 px-4 py-2 rounded-full glass-card">WE CREATE</button>
+        <button class="text-sm font-light opacity-80 hover:opacity-100 transition-opacity border border-white/20 px-5 py-2 rounded-full glass-card">
+            WE CREATE
+        </button>
     </header>
 
-    <main id="player-container" class="max-w-2xl mx-auto space-y-4">
+    <main id="player-container" class="space-y-4">
         </main>
 
     <script>
-        const songs = Array.from({length: 50}, (_, i) => `Soundscape Track ${i + 1}`);
+        const songs = [
+            "Astral Echoes", "Midnight Neon", "Oceanic Flow", "Distant Pulsar", "Solar Wind", 
+            "Cloud Drifter", "Velvet Skies", "Neon Pulse", "Digital Rain", "Lost Frequency",
+            "Golden Hour", "Silver Lining", "Deep Forest", "Urban Haze", "Quiet Storm",
+            "Electric Soul", "Hidden Path", "Crystal Cave", "Winter Sun", "Desert Moon",
+            "Static Noise", "Liquid Time", "Gravity Well", "Silent Echo", "Blue Horizon",
+            "Infinite Loop", "Dark Matter", "Morning Dew", "Solar Flare", "Night Ride",
+            "Retro Wave", "Inner Peace", "Hyper Space", "Virtual Life", "Core Memory",
+            "Bass Drop", "Synth Dream", "Pure Energy", "Raw Data", "Sky High",
+            "Deep Dive", "Cold Fire", "Warm Light", "Time Warp", "Event Horizon",
+            "Space Dust", "Echo Chamber", "Future Bass", "Night Owl", "Final Breath"
+        ];
+
         const container = document.getElementById('player-container');
 
         songs.forEach((song) => {
             const card = document.createElement('div');
-            // Added glass-card class here
-            card.className = "glass-card p-4 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-white/10 transition-all";
+            card.className = "glass-card p-4 rounded-2xl flex items-center justify-between hover:bg-white/10 transition-all cursor-pointer mx-2";
             
             card.innerHTML = `
                 <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-black/20 shadow-inner"></div>
+                    <div class="w-12 h-12 rounded-lg bg-black/30 shadow-inner"></div>
                     <span class="text-md font-medium tracking-wide">${song}</span>
                 </div>
                 
-                <div class="relative p-[1.5px] rounded-full overflow-hidden">
+                <div class="relative p-[1.5px] rounded-full overflow-hidden shrink-0">
                     <div class="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-border-spin"></div>
                     <button class="relative w-10 h-10 flex items-center justify-center rounded-full bg-[#0a0a0a] hover:bg-black transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <svg class="w-5 h-5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
                     </button>
                 </div>
             `;
