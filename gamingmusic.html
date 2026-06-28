@@ -11,7 +11,7 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
 html{scroll-behavior:smooth;}
 body{background:#050505;color:#fff;overflow-x:hidden;}
-.bg-image {position: fixed;inset: 0;background: url("BACKGROUND.jpg") no-repeat center center;background-size: cover;z-index: -4;animation: atmosphericScale 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;transition: opacity 0.8s ease;}
+.bg-image {position: fixed;inset: 0;background: url("WECREATE/GAMEMUSIC/BACKGROUND.jpg") no-repeat center center;background-size: cover;z-index: -4;animation: atmosphericScale 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;transition: opacity 0.8s ease;}
 .bg{position:fixed;inset:0;background:radial-gradient(circle at top,#222,#050505 70%);transition:1s;z-index:-3;opacity: 0.65;animation: atmosphericScale 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;}
 header{position:fixed;top:0;left:0;width:100%;padding:22px 60px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(0,0,0,.18);z-index:1000;animation: premiumEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;animation-delay: 0.1s;}
 .logo{font-size:24px;font-weight:800;letter-spacing:2px;white-space:nowrap;}
@@ -53,20 +53,19 @@ nav a:hover{color:#00E5FF;}
 @keyframes atmosphericScale {0% {opacity: 0;transform: scale(1.12);}100% {opacity: 1;transform: scale(1);}}
 .info{flex:1;}
 .info h3{font-size:21px;margin-bottom:6px;}
-.info p{color:#bfbfbf;}
+.info p{color:#bfbfbf; font-size: 14px;}
 .download{width:44px;height:44px;border-radius:50%;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,.08);font-size:22px;transition:.3s;text-decoration: none;color: white;}
 .download:hover{background:#00E5FF;color:black;transform:scale(1.08);}
 .search{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);width:min(700px,92%);z-index: 10;}
 .search input{width:100%;padding:18px 22px;border:none;outline:none;border-radius:50px;background:rgba(255,255,255,.08);backdrop-filter:blur(20px);color:white;font-size:17px;border: 1px solid rgba(255, 255, 255, .05);}
 .search input::placeholder{color:#bbb;}
-@media (max-width:900px){header{padding:18px 25px;display:flex;flex-direction:column;align-items:center;gap:15px;}.logo{ font-size:24px; }nav{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px 18px;width:100%;}nav a{ font-size:14px; white-space:nowrap; }.hero{ padding-top:210px; }}
-@media(max-width:768px){header{ padding:16px 20px; gap:15px; }nav{ gap:12px; }nav a{ font-size:13px; }.hero{ padding-top:210px; }.hero h1{ font-size:55px; }.hero p{ font-size:16px; padding:0 20px; }.music{ padding:0 20px 120px; }.card img{ width:60px; height:60px; }}
 </style>
 </head>
 
 <body>
 <div class="bg-image"></div>
 <div class="bg"></div>
+
 <header>
 <div class="logo"><a id="homeButton"><span class="we-text">WE</span> <span>CREATE</span></a></div>
 <nav>
@@ -80,28 +79,35 @@ nav a:hover{color:#00E5FF;}
 <section class="hero">
 <h4>DISCOVER • LISTEN • DOWNLOAD</h4>
 <h1>GAME<span>MUSIC</span></h1>
-<p>Explore a Premium Collection of Lounge Music, Ambient Soundtracks, Royalty-free Audio and Immersive Background Tracks</p>
+<p>Explore a Premium Collection of Immersive Background Tracks</p>
 </section>
 
 <section class="music">
 <h2>Latest Tracks</h2>
-  <div class="card" data-song="WECREATE/GAMEMUSIC/MUSIC/song1.mp3">
-    <img src="WECREATE/GAMEMUSIC/COVER/cover1.jpg" crossorigin="anonymous">
-    <div class="info"><h3>Midnight Echo</h3><p>Lounge Music • 03:42</p></div>
-    <div class="equalizer"><span></span><span></span><span></span></div>
-    <a class="download" href="WECREATE/GAMEMUSIC/MUSIC/song1.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
-  </div>
-  </section>
 
-<div class="search">
-<input type="text" id="searchInput" placeholder="Search music...">
-</div>
+<script>
+    const musicSection = document.querySelector('.music');
+    for (let i = 1; i <= 30; i++) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.dataset.song = `WECREATE/GAMEMUSIC/MUSIC/song${i}.mp3`;
+        card.innerHTML = `
+            <img src="WECREATE/GAMEMUSIC/COVER/cover${i}.jpg" crossorigin="anonymous">
+            <div class="info"><h3>Song ${i}</h3><p>Game Soundtrack</p></div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+            <a class="download" href="WECREATE/GAMEMUSIC/MUSIC/song${i}.mp3" download><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+        `;
+        musicSection.appendChild(card);
+    }
+</script>
+</section>
+
+<div class="search"><input type="text" id="searchInput" placeholder="Search music..."></div>
 <audio id="player"></audio>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.4.0/color-thief.min.js"></script>
 <script>
 const player=document.getElementById("player");
-const cards=document.querySelectorAll(".card");
 const background=document.querySelector(".bg");
 const bgImage=document.querySelector(".bg-image"); 
 const searchInput=document.getElementById("searchInput");
@@ -110,68 +116,62 @@ const colorThief = new ColorThief();
 let current = null;
 let currentIndex = -1;
 
-function playCard(index){
-const card = cards[index];
-if(!card) return;
-cards.forEach(c=>{c.classList.remove("active");c.style.boxShadow="";});
-card.classList.add("active");
-current = card;
-currentIndex = index;
-player.src = card.dataset.song;
-player.load(); 
-player.play().catch(()=>{});
-bgImage.style.opacity = "0.15"; 
-const img = card.querySelector("img");
-const updateBackground = () => {
-const palette = colorThief.getPalette(img, 2);
-const glow = `rgb(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]})`;
-img.style.border = `2px solid ${glow}`;
-img.style.boxShadow = `0 0 12px ${glow},0 0 25px ${glow},0 0 40px ${glow}`;
-card.style.boxShadow = `0 0 25px ${glow},0 0 80px rgba(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]}, 0.4)`;
-background.style.transition = "background .8s ease";
-background.style.background = `radial-gradient(circle at top,rgba(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]}, 0.22) 0%,rgba(${palette[1][0]}, ${palette[1][1]}, ${palette[1][2]}, 0.12) 45%,#050505 100%)`;
-};
-if (img.complete) {updateBackground();} else {img.onload = updateBackground;}
+function initPlayer() {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, index) => {
+        card.addEventListener("click", (e) => {
+            if (e.target.closest(".download") || e.target.closest("audio")) return;
+            if(current === card) {
+                if(player.paused){player.play();card.classList.add("active");bgImage.style.opacity = "0.15";}
+                else{player.pause();card.classList.remove("active");bgImage.style.opacity = "1";}
+                return;
+            }
+            playCard(index, cards);
+        });
+    });
 }
 
-cards.forEach((card,index)=>{
-card.addEventListener("click",(e)=>{
-if (e.target.closest(".download") || e.target.closest("audio")) return;
-if(current===card){
-if(player.paused){player.play();card.classList.add("active");bgImage.style.opacity = "0.15";}
-else{player.pause();card.classList.remove("active");card.style.boxShadow="";background.style.background="radial-gradient(circle at top,#121212,#050505 75%)";bgImage.style.opacity = "1";}
-return;
+function playCard(index, cards){
+    const card = cards[index];
+    cards.forEach(c=>{c.classList.remove("active");c.style.boxShadow="";});
+    card.classList.add("active");
+    current = card;
+    currentIndex = index;
+    player.src = card.dataset.song;
+    player.play();
+    bgImage.style.opacity = "0.15"; 
+    const img = card.querySelector("img");
+    const updateBackground = () => {
+        const palette = colorThief.getPalette(img, 2);
+        const glow = `rgb(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]})`;
+        card.style.boxShadow = `0 0 25px ${glow}`;
+        background.style.background = `radial-gradient(circle at top,rgba(${palette[0][0]}, ${palette[0][1]}, ${palette[0][2]}, 0.22) 0%,#050505 100%)`;
+    };
+    if (img.complete) updateBackground(); else img.onload = updateBackground;
 }
-playCard(index);
-});
-});
 
-player.addEventListener("ended",()=>{
-if(currentIndex < cards.length-1){playCard(currentIndex+1);}else{resetToHome();}
+player.addEventListener("ended", () => {
+    const cards = document.querySelectorAll(".card");
+    if(currentIndex < cards.length-1) playCard(currentIndex + 1, cards);
 });
 
 searchInput.addEventListener("input", (e) => {
-const query = e.target.value.toLowerCase().trim();
-cards.forEach(card => {
-const title = card.querySelector(".info h3").textContent.toLowerCase();
-const genre = card.querySelector(".info p").textContent.toLowerCase();
-card.style.display = (title.includes(query) || genre.includes(query)) ? "flex" : "none";
-});
+    const query = e.target.value.toLowerCase().trim();
+    document.querySelectorAll(".card").forEach(card => {
+        card.style.display = card.querySelector("h3").textContent.toLowerCase().includes(query) ? "flex" : "none";
+    });
 });
 
-function resetToHome() {
-player.pause();
-player.src = "";
-cards.forEach(c => {c.classList.remove("active");c.style.boxShadow = "";c.style.display = "flex";});
-current = null;
-currentIndex = -1;
-searchInput.value = "";
-background.style.background = "radial-gradient(circle at top,#222,#050505 70%)";
-bgImage.style.opacity = "0.65";
-window.scrollTo({ top: 0, behavior: "smooth" });
-}
+homeButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    player.pause();
+    document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
+    bgImage.style.opacity = "0.65";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-homeButton.addEventListener("click", (e) => {e.preventDefault();resetToHome();});
+// Initialize cards after they are generated
+setTimeout(initPlayer, 100);
 </script>
 </body>
 </html>
