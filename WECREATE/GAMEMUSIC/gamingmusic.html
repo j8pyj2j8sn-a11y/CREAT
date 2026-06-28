@@ -141,6 +141,16 @@ cards.forEach((card,i)=>{
         }
     };
 });
+    // --- Add this to enable Auto-Play Next ---
+player.addEventListener("ended", () => {
+    // Check if there is a next song available
+    if (currentIndex < cards.length - 1) {
+        playCard(currentIndex + 1); // Play the next card
+    } else {
+        // Optional: Loop back to the first song if you want
+        playCard(0); 
+    }
+});
 
 searchInput.oninput = (e) => {
     const q = e.target.value.toLowerCase();
