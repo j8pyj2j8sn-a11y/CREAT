@@ -6,32 +6,66 @@
 <title>WE CREATE • Game Music</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ... (Keep your existing CSS here) ... */
+/* YOUR ORIGINAL CSS REMAINS HERE */
+*{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
+html{ scroll-behavior:smooth; }
+body{ background:#050505; color:#fff; overflow-x:hidden; }
+.bg-image { position: fixed; inset: 0; background: url("BACKGROUND.jpg") no-repeat center center; background-size: cover; z-index: -4; animation: atmosphericScale 2.2s cubic-bezier(0.16, 1, 0.3, 1) both; transition: opacity 0.8s ease; }
+.bg{ position:fixed; inset:0; background:radial-gradient(circle at top,#222,#050505 70%); transition:1s; z-index:-3; opacity: 0.65; animation: atmosphericScale 2.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+header{ position:fixed; top:0; left:0; width:100%; padding:22px 60px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(20px); background:rgba(0,0,0,.18); z-index:1000; animation: premiumEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.1s; }
+.logo{ font-size:24px; font-weight:800; letter-spacing:2px; white-space:nowrap; }
+.logo a { color: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 8px 20px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .08); border-radius: 50px; backdrop-filter: blur(20px); cursor: pointer; position: relative; overflow: hidden; transition: transform .3s ease, box-shadow .3s ease; box-shadow: 0 0 15px rgba(0, 229, 255, 0.2), 0 0 40px rgba(0, 229, 255, 0.1); }
+.logo a:hover { transform: translateY(-2px); box-shadow: 0 0 25px #00E5FF, 0 0 60px rgba(0, 229, 255, 0.4); }
+.logo a::before { content: ""; position: absolute; inset: 0; padding: 1.5px; border-radius: 50px; background: linear-gradient(90deg, #00eaff, #4d7cff, #9b5cff, #ff2f92, #00eaff); background-size: 300%; animation: rgbBorder 6s linear infinite; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; pointer-events: none; }
+.logo .we-text { color: #f5f5f5; margin-right: 6px; }
+.logo span{ color:#00E5FF; }
+nav{ display:flex; gap:35px; }
+nav a{ color:white; text-decoration:none; font-weight:500; transition:.3s; }
+nav a:hover{ color:#00E5FF; }
+.hero{ padding-top:150px; text-align:center; padding-bottom:60px; }
+.hero h4, .hero h1, .hero p { animation: premiumEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.hero h4{ letter-spacing:5px; color:#00E5FF; font-size:14px; margin-bottom:20px; animation-delay: 0.2s; }
+.hero h1{ font-size:85px; font-weight:900; line-height:.9; display: block; animation-delay: 0.35s; background: linear-gradient(180deg, #fafafa 0%, #5a5a5a 8%, #1c1c1c 20%, #3f3f3f 50%, #4d4d4d 80%, #d9d9d9 92%, #111111 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero h1 span{ display:block; color:#d8d8d8; }
+.hero p{ margin:auto; margin-top:25px; max-width:720px; font-size:19px; line-height:1.8; color:#c5c5c5; animation-delay: 0.5s; }
+.music{ padding:0 60px 140px; }
+.card{ display:flex; align-items:center; gap:18px; padding:18px; margin-bottom:18px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:24px; backdrop-filter:blur(20px); transition:.35s; cursor:pointer; position:relative; overflow:hidden; animation: premiumEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.card:hover{ transform:translateY(-3px); background:rgba(255,255,255,.08); }
+.card::before{ content:""; position:absolute; inset:0; padding:1px; border-radius:24px; background:linear-gradient(90deg, #00eaff, #4d7cff, #9b5cff, #ff2f92, #00eaff); background-size:300%; animation:rgbBorder 6s linear infinite; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; pointer-events:none; }
+.card img{ transition:.4s; width:75px; height:75px; border-radius:60px; object-fit:cover; }
+.card.active img{ animation:spinAlbum 12s linear infinite; box-shadow:0 0 30px rgba(255,255,255,.15); }
+@keyframes spinAlbum{ from{ transform:rotate(0deg) scale(1.08); } to{ transform:rotate(360deg) scale(1.08); } }
+.download svg{ width:24px; height:24px; filter: drop-shadow(0 0 6px #00F5FF) drop-shadow(0 0 12px #4F8CFF) drop-shadow(0 0 18px #C44DFF); transition:.3s; }
+.download:hover svg{ transform:scale(1.15); filter: drop-shadow(0 0 10px #00F5FF) drop-shadow(0 0 20px #4F8CFF) drop-shadow(0 0 30px #C44DFF); }
+.equalizer{ display:flex; gap:4px; align-items:flex-end; height:24px; margin-right:18px; opacity:0; transition:.3s; }
+.equalizer span{ width:4px; border-radius:20px; background:#00E5FF; animation:equalizer .8s infinite alternate; }
+.equalizer span:nth-child(1){ height:8px; } .equalizer span:nth-child(2){ height:20px; animation-delay:.2s; } .equalizer span:nth-child(3){ height:14px; animation-delay:.4s; }
+.card.active .equalizer{ opacity:1; }
+.card.active{ transform:translateY(-6px); background:rgba(255,255,255,.08); backdrop-filter:blur(12px); }
+@keyframes rgbBorder{ 0%{ background-position:0%; } 100%{ background-position:300%; } }
+@keyframes equalizer{ from{ transform:scaleY(.5); } to{ transform:scaleY(1.5); } }
+@keyframes premiumEntrance { 0% { opacity: 0; transform: translateY(40px) scale(0.98); filter: blur(8px); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes atmosphericScale { 0% { opacity: 0; transform: scale(1.12); } 100% { opacity: 1; transform: scale(1); } }
+.info{ flex:1; }
+.info h3{ font-size:21px; }
+.download{ width:44px; height:44px; border-radius:50%; display:flex; justify-content:center; align-items:center; background:rgba(255,255,255,.08); font-size:22px; transition:.3s; text-decoration: none; color: white; }
+.download:hover{ background:#00E5FF; color:black; transform:scale(1.08); }
+.search{ position:fixed; bottom:25px; left:50%; transform:translateX(-50%); width:min(700px,92%); z-index: 10; }
+.search input{ width:100%; padding:18px 22px; border:none; outline:none; border-radius:50px; background:rgba(255,255,255,.08); backdrop-filter:blur(20px); color:white; font-size:17px; border: 1px solid rgba(255, 255, 255, .05); }
 </style>
 </head>
 <body>
 <div class="bg-image"></div>
 <div class="bg"></div>
-
 <header>
-    <div class="logo">
-        <a href="../../index.html">
-            <span class="we-text">WE</span> <span>CREATE</span>
-        </a>
-    </div>
-    <nav>
-        <a href="../../index.html">Home</a>
-        <a href="nocopyrightmusic.html">NO COPYRIGHT MUSIC</a>
-    </nav>
+<div class="logo"><a id="homeButton"><span class="we-text">WE</span> <span>CREATE</span></a></div>
+<nav><a href="index.html">Home</a><a href="nocopyrightmusic.html">NO COPYRIGHT MUSIC</a></nav>
 </header>
-
 <section class="hero">
-    <h4>DISCOVER • LISTEN • DOWNLOAD</h4>
-    <h1>GAME<span>MUSIC</span></h1>
+<h4>DISCOVER • LISTEN • DOWNLOAD</h4>
+<h1>GAME<span>MUSIC</span></h1>
 </section>
-
 <section class="music" id="musicContainer"></section>
-
 <div class="search"><input type="text" id="searchInput" placeholder="Search music..."></div>
 <audio id="player"></audio>
 
@@ -60,31 +94,36 @@ songNames.forEach((name, i) => {
     `;
 });
 
-const player = document.getElementById("player");
-const cards = document.querySelectorAll(".card");
-const background = document.querySelector(".bg");
-const bgImage = document.querySelector(".bg-image"); 
+/* ORIGINAL ADVANCED LOGIC */
+const player=document.getElementById("player");
+const cards=document.querySelectorAll(".card");
+const background=document.querySelector(".bg");
+const bgImage=document.querySelector(".bg-image"); 
+const searchInput=document.getElementById("searchInput");
+const homeButton=document.getElementById("homeButton");
 const colorThief = new ColorThief();
-let current = null;
+let current = null; let currentIndex = -1;
 
 function playCard(index){
     const card = cards[index];
+    if(!card) return;
     cards.forEach(c=>{ c.classList.remove("active"); c.style.boxShadow=""; });
     card.classList.add("active");
-    current = card;
+    current = card; currentIndex = index;
     player.src = card.dataset.song;
     player.play().catch(()=>{});
     bgImage.style.opacity = "0.15"; 
     const img = card.querySelector("img");
     const update = () => {
         const p = colorThief.getPalette(img, 2);
-        card.style.boxShadow = `0 0 25px rgb(${p[0][0]}, ${p[0][1]}, ${p[0][2]}), 0 0 80px rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.4)`;
+        const glow = `rgb(${p[0][0]}, ${p[0][1]}, ${p[0][2]})`;
+        card.style.boxShadow = `0 0 25px ${glow}, 0 0 80px rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.4)`;
         background.style.background = `radial-gradient(circle at top, rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.22) 0%, #050505 100%)`;
     };
     img.complete ? update() : img.onload = update;
 }
 
-cards.forEach((card, i) => {
+cards.forEach((card,i)=>{
     card.onclick = (e) => {
         if(e.target.closest(".download")) return;
         if(current === card){
@@ -96,10 +135,11 @@ cards.forEach((card, i) => {
     };
 });
 
-document.getElementById("searchInput").oninput = (e) => {
+searchInput.oninput = (e) => {
     const q = e.target.value.toLowerCase();
     cards.forEach((c, i) => c.style.display = songNames[i].toLowerCase().includes(q) ? "flex" : "none");
 };
+homeButton.onclick = () => location.reload();
 </script>
 </body>
 </html>
