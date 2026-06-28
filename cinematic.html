@@ -19,11 +19,10 @@
             overflow: hidden;
         }
 
-        /* Fixed Top Bar */
+        /* Fixed Top Bar (No border bottom) */
         .top-bar {
             height: 70px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
@@ -100,17 +99,15 @@
 
     <!-- Music List -->
     <main id="player-container" class="space-y-4">
-        <!-- JS will inject cards -->
     </main>
 
     <script>
-        // Scroll Animation Logic
         const container = document.getElementById('player-container');
         const title = document.getElementById('main-title');
 
         container.addEventListener('scroll', () => {
             const scrollPos = container.scrollTop;
-            const fadePoint = 150; // Distance to scroll before title is hidden
+            const fadePoint = 150; 
             let opacity = 1 - (scrollPos / fadePoint);
             opacity = Math.max(0, Math.min(1, opacity));
             
@@ -118,7 +115,6 @@
             title.style.transform = `translateY(-${scrollPos * 0.3}px)`;
         });
 
-        // Generate Songs
         const songs = Array.from({length: 50}, (_, i) => `Soundscape Track ${i + 1}`);
         songs.forEach((song) => {
             const card = document.createElement('div');
