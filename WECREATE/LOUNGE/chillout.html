@@ -32,13 +32,13 @@ nav a:hover{ color:#00E5FF; }
 .card {
     display: flex;
     align-items: center;
-    gap: 25px;
-    padding: 36px;         /* Increased padding for more vertical space */
-    min-height: 150px;     /* Double the original ~75px height */
-    margin-bottom: 24px;
+    gap: 40px;
+    padding: 60px;         /* Significant internal spacing */
+    min-height: 300px;     /* Double of the previous 150px */
+    margin-bottom: 30px;
     background: rgba(255, 255, 255, .05);
     border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: 32px;   /* Adjusted to look proportional */
+    border-radius: 45px;   /* Larger curves for a modern look */
     backdrop-filter: blur(20px);
     transition: .35s;
     cursor: pointer;
@@ -46,7 +46,29 @@ nav a:hover{ color:#00E5FF; }
     overflow: hidden;
     animation: premiumEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-    
+
+.card img {
+    transition: .4s;
+    width: 200px;          /* Scaled up to keep proportions */
+    height: 200px;         /* Scaled up to keep proportions */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.info h3 {
+    font-size: 42px;       /* Much larger, hero-style text */
+    font-weight: 700;
+}
+
+.download {
+    width: 80px;           /* Large, easy-to-click button */
+    height: 80px;
+}
+
+.download svg {
+    width: 40px;           /* Larger icon inside the button */
+    height: 40px;
+}
 .card:hover{ transform:translateY(-3px); background:rgba(255,255,255,.08); }
 .card::before{ content:""; position:absolute; inset:0; padding:1px; border-radius:24px; background:linear-gradient(90deg, #00eaff, #4d7cff, #9b5cff, #ff2f92, #00eaff); background-size:300%; animation:rgbBorder 6s linear infinite; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; pointer-events:none; }
 .card img{ transition:.4s; width:75px; height:75px; border-radius:60px; object-fit:cover; }
