@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOUNGE MUSIC</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WE CREATE • Game Music</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
 /* YOUR ORIGINAL CSS REMAINS HERE */
 *{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
 html{ scroll-behavior:smooth; }
@@ -54,95 +55,110 @@ nav a:hover{ color:#00E5FF; }
 </style>
 </head>
 <body>
+<div class="bg-image"></div>
+<div class="bg"></div>
+<header>
+<div class="logo"><a id="homeButton"><span class="we-text">WE</span> <span>CREATE</span></a></div>
+<nav><a href="../../index.html">Home</a><a href="https://youtube.com/@rudyislivebgmi?si=S3AqVz0Niw7RqwC0">YOUTUBE</a></nav>
+</header>
+<section class="hero">
+<h4>DISCOVER • LISTEN • DOWNLOAD</h4>
+<h1>LOUNGE<span>MUSIC</span></h1>
+</section>
+<section class="music" id="musicContainer"></section>
+<div class="search"><input type="text" id="searchInput" placeholder="Search music..."></div>
+<audio id="player"></audio>
 
-    <div id="bg-dynamic"></div>
-    <nav><a href="../../index.html">WE CREATE</a></nav>
-    <h1>LOUNGE MUSIC</h1>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.4.0/color-thief.min.js"></script>
+<script>
+// --- EDIT YOUR 30 NAMES HERE ---
+const songNames = [
+    "Battle Theme", "Lobby Ambience", "Victory Song", "Main Menu", "Secret Level", 
+    "Boss Fight", "Forest Zone", "Ice Cave", "Cyber City", "Retro Chase",
+    "Song 11", "Song 12", "Song 13", "Song 14", "Song 15",
+    "Song 16", "Song 17", "Song 18", "Song 19", "Song 20",
+    "Song 21", "Song 22", "Song 23", "Song 24", "Song 25",
+    "Song 26", "Song 27", "Song 28", "Song 29", "Song 30"
+];
 
-    <div id="disc"></div>
+const container = document.getElementById("musicContainer");
+songNames.forEach((name, i) => {
+    let num = i + 1;
+    container.innerHTML += `
+        <div class="card" data-song="MUSIC/song${num}.mp3">
+            <img src="COVER/cover${num}.jpg" crossorigin="anonymous">
+            <div class="info"><h3>${name}</h3></div>
+            <div class="equalizer"><span></span><span></span><span></span></div>
+            <a class="download" href="MUSIC/song${num}.mp3" download onclick="event.stopPropagation()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+        </div>
+    `;
+});
 
-    <div class="glass-bar">
-        <button class="btn-tablet" onclick="togglePlaylist()">≡</button>
-        <button class="btn-tablet" onclick="prevSong()">&lt;</button>
-        <button class="btn-tablet" id="mainPlayBtn" onclick="togglePlay()">▶</button>
-        <button class="btn-tablet" onclick="nextSong()">&gt;</button>
-        <button class="btn-tablet">↓</button>
-    </div>
+/* ORIGINAL ADVANCED LOGIC */
+const player=document.getElementById("player");
+const cards=document.querySelectorAll(".card");
+const background=document.querySelector(".bg");
+const bgImage=document.querySelector(".bg-image"); 
+const searchInput=document.getElementById("searchInput");
+const homeButton=document.getElementById("homeButton");
+const colorThief = new ColorThief();
+let current = null; let currentIndex = -1;
 
-    <audio id="audioPlayer"></audio>
+function playCard(index){
+    const card = cards[index];
+    if(!card) return;
+    cards.forEach(c=>{ c.classList.remove("active"); c.style.boxShadow=""; });
+    card.classList.add("active");
+    current = card; currentIndex = index;
+    player.src = card.dataset.song;
+    player.play().catch(()=>{});
+    bgImage.style.opacity = "0.15"; 
+    const img = card.querySelector("img");
+    const update = () => {
+        const p = colorThief.getPalette(img, 2);
+        const glow = `rgb(${p[0][0]}, ${p[0][1]}, ${p[0][2]})`;
+        card.style.boxShadow = `0 0 25px ${glow}, 0 0 80px rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.4)`;
+        background.style.background = `radial-gradient(circle at top, rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.22) 0%, #050505 100%)`;
+    };
+    img.complete ? update() : img.onload = update;
+}
 
-    <div id="playlist">
-        <div class="handle" onclick="togglePlaylist()"></div>
-        <div id="song-list-container"></div>
-    </div>
-
-    <script>
-        const disc = document.getElementById('disc');
-        const playBtn = document.getElementById('mainPlayBtn');
-        const audio = document.getElementById('audioPlayer');
-        const container = document.getElementById('song-list-container');
-        const bgDynamic = document.getElementById('bg-dynamic');
-        let currentTrack = 1;
-
-        audio.src = `MUSIC/music${currentTrack}.mp3`;
-        bgDynamic.style.backgroundImage = `url('COVER/cover${currentTrack}.jpg')`;
-
-        // Handle auto-stop visibility
-        audio.addEventListener('ended', () => {
-            disc.classList.remove('playing');
-            playBtn.innerText = "▶";
-            bgDynamic.style.opacity = "0";
-        });
-
-        for(let i=1; i<=50; i++) {
-            container.innerHTML += `
-                <div class="song-item" onclick="selectSong(${i})">
-                    <div class="song-cover" style="background-image: url('COVER/cover${i}.jpg')"></div>
-                    <div style="color:white; font-weight:bold;">MUSIC ${i}</div>
-                </div>`;
+cards.forEach((card, i) => {
+    card.onclick = (e) => {
+        if (e.target.closest(".download")) return;
+        if (current === card) {
+            // Only toggle audio; the player events below will handle the UI
+            player.paused ? player.play() : player.pause();
+        } else {
+            playCard(i);
         }
+    };
+}); 
 
-        function selectSong(i) {
-            currentTrack = i;
-            const coverPath = `COVER/cover${i}.jpg`;
-            audio.src = `MUSIC/music${i}.mp3`;
-            disc.style.backgroundImage = `url('${coverPath}')`;
-            bgDynamic.style.backgroundImage = `url('${coverPath}')`;
-            
-            audio.play();
-            disc.classList.add('playing');
-            bgDynamic.style.opacity = "0.6"; // Show background
-            playBtn.innerText = "||";
-            document.getElementById('playlist').classList.remove('active');
+player.onpause = () => {
+    cards.forEach(c => {
+        c.classList.remove("active");
+        c.style.boxShadow = ""; // This ensures the shadow also disappears
+    });
+    bgImage.style.opacity = "1";
+    background.style.background = "radial-gradient(circle at top,#222,#050505 70%)";
+};
+player.onplay = () => {
+    if (current) {
+        current.classList.add("active");
+        bgImage.style.opacity = "0.15";
+        const img = current.querySelector("img");
+        if (img.complete) {
+            const p = colorThief.getPalette(img, 2);
+            background.style.background = `radial-gradient(circle at top, rgba(${p[0][0]}, ${p[0][1]}, ${p[0][2]}, 0.22) 0%, #050505 100%)`;
         }
-
-        function togglePlay() {
-            if (audio.paused) { 
-                audio.play().catch(e => console.log("Playback failed:", e)); 
-                disc.classList.add('playing'); 
-                bgDynamic.style.opacity = "0.6"; // Show
-                playBtn.innerText = "||"; 
-            } else { 
-                audio.pause(); 
-                disc.classList.remove('playing'); 
-                bgDynamic.style.opacity = "0"; // Hide
-                playBtn.innerText = "▶"; 
-            }
-        }
-
-        function nextSong() { 
-            currentTrack = (currentTrack >= 50) ? 1 : currentTrack + 1; 
-            selectSong(currentTrack); 
-        }
-        
-        function prevSong() { 
-            currentTrack = (currentTrack <= 1) ? 50 : currentTrack - 1; 
-            selectSong(currentTrack); 
-        }
-        
-        function togglePlaylist() { 
-            document.getElementById('playlist').classList.toggle('active'); 
-        }
-    </script>
+    }
+};
+searchInput.oninput = (e) => {
+    const q = e.target.value.toLowerCase();
+    cards.forEach((c, i) => c.style.display = songNames[i].toLowerCase().includes(q) ? "flex" : "none");
+};
+homeButton.onclick = () => location.reload();
+</script>
 </body>
 </html>
