@@ -2,105 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOUNGE MUSIC</title>
     <style>
-        :root { --glass: rgba(255, 255, 255, 0.05); }
-        body { margin: 0; background: #050505; color: white; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; transition: background 0.5s ease; }
-
-        #bg-dynamic { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(60px) brightness(0.3); opacity: 0; z-index: -1; transition: opacity 0.8s ease; }
-        
-        h1 { font-size: 100px; margin: 0; text-transform: uppercase; letter-spacing: -3px; }
-        #disc { width: 250px; height: 250px; border-radius: 50%; background: url('COVER/cover1.jpg') center/cover; border: 4px solid #333; transition: all 0.5s ease; margin: 50px 0; }
-        .playing-disc { animation: rotate 8s linear infinite; border-color: #fff; box-shadow: 0 0 40px rgba(255,255,255,0.2); }
-
-        .glass-bar { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); padding: 15px 40px; border-radius: 50px; display: flex; gap: 20px; position: fixed; bottom: 40px; }
-        .btn-tablet { height: 50px; width: 70px; border-radius: 25px; background: rgba(0,0,0,0.3); border: 1px solid #555; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: bold; }
-
-        #playlist { position: fixed; bottom: -100%; width: 100%; height: 60%; background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(20px); transition: 0.6s; padding: 20px; overflow-y: auto; z-index: 100; }
-        #playlist.active { bottom: 0; }
-        .song-item { display: flex; align-items: center; gap: 20px; padding: 15px; border-bottom: 1px solid #333; cursor: pointer; }
-        .song-cover { width: 60px; height: 60px; border-radius: 8px; background-size: cover; background-position: center; }
-
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        body { margin: 0; background: #050505; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; }
+        #bg-dynamic { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(60px) brightness(0.3); opacity: 0; z-index: -1; transition: opacity 0.8s; }
+        #disc { width: 250px; height: 250px; border-radius: 50%; background: #333; border: 4px solid #333; margin: 50px 0; }
+        .glass-bar { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 15px; border-radius: 50px; display: flex; gap: 15px; }
+        .btn { padding: 10px 20px; border-radius: 20px; cursor: pointer; border: none; background: #444; color: white; }
     </style>
 </head>
 <body>
-
     <div id="bg-dynamic"></div>
     <h1>LOUNGE MUSIC</h1>
     <div id="disc"></div>
-
     <div class="glass-bar">
-        <button class="btn-tablet" onclick="togglePlaylist()">≡</button>
-        <button class="btn-tablet" onclick="prevSong()">&lt;</button>
-        <button class="btn-tablet" id="mainPlayBtn" onclick="togglePlay()">▶</button>
-        <button class="btn-tablet" onclick="nextSong()">&gt;</button>
-        <a id="downloadBtn" href="MUSIC/music1.mp3" download class="btn-tablet">↓</a>
+        <button class="btn" onclick="togglePlay()" id="playBtn">PLAY</button>
+        <button class="btn" onclick="nextSong()">NEXT</button>
+        <a id="downBtn" href="#" download class="btn" style="text-decoration:none;">DOWNLOAD</a>
     </div>
-
     <audio id="audioPlayer"></audio>
 
-    <div id="playlist">
-        <div style="text-align:center; padding:10px; cursor:pointer;" onclick="togglePlaylist()">CLOSE X</div>
-        <div id="song-list-container"></div>
-    </div>
-
     <script>
-        const disc = document.getElementById('disc');
-        const playBtn = document.getElementById('mainPlayBtn');
         const audio = document.getElementById('audioPlayer');
-        const container = document.getElementById('song-list-container');
-        const bgDynamic = document.getElementById('bg-dynamic');
-        const downloadBtn = document.getElementById('downloadBtn');
+        const playBtn = document.getElementById('playBtn');
+        const downBtn = document.getElementById('downBtn');
+        const bg = document.getElementById('bg-dynamic');
         let currentTrack = 1;
-
-        for(let i=1; i<=50; i++) {
-            container.innerHTML += `
-                <div class="song-item" onclick="selectSong(${i})">
-                    <div class="song-cover" style="background-image: url('COVER/cover${i}.jpg')"></div>
-                    <div style="font-weight:bold;">MUSIC ${i}</div>
-                </div>`;
-        }
 
         function selectSong(i) {
             currentTrack = i;
-            const mPath = `MUSIC/music${i}.mp3`;
-            const cPath = `COVER/cover${i}.jpg`;
+            // UPDATE: Paths are relative to your html file
+            const mPath = "MUSIC/music" + i + ".mp3";
+            const cPath = "COVER/cover" + i + ".jpg";
+            
+            console.log("Loading: " + mPath); // LOOK AT THIS IN F12 CONSOLE
             
             audio.src = mPath;
-            audio.load(); // Force load
-            downloadBtn.href = mPath; // Update download link
-            
-            disc.style.backgroundImage = `url('${cPath}')`;
-            bgDynamic.style.backgroundImage = `url('${cPath}')`;
+            downBtn.href = mPath;
+            bg.style.backgroundImage = "url('" + cPath + "')";
             
             audio.play().then(() => {
-                disc.classList.add('playing-disc');
-                bgDynamic.style.opacity = "0.6";
-                playBtn.innerText = "||";
-            }).catch(e => console.log("Click page to enable audio."));
-            
-            document.getElementById('playlist').classList.remove('active');
+                playBtn.innerText = "PAUSE";
+                bg.style.opacity = "0.6";
+            }).catch(e => {
+                console.error("Browser blocked audio or file not found: " + e);
+                alert("Cannot play! Check Console (F12) for 404 errors.");
+            });
         }
 
         function togglePlay() {
-            if (audio.paused) { 
-                audio.play(); 
-                disc.classList.add('playing-disc'); 
-                bgDynamic.style.opacity = "0.6";
-                playBtn.innerText = "||"; 
-            } else { 
-                audio.pause(); 
-                disc.classList.remove('playing-disc'); 
-                bgDynamic.style.opacity = "0";
-                playBtn.innerText = "▶"; 
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerText = "PAUSE";
+                bg.style.opacity = "0.6";
+            } else {
+                audio.pause();
+                playBtn.innerText = "PLAY";
+                bg.style.opacity = "0";
             }
         }
-
-        function nextSong() { currentTrack = (currentTrack >= 50) ? 1 : currentTrack + 1; selectSong(currentTrack); }
-        function prevSong() { currentTrack = (currentTrack <= 1) ? 50 : currentTrack - 1; selectSong(currentTrack); }
-        function togglePlaylist() { document.getElementById('playlist').classList.toggle('active'); }
+        
+        function nextSong() { selectSong(currentTrack >= 50 ? 1 : currentTrack + 1); }
     </script>
 </body>
 </html>
