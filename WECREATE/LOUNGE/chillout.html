@@ -13,7 +13,6 @@
             align-items: center; justify-content: center; min-height: 100vh; overflow: hidden;
         }
 
-        /* Correct Path for Background Image */
         #bg-light {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('chillout.jpg');
@@ -22,7 +21,6 @@
         }
         .playing + #bg-light { opacity: 1; }
 
-        /* Updated Home Path */
         nav { width: 100%; padding: 50px 80px; position: absolute; top: 0; box-sizing: border-box; }
         nav a { color: white; text-decoration: none; font-weight: 300; letter-spacing: 3px; font-size: 20px; }
 
@@ -31,13 +29,12 @@
         /* Disc Centered */
         #disc { 
             width: 250px; height: 250px; border-radius: 50%; 
-            background: url('../COVER/album_cover.jpg') center/cover;
+            background: url('../COVER/cover.jpg') center/cover;
             border: 4px solid #333; transition: all 0.5s ease;
             margin: 50px 0;
         }
         .playing { animation: rotate 8s linear infinite; border-color: #fff; box-shadow: 0 0 40px rgba(255,255,255,0.2); }
 
-        /* Buttons with Space */
         .glass-bar {
             width: auto; max-width: 90%; background: var(--glass);
             backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
@@ -96,7 +93,13 @@
         const list = document.getElementById('song-list');
 
         for(let i=1; i<=50; i++) {
-            list.innerHTML += `<p style="padding:15px; border-bottom:1px solid rgba(255,255,255,0.1); text-align:center;">MUSIC ${i}</p>`;
+            // Updated to point to music1.mp3, music2.mp3 etc.
+            list.innerHTML += `
+                <a href="../MUSIC/music${i}.mp3" style="text-decoration:none; color:white;">
+                    <p style="padding:15px; border-bottom:1px solid rgba(255,255,255,0.1); text-align:center;">
+                        MUSIC ${i}
+                    </p>
+                </a>`;
         }
 
         function togglePlay() {
