@@ -13,7 +13,6 @@
             align-items: center; min-height: 100vh; overflow: hidden;
         }
 
-        /* Updated Background Path */
         #bg-light {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('chillout.jpg') center/cover;
@@ -24,7 +23,7 @@
         nav { width: 100%; padding: 40px; position: absolute; }
         nav a { color: white; text-decoration: none; font-weight: 200; letter-spacing: 2px; }
 
-        h1 { font-size: 8vw; margin-top: 12vh; text-transform: uppercase; letter-spacing: -5px; }
+        h1 { font-size: 120px; margin-top: 100px; text-transform: uppercase; letter-spacing: -5px; }
 
         #disc { 
             width: 250px; height: 250px; border-radius: 50%; 
@@ -33,24 +32,24 @@
         }
         .playing { animation: rotate 8s linear infinite; border-color: #fff; box-shadow: 0 0 40px rgba(255,255,255,0.2); }
 
-        /* Premium Tablet-Shade Buttons */
+        /* Premium Tablet-Shaped Buttons */
         .glass-bar {
-            width: 90%; max-width: 500px; background: var(--glass);
+            width: 90%; max-width: 600px; background: var(--glass);
             backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
-            padding: 15px; border-radius: 50px; display: flex;
-            align-items: center; justify-content: space-between; gap: 10px;
+            padding: 15px 30px; border-radius: 50px; display: flex;
+            align-items: center; justify-content: center; gap: 20px;
             position: fixed; bottom: 30px;
         }
 
-        .btn-premium {
-            width: 55px; height: 55px; border-radius: 50%;
+        .btn-tablet {
+            height: 50px; padding: 0 25px; border-radius: 25px;
             background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
             border: 1px solid #444; color: #fff; cursor: pointer;
-            box-shadow: inset 2px 2px 5px rgba(255,255,255,0.1), 5px 5px 10px rgba(0,0,0,0.5);
+            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.1), 3px 3px 6px rgba(0,0,0,0.5);
             display: flex; align-items: center; justify-content: center; font-size: 18px;
             transition: 0.3s;
         }
-        .btn-premium:active { box-shadow: inset 5px 5px 10px #000; transform: scale(0.95); }
+        .btn-tablet:active { box-shadow: inset 3px 3px 6px #000; transform: translateY(2px); }
 
         /* Liquid Glass Playlist */
         #playlist {
@@ -75,11 +74,11 @@
     <div id="disc"></div>
 
     <div class="glass-bar">
-        <button class="btn-premium" onclick="togglePlaylist()">☰</button>
-        <button class="btn-premium">⏮</button>
-        <button class="btn-premium" id="mainPlayBtn" onclick="togglePlay()">▶</button>
-        <button class="btn-premium">⏭</button>
-        <button class="btn-premium">⬇</button>
+        <button class="btn-tablet" onclick="togglePlaylist()">☰</button>
+        <button class="btn-tablet">⏮</button>
+        <button class="btn-tablet" id="mainPlayBtn" onclick="togglePlay()">▶</button>
+        <button class="btn-tablet">⏭</button>
+        <button class="btn-tablet">⬇</button>
     </div>
 
     <div id="playlist">
