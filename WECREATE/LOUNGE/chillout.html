@@ -64,6 +64,10 @@
         const bgDynamic = document.getElementById('bg-dynamic');
         let currentTrack = 1;
 
+        // Initialize first song source on load
+        audio.src = `MUSIC/music${currentTrack}.mp3`;
+        bgDynamic.style.backgroundImage = `url('COVER/cover${currentTrack}.jpg')`;
+
         // Generate the 50 songs
         for(let i=1; i<=50; i++) {
             container.innerHTML += `
@@ -78,8 +82,6 @@
             const coverPath = `COVER/cover${i}.jpg`;
             audio.src = `MUSIC/music${i}.mp3`;
             disc.style.backgroundImage = `url('${coverPath}')`;
-            
-            // Set dynamic background to the current cover image
             bgDynamic.style.backgroundImage = `url('${coverPath}')`;
             
             audio.play();
@@ -90,7 +92,7 @@
 
         function togglePlay() {
             if (audio.paused) { 
-                audio.play(); 
+                audio.play().catch(e => console.log("Playback failed:", e)); 
                 disc.classList.add('playing'); 
                 playBtn.innerText = "||"; 
             } else { 
