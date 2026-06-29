@@ -24,6 +24,7 @@ body{ background:#050505; color:#fff; overflow-x:hidden; }
     border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; transition: 0.3s; color: white;
+    font-size: 1.2rem;
 }
 .glass-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
 
@@ -31,30 +32,28 @@ body{ background:#050505; color:#fff; overflow-x:hidden; }
 #progress-bar { height: 100%; width: 0%; background: #00E5FF; box-shadow: 0 0 10px #00E5FF; transition: width 0.1s linear; }
 
 /* Updated Card Styles */
-.card { display: flex; flex-direction: column; padding: 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; backdrop-filter: blur(15px); margin-bottom: 20px; position: relative; }
-.card-top { display: flex; align-items: center; gap: 20px; }
+.card { display: flex; flex-direction: column; padding: 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; backdrop-filter: blur(15px); margin-bottom: 20px; position: relative; width: 350px; }
+.card-top { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
 .card img { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; }
-
-/* Keep existing animations and header styles from your original code... */
-/* [Insert your original header, logo, and animation CSS here] */
+.info { flex: 1; }
 </style>
 </head>
 <body>
 
 <section class="music" id="musicContainer">
-    <div class="card" data-song="MUSIC/song1.mp3">
+    <div class="card" id="activeCard" data-song="MUSIC/song1.mp3">
         <div class="card-top">
-            <img src="COVER/cover1.jpg" crossorigin="anonymous">
-            <div class="info"><h3>Battle Theme</h3></div>
-            <a class="download" href="MUSIC/song1.mp3" download>↓</a>
+            <button class="glass-btn" onclick="changeTrack(-1)">⏮</button>
+            <img src="COVER/cover1.jpg" id="coverImage" crossorigin="anonymous">
+            <div class="info"><h3 id="trackTitle">Battle Theme</h3></div>
+            <a class="download" href="MUSIC/song1.mp3" id="downloadLink" download>↓</a>
+            <button class="glass-btn" onclick="changeTrack(1)">⏭</button>
         </div>
         
         <div class="controls-container">
-            <button class="glass-btn" onclick="changeTrack(-1)">⏮</button>
             <div class="progress-container" id="progress-container">
                 <div id="progress-bar"></div>
             </div>
-            <button class="glass-btn" onclick="changeTrack(1)">⏭</button>
         </div>
     </div>
 </section>
@@ -66,10 +65,19 @@ const player = document.getElementById("player");
 const progressBar = document.getElementById("progress-bar");
 const progressContainer = document.getElementById("progress-container");
 
+// Example track list
+const tracks = [
+    { title: "Battle Theme", src: "MUSIC/song1.mp3", cover: "COVER/cover1.jpg" },
+    { title: "Menu Theme", src: "MUSIC/song2.mp3", cover: "COVER/cover2.jpg" }
+];
+let currentIndex = 0;
+
 // Update Progress Bar
 player.addEventListener("timeupdate", () => {
-    const percent = (player.currentTime / player.duration) * 100;
-    progressBar.style.width = percent + "%";
+    if (player.duration) {
+        const percent = (player.currentTime / player.duration) * 100;
+        progressBar.style.width = percent + "%";
+    }
 });
 
 // Click to seek
@@ -81,11 +89,21 @@ progressContainer.addEventListener("click", (e) => {
 
 // Navigation Logic
 function changeTrack(direction) {
-    // Logic to update currentIndex and call playCard(newIndex)
-    console.log("Next/Prev Triggered");
-}
+    currentIndex += direction;
+    
+    // Loop index if out of bounds
+    if (currentIndex < 0) currentIndex = tracks.length - 1;
+    if (currentIndex >= tracks.length) currentIndex = 0;
 
-// ... rest of your original script
+    // Load new track
+    const track = tracks[currentIndex];
+    player.src = track.src;
+    document.getElementById("trackTitle").innerText = track.title;
+    document.getElementById("coverImage").src = track.cover;
+    document.getElementById("downloadLink").href = track.src;
+    
+    player.play();
+}
 </script>
 </body>
 </html>
