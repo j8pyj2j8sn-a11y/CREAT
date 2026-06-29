@@ -6,6 +6,7 @@
 <title>WE CREATE • Game Music</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+/* ... KEEP ALL YOUR EXISTING CSS EXACTLY AS IT IS ... */
 *{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
 html{ scroll-behavior:smooth; }
 body{ background:#050505; color:#fff; overflow-x:hidden; }
@@ -35,7 +36,6 @@ nav a:hover{ color:#00E5FF; }
 .download { width: 44px; height: 44px; border-radius: 50%; display: flex; justify-content: center; align-items: center; background: rgba(255, 255, 255, .08); font-size: 22px; transition: .3s; text-decoration: none; color: white; }
 .download:hover { background: #00E5FF; color: black; transform: scale(1.08); }
 .download svg { width: 24px; height: 24px; filter: drop-shadow(0 0 6px #00F5FF); }
-/* Premium Controls */
 .controls-area { display: flex; align-items: center; gap: 15px; margin-top: 15px; opacity: 0; transition: 0.3s; }
 .card.active .controls-area { opacity: 1; }
 .nav-btn { background: none; border: none; color: white; cursor: pointer; font-size: 16px; transition: 0.3s; }
@@ -66,7 +66,8 @@ nav a:hover{ color:#00E5FF; }
 <h1>LOUNGE<span>MUSIC</span></h1>
 </section>
 
-</section>
+<section class="music" id="musicContainer"></section>
+
 <audio id="player"></audio>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.4.0/color-thief.min.js"></script>
     
@@ -79,7 +80,7 @@ const homeButton = document.getElementById("homeButton");
 const colorThief = new ColorThief();
 let current = null;
 
-// Generate 50 songs
+// 1. Generate 50 songs dynamically
 for (let i = 1; i <= 50; i++) {
     const card = document.createElement("div");
     card.className = "card";
@@ -102,7 +103,7 @@ for (let i = 1; i <= 50; i++) {
     container.appendChild(card);
 }
 
-// Select cards after they are built
+// 2. Select cards AFTER generation
 const cards = document.querySelectorAll(".card");
 
 function playCard(index) {
@@ -113,7 +114,6 @@ function playCard(index) {
     current = card;
     player.src = card.dataset.song;
     player.play().catch(() => {});
-    
     const img = card.querySelector("img");
     const update = () => {
         const p = colorThief.getPalette(img, 2);
