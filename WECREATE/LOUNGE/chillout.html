@@ -16,14 +16,13 @@
 
         h1 { font-size: 120px; margin: 0; text-transform: uppercase; letter-spacing: -5px; }
 
-        /* Disc - Using explicit relative path */
-        #disc { width: 250px; height: 250px; border-radius: 50%; background: url('../COVER/cover.jpg') center/cover; border: 4px solid #333; transition: all 0.5s ease; margin: 50px 0; }
+        /* Disc */
+        #disc { width: 250px; height: 250px; border-radius: 50%; background: url('../COVER/cover1.jpg') center/cover; border: 4px solid #333; transition: all 0.5s ease; margin: 50px 0; }
         .playing { animation: rotate 8s linear infinite; border-color: #fff; box-shadow: 0 0 40px rgba(255,255,255,0.2); }
 
         .glass-bar { width: auto; max-width: 90%; background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); padding: 15px 40px; border-radius: 50px; display: flex; align-items: center; justify-content: center; gap: 40px; position: fixed; bottom: 40px; }
         .btn-tablet { height: 50px; min-width: 70px; border-radius: 25px; background: rgba(0,0,0,0.3); border: var(--silver-border); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; transition: 0.3s; }
         .btn-tablet:hover { background: rgba(255,255,255,0.1); }
-        .btn-tablet:active { transform: scale(0.95); }
 
         /* Playlist */
         #playlist { position: fixed; bottom: -100%; width: 100%; height: 60%; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(40px); border-top: 1px solid rgba(255,255,255,0.2); border-radius: 40px 40px 0 0; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 20px; overflow-y: auto; z-index: 100; }
@@ -31,7 +30,7 @@
         .handle { width: 50px; height: 5px; background: #fff; margin: 10px auto 30px; border-radius: 5px; cursor: pointer; }
         
         .song-item { display: flex; align-items: center; gap: 20px; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
-        .song-cover { width: 60px; height: 60px; border-radius: 8px; background: url('../COVER/cover.jpg') center/cover; }
+        .song-cover { width: 60px; height: 60px; border-radius: 8px; background-size: cover; background-position: center; }
 
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
@@ -49,31 +48,43 @@
         <button class="btn-tablet" id="mainPlayBtn" onclick="togglePlay()">▶</button>
     </div>
 
-    <audio id="audioPlayer">
-        <source src="MUSIC/music.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="audioPlayer"></audio>
 
     <div id="playlist">
         <div class="handle" onclick="togglePlaylist()"></div>
-        <div class="song-item" onclick="playMusic()">
-            <div class="song-cover"></div>
-            <div>
-                <div style="font-weight:bold; font-size:18px;">MUSIC 1</div>
-                <div style="color:#aaa;">Click to play</div>
-            </div>
-        </div>
+        <div id="song-list-container"></div>
     </div>
 
     <script>
         const disc = document.getElementById('disc');
         const playBtn = document.getElementById('mainPlayBtn');
         const audio = document.getElementById('audioPlayer');
+        const container = document.getElementById('song-list-container');
+
+        // Generate 50 songs
+        for(let i=1; i<=50; i++) {
+            container.innerHTML += `
+                <div class="song-item" onclick="selectSong(${i})">
+                    <div class="song-cover" style="background-image: url('../COVER/cover${i}.jpg')"></div>
+                    <div style="color:white;">
+                        <div style="font-weight:bold;">MUSIC ${i}</div>
+                    </div>
+                </div>`;
+        }
+
+        function selectSong(i) {
+            audio.src = `MUSIC/music${i}.mp3`;
+            disc.style.backgroundImage = `url('../COVER/cover${i}.jpg')`;
+            audio.play();
+            disc.classList.add('playing');
+            playBtn.innerText = "||";
+            togglePlaylist();
+        }
 
         function togglePlay() {
             if (audio.paused) { audio.play(); disc.classList.add('playing'); playBtn.innerText = "||"; }
             else { audio.pause(); disc.classList.remove('playing'); playBtn.innerText = "▶"; }
         }
-        function playMusic() { audio.play(); disc.classList.add('playing'); playBtn.innerText = "||"; }
         function togglePlaylist() { document.getElementById('playlist').classList.toggle('active'); }
     </script>
 </body>
