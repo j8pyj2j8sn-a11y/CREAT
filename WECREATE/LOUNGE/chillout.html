@@ -90,7 +90,15 @@ nav a:hover{ color:#00E5FF; }
 .download{ width:44px; height:44px; border-radius:50%; display:flex; justify-content:center; align-items:center; background:rgba(255,255,255,.08); font-size:22px; transition:.3s; text-decoration: none; color: white; }
 .download:hover{ background:#00E5FF; color:black; transform:scale(1.08); }
 .search{ position:fixed; bottom:25px; left:50%; transform:translateX(-50%); width:min(700px,92%); z-index: 10; }
-.search input{ width:100%; padding:18px 22px; border:none; outline:none; border-radius:50px; background:rgba(255,255,255,.08); backdrop-filter:blur(20px); color:white; font-size:17px; border: 1px solid rgba(255, 255, 255, .05); }
+
+    /* Premium Controls Styling */
+.controls-area { display: flex; align-items: center; gap: 15px; margin-top: 15px; opacity: 0; transition: 0.3s; }
+.card.active .controls-area { opacity: 1; }
+.nav-btn { background: none; border: none; color: white; cursor: pointer; font-size: 16px; transition: 0.3s; }
+.nav-btn:hover { color: #00E5FF; transform: scale(1.2); }
+.progress-container { flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; cursor: pointer; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: #00E5FF; border-radius: 3px; transition: width 0.1s linear; }
+
 </style>
 </head>
 <body>
@@ -141,7 +149,6 @@ const cards=document.querySelectorAll(".card");
 const player=document.getElementById("player");
 const background=document.querySelector(".bg");
 const bgImage=document.querySelector(".bg-image"); 
-const searchInput=document.getElementById("searchInput");
 const homeButton=document.getElementById("homeButton");
 const colorThief = new ColorThief();
 let current = null; let currentIndex = -1;
@@ -199,6 +206,33 @@ searchInput.oninput = (e) => {
     const q = e.target.value.toLowerCase();
     cards.forEach((c, i) => c.style.display = songNames[i].toLowerCase().includes(q) ? "flex" : "none");
 };
+    // Navigation and Progress logic
+document.querySelectorAll('.prev').forEach((btn, i) => btn.onclick = (e) => { 
+    e.stopPropagation(); 
+    playCard(i - 1 < 0 ? cards.length - 1 : i - 1); 
+});
+document.querySelectorAll('.next').forEach((btn, i) => btn.onclick = (e) => { 
+    e.stopPropagation(); 
+    playCard(i + 1 >= cards.length ? 0 : i + 1); 
+});
+
+player.addEventListener('timeupdate', () => {
+    if (current) {
+        const fill = current.querySelector('.progress-fill');
+        if (player.duration) {
+            fill.style.width = (player.currentTime / player.duration) * 100 + '%';
+        }
+    }
+});
+
+document.querySelectorAll('.progress-container').forEach((bar) => {
+    bar.onclick = (e) => {
+        e.stopPropagation();
+        const rect = bar.getBoundingClientRect();
+        const clickPos = (e.clientX - rect.left) / rect.width;
+        player.currentTime = clickPos * player.duration;
+    };
+});
 homeButton.onclick = () => location.reload();
 </script>
 </body>
