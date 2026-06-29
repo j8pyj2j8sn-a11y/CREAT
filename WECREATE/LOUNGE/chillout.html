@@ -29,7 +29,22 @@ nav a:hover{ color:#00E5FF; }
 .hero h1 span{ display:block; color:#d8d8d8; }
 .hero p{ margin:auto; margin-top:25px; max-width:720px; font-size:19px; line-height:1.8; color:#c5c5c5; animation-delay: 0.5s; }
 .music{ padding:0 60px 140px; }
-.card{ display:flex; align-items:center; gap:18px; padding:18px; margin-bottom:18px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:24px; backdrop-filter:blur(20px); transition:.35s; cursor:pointer; position:relative; overflow:hidden; animation: premiumEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.card {
+    display: flex;
+    align-items: center;
+    gap: 24px;       /* Increased gap for more breathing room */
+    padding: 24px;   /* Increased padding to make the card "fatter" */
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 28px; /* Slightly more rounded corners for the larger size */
+    backdrop-filter: blur(20px);
+    transition: .35s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    animation: premiumEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
 .card:hover{ transform:translateY(-3px); background:rgba(255,255,255,.08); }
 .card::before{ content:""; position:absolute; inset:0; padding:1px; border-radius:24px; background:linear-gradient(90deg, #00eaff, #4d7cff, #9b5cff, #ff2f92, #00eaff); background-size:300%; animation:rgbBorder 6s linear infinite; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; pointer-events:none; }
 .card img{ transition:.4s; width:75px; height:75px; border-radius:60px; object-fit:cover; }
