@@ -32,12 +32,13 @@ nav a:hover{ color:#00E5FF; }
 .card {
     display: flex;
     align-items: center;
-    gap: 24px;       /* Increased gap for more breathing room */
-    padding: 24px;   /* Increased padding to make the card "fatter" */
-    margin-bottom: 20px;
+    gap: 25px;
+    padding: 36px;         /* Increased padding for more vertical space */
+    min-height: 150px;     /* Double the original ~75px height */
+    margin-bottom: 24px;
     background: rgba(255, 255, 255, .05);
     border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: 28px; /* Slightly more rounded corners for the larger size */
+    border-radius: 32px;   /* Adjusted to look proportional */
     backdrop-filter: blur(20px);
     transition: .35s;
     cursor: pointer;
@@ -45,6 +46,7 @@ nav a:hover{ color:#00E5FF; }
     overflow: hidden;
     animation: premiumEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+    
 .card:hover{ transform:translateY(-3px); background:rgba(255,255,255,.08); }
 .card::before{ content:""; position:absolute; inset:0; padding:1px; border-radius:24px; background:linear-gradient(90deg, #00eaff, #4d7cff, #9b5cff, #ff2f92, #00eaff); background-size:300%; animation:rgbBorder 6s linear infinite; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; pointer-events:none; }
 .card img{ transition:.4s; width:75px; height:75px; border-radius:60px; object-fit:cover; }
