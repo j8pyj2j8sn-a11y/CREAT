@@ -103,6 +103,7 @@ function playCard(index) {
     current = card;
     player.src = card.dataset.song;
     player.play().catch(() => {});
+    
     const img = card.querySelector("img");
     const update = () => {
         const p = colorThief.getPalette(img, 2);
@@ -110,20 +111,32 @@ function playCard(index) {
     };
     img.complete ? update() : img.onload = update;
 }
+
+// Single, clean click handler for cards
 cards.forEach((card, i) => {
     card.onclick = (e) => {
         if (e.target.closest(".download, .nav-btn, .progress-container")) return;
-        current === card ? (player.paused ? player.play() : player.pause()) : playCard(i);
+        
+        if (current === card) {
+            player.paused ? player.play() : player.pause();
+        } else {
+            playCard(i);
+        }
     };
 });
+
+// Navigation logic
 document.querySelectorAll('.prev').forEach((btn, i) => btn.onclick = (e) => { e.stopPropagation(); playCard(i - 1 < 0 ? cards.length - 1 : i - 1); });
 document.querySelectorAll('.next').forEach((btn, i) => btn.onclick = (e) => { e.stopPropagation(); playCard(i + 1 >= cards.length ? 0 : i + 1); });
+
+// Progress bar logic
 player.addEventListener('timeupdate', () => {
     if (current) {
         const fill = current.querySelector('.progress-fill');
         if (player.duration) fill.style.width = (player.currentTime / player.duration) * 100 + '%';
     }
 });
+
 document.querySelectorAll('.progress-container').forEach((bar) => {
     bar.onclick = (e) => {
         e.stopPropagation();
@@ -131,13 +144,10 @@ document.querySelectorAll('.progress-container').forEach((bar) => {
         player.currentTime = ((e.clientX - rect.left) / rect.width) * player.duration;
     };
 });
-// --- UPDATED PLAY/PAUSE LOGIC ---
 
+// Play/Pause State visuals
 player.onpause = () => {
-    // We only reset the background if the audio is actually finished or stopped completely
-    if (player.currentTime === 0 || player.paused) {
-        bgImage.style.opacity = "1";
-    }
+    bgImage.style.opacity = "1";
 };
 
 player.onplay = () => {
@@ -147,21 +157,7 @@ player.onplay = () => {
     }
 };
 
-// Update the click handler for the card to ensure it resumes correctly
-cards.forEach((card, i) => {
-    card.onclick = (e) => {
-        // If clicking download, nav buttons, or progress bar, do nothing
-        if (e.target.closest(".download, .nav-btn, .progress-container")) return;
-        
-        if (current === card) {
-            // Simply toggle play/pause without removing the "active" class
-            player.paused ? player.play() : player.pause();
-        } else {
-            playCard(i);
-        }
-    };
-});
-    homeButton.onclick = () => location.reload();
+homeButton.onclick = () => location.reload();
 </script>
 </body>
 </html>
