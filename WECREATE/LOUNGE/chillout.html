@@ -65,32 +65,21 @@ nav a:hover{ color:#00E5FF; }
 <h4>DISCOVER • LISTEN • DOWNLOAD</h4>
 <h1>LOUNGE<span>MUSIC</span></h1>
 </section>
-<section class="music" id="musicContainer">
-    <div class="card" data-song="WECREATE/LOUNGE/MUSIC/music1.mp3">
-        <img src="WECREATE/LOUNGE/COVER/cover1.jpg" crossorigin="anonymous">
-        <div class="info">
-            <h3>Battle Theme</h3>
-            <div class="controls-area">
-                <button class="nav-btn prev">⏮</button>
-                <div class="progress-container">
-                    <div class="progress-fill"></div>
-                </div>
-                <button class="nav-btn next">⏭</button>
-            </div>
-        </div>
-        <div class="equalizer"><span></span><span></span><span></span></div>
-        <a class="download" href="WECREATE/LOUNGE/MUSIC/music1.mp3" download onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3V14M8.5 10.5L12 14L15.5 10.5M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </a>
-    </div>
+
 </section>
 <audio id="player"></audio>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.4.0/color-thief.min.js"></script>
     
 <script>
 const container = document.getElementById("musicContainer");
+const player = document.getElementById("player");
+const background = document.querySelector(".bg");
+const bgImage = document.querySelector(".bg-image");
+const homeButton = document.getElementById("homeButton");
+const colorThief = new ColorThief();
+let current = null;
 
-// 1. Generate 50 songs dynamically
+// Generate 50 songs
 for (let i = 1; i <= 50; i++) {
     const card = document.createElement("div");
     card.className = "card";
@@ -113,14 +102,8 @@ for (let i = 1; i <= 50; i++) {
     container.appendChild(card);
 }
 
-// 2. Initialize variables and logic
+// Select cards after they are built
 const cards = document.querySelectorAll(".card");
-const player = document.getElementById("player");
-const background = document.querySelector(".bg");
-const bgImage = document.querySelector(".bg-image");
-const homeButton = document.getElementById("homeButton");
-const colorThief = new ColorThief();
-let current = null;
 
 function playCard(index) {
     const card = cards[index];
@@ -144,24 +127,20 @@ cards.forEach((card, i) => {
         if (e.target.closest(".download, .nav-btn, .progress-container")) return;
         current === card ? (player.paused ? player.play() : player.pause()) : playCard(i);
     };
+    card.querySelector('.prev').onclick = (e) => { e.stopPropagation(); playCard(i - 1 < 0 ? cards.length - 1 : i - 1); };
+    card.querySelector('.next').onclick = (e) => { e.stopPropagation(); playCard(i + 1 >= cards.length ? 0 : i + 1); };
+    card.querySelector('.progress-container').onclick = (e) => {
+        e.stopPropagation();
+        const rect = card.querySelector('.progress-container').getBoundingClientRect();
+        player.currentTime = ((e.clientX - rect.left) / rect.width) * player.duration;
+    };
 });
-
-document.querySelectorAll('.prev').forEach((btn, i) => btn.onclick = (e) => { e.stopPropagation(); playCard(i - 1 < 0 ? cards.length - 1 : i - 1); });
-document.querySelectorAll('.next').forEach((btn, i) => btn.onclick = (e) => { e.stopPropagation(); playCard(i + 1 >= cards.length ? 0 : i + 1); });
 
 player.addEventListener('timeupdate', () => {
     if (current) {
         const fill = current.querySelector('.progress-fill');
         if (player.duration) fill.style.width = (player.currentTime / player.duration) * 100 + '%';
     }
-});
-
-document.querySelectorAll('.progress-container').forEach((bar) => {
-    bar.onclick = (e) => {
-        e.stopPropagation();
-        const rect = bar.getBoundingClientRect();
-        player.currentTime = ((e.clientX - rect.left) / rect.width) * player.duration;
-    };
 });
 
 player.onpause = () => { bgImage.style.opacity = "1"; };
