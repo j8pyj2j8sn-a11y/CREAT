@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOUNGE MUSIC</title>
+    <style>
+        :root { --glass: rgba(255, 255, 255, 0.05); }
+        
+        body { 
+            margin: 0; background: #050505; color: white; 
+            font-family: 'Inter', sans-serif; display: flex; flex-direction: column; 
+            align-items: center; min-height: 100vh; overflow: hidden;
+        }
 
+        /* Updated Background Path */
+        #bg-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('chillout.jpg') center/cover;
+            filter: blur(80px) brightness(0.4); opacity: 0; transition: opacity 1.5s ease; z-index: -1;
+        }
+        .playing + #bg-light { opacity: 1; }
+
+        nav { width: 100%; padding: 40px; position: absolute; }
+        nav a { color: white; text-decoration: none; font-weight: 200; letter-spacing: 2px; }
+
+        h1 { font-size: 8vw; margin-top: 12vh; text-transform: uppercase; letter-spacing: -5px; }
+
+        #disc { 
+            width: 250px; height: 250px; border-radius: 50%; 
+            background: url('../../COVER/album_cover.jpg') center/cover;
+            border: 4px solid #333; transition: all 0.5s ease;
+        }
+        .playing { animation: rotate 8s linear infinite; border-color: #fff; box-shadow: 0 0 40px rgba(255,255,255,0.2); }
+
+        /* Premium Tablet-Shade Buttons */
+        .glass-bar {
+            width: 90%; max-width: 500px; background: var(--glass);
+            backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px; border-radius: 50px; display: flex;
+            align-items: center; justify-content: space-between; gap: 10px;
+            position: fixed; bottom: 30px;
+        }
+
+        .btn-premium {
+            width: 55px; height: 55px; border-radius: 50%;
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border: 1px solid #444; color: #fff; cursor: pointer;
+            box-shadow: inset 2px 2px 5px rgba(255,255,255,0.1), 5px 5px 10px rgba(0,0,0,0.5);
+            display: flex; align-items: center; justify-content: center; font-size: 18px;
+            transition: 0.3s;
+        }
+        .btn-premium:active { box-shadow: inset 5px 5px 10px #000; transform: scale(0.95); }
+
+        /* Liquid Glass Playlist */
+        #playlist {
+            position: fixed; bottom: -100%; width: 100%; height: 60%;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(40px);
+            border-top: 1px solid rgba(255,255,255,0.2); border-radius: 40px 40px 0 0;
+            transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            padding: 20px; overflow-y: auto;
+        }
+        #playlist.active { bottom: 0; }
+        .handle { width: 50px; height: 5px; background: #fff; margin: 10px auto; border-radius: 5px; cursor: pointer; }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="bg-light"></div>
+    <nav><a href="../../index.html">WE CREATE</a></nav>
+    <h1>LOUNGE MUSIC</h1>
+
+    <div id="disc"></div>
+
+    <div class="glass-bar">
+        <button class="btn-premium" onclick="togglePlaylist()">☰</button>
+        <button class="btn-premium">⏮</button>
+        <button class="btn-premium" id="mainPlayBtn" onclick="togglePlay()">▶</button>
+        <button class="btn-premium">⏭</button>
+        <button class="btn-premium">⬇</button>
+    </div>
+
+    <div id="playlist">
+        <div class="handle" onclick="togglePlaylist()"></div>
+        <div id="song-list"></div>
+    </div>
+
+    <script>
+        const disc = document.getElementById('disc');
+        const playBtn = document.getElementById('mainPlayBtn');
+        const list = document.getElementById('song-list');
+
+        for(let i=1; i<=50; i++) {
+            list.innerHTML += `<p style="padding:15px; border-bottom:1px solid rgba(255,255,255,0.1); text-align:center;">MUSIC ${i}</p>`;
+        }
+
+        function togglePlay() {
+            disc.classList.toggle('playing');
+            playBtn.innerText = disc.classList.contains('playing') ? "⏸" : "▶";
+        }
+
+        function togglePlaylist() { document.getElementById('playlist').classList.toggle('active'); }
+    </script>
+</body>
+</html>
