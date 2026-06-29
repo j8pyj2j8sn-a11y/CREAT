@@ -131,8 +131,37 @@ document.querySelectorAll('.progress-container').forEach((bar) => {
         player.currentTime = ((e.clientX - rect.left) / rect.width) * player.duration;
     };
 });
-player.onpause = () => { cards.forEach(c => c.classList.remove("active")); bgImage.style.opacity = "1"; background.style.background = "radial-gradient(circle at top,#222,#050505 70%)"; };
-homeButton.onclick = () => location.reload();
+// --- UPDATED PLAY/PAUSE LOGIC ---
+
+player.onpause = () => {
+    // We only reset the background if the audio is actually finished or stopped completely
+    if (player.currentTime === 0 || player.paused) {
+        bgImage.style.opacity = "1";
+    }
+};
+
+player.onplay = () => {
+    if (current) {
+        current.classList.add("active");
+        bgImage.style.opacity = "0.15";
+    }
+};
+
+// Update the click handler for the card to ensure it resumes correctly
+cards.forEach((card, i) => {
+    card.onclick = (e) => {
+        // If clicking download, nav buttons, or progress bar, do nothing
+        if (e.target.closest(".download, .nav-btn, .progress-container")) return;
+        
+        if (current === card) {
+            // Simply toggle play/pause without removing the "active" class
+            player.paused ? player.play() : player.pause();
+        } else {
+            playCard(i);
+        }
+    };
+});
+    homeButton.onclick = () => location.reload();
 </script>
 </body>
 </html>
