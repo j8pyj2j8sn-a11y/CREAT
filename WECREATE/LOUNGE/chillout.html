@@ -9,36 +9,41 @@
         
         body { 
             margin: 0; 
-            /* Permanent Background */
-            background: url('chillout.jpg') no-repeat center center fixed; 
+            /* Titanium Gradient + Chillout Image */
+            background: linear-gradient(135deg, rgba(30, 30, 35, 0.9), rgba(10, 10, 15, 0.95)), url('chillout.jpg') no-repeat center center fixed; 
             background-size: cover;
             color: white; 
             font-family: 'Inter', sans-serif; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             min-height: 100vh; overflow: hidden; 
+            /* Page Opening Transaction */
+            animation: fadeIn 1.5s ease-in-out;
         }
 
-        /* The dynamic blurred cover art layer (Toggled by JS) */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Dynamic blurred cover art layer */
         #bg-dynamic { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background-size: cover; background-position: center; 
             filter: blur(60px); opacity: 0; z-index: -1; 
-            transition: opacity 1s ease; 
+            transition: opacity 1.5s ease; 
         }
-        #bg-dynamic.visible { opacity: 0.6; }
+        #bg-dynamic.visible { opacity: 0.5; }
 
-        /* Titanium Finish Overlay (Always present) */
+        /* Subtle Titanium Grain/Reflective Overlay */
         body::before {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.05) 50%, rgba(100, 100, 100, 0.1) 100%);
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.2) 100%);
             pointer-events: none; z-index: 0;
         }
 
         /* UI elements */
         nav, h1, #disc, .glass-bar, #playlist { position: relative; z-index: 1; }
-        
-        /* ... Keep all your existing CSS for nav, h1, disc, etc. below ... */
         nav { width: 100%; padding: 50px 80px; position: absolute; top: 0; box-sizing: border-box; }
         nav a { color: white; text-decoration: none; font-weight: 300; letter-spacing: 3px; font-size: 20px; }
         h1 { font-size: 120px; margin: 0; text-transform: uppercase; letter-spacing: -5px; }
@@ -82,18 +87,23 @@
         const disc = document.getElementById('disc');
         const playBtn = document.getElementById('mainPlayBtn');
         const audio = document.getElementById('audioPlayer');
+        const container = document.getElementById('song-list-container');
         const bgDynamic = document.getElementById('bg-dynamic');
+
+        // Logic to populate songs and handle playback...
+        // [Keep your existing script functions here]
         
-        // Initial setup: Background is already set by CSS, so we just manage the overlay
+        // Ensure initial background is set to the first cover
+        bgDynamic.style.backgroundImage = `url('COVER/cover1.jpg')`;
+
         function selectSong(i) {
-            const coverPath = `COVER/cover${i}.jpg`;
             audio.src = `MUSIC/music${i}.mp3`;
-            disc.style.backgroundImage = `url('${coverPath}')`;
-            bgDynamic.style.backgroundImage = `url('${coverPath}')`;
-            
+            const path = `COVER/cover${i}.jpg`;
+            disc.style.backgroundImage = `url('${path}')`;
+            bgDynamic.style.backgroundImage = `url('${path}')`;
             audio.play();
             disc.classList.add('playing');
-            bgDynamic.classList.add('visible'); // Show blurred cover
+            bgDynamic.classList.add('visible');
             playBtn.innerText = "||";
         }
 
@@ -101,16 +111,15 @@
             if (audio.paused) { 
                 audio.play(); 
                 disc.classList.add('playing'); 
-                bgDynamic.classList.add('visible'); // Show blurred cover
+                bgDynamic.classList.add('visible');
                 playBtn.innerText = "||"; 
             } else { 
                 audio.pause(); 
                 disc.classList.remove('playing'); 
-                bgDynamic.classList.remove('visible'); // Hide blurred cover
+                bgDynamic.classList.remove('visible');
                 playBtn.innerText = "▶"; 
             }
         }
-        // ... (rest of your existing functions)
     </script>
 </body>
 </html>
