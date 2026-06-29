@@ -9,7 +9,6 @@
         
         body { 
             margin: 0; 
-            /* Added chillout.jpg as the main background */
             background: url('chillout.jpg') no-repeat center center fixed; 
             background-size: cover;
             color: white; 
@@ -20,59 +19,44 @@
             justify-content: center; 
             min-height: 100vh; 
             overflow: hidden; 
-            transition: background 1s ease; 
         }
 
-        /* This layer now sits on top of the chillout.jpg image */
+        /* Hidden by default */
         #bg-dynamic { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background-size: cover; 
-            background-position: center; 
-            filter: blur(60px); 
-            opacity: 0.4; /* Slightly lowered opacity to blend with chillout.jpg */
-            z-index: -1; 
-            transition: background 1s ease; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-size: cover; background-position: center; 
+            filter: blur(60px); opacity: 0; z-index: -1; 
+            transition: opacity 1s ease; /* Smooth fade effect */
         }
+        
+        /* Class to show background */
+        #bg-dynamic.visible { opacity: 0.4; }
 
-        /* Transparent Titanium Finish Overlay */
         body::before {
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.05) 50%, rgba(100, 100, 100, 0.1) 100%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Ensure UI stays on top */
         nav, h1, #disc, .glass-bar, #playlist { position: relative; z-index: 1; }
 
+        /* ... rest of your CSS remains the same ... */
         nav { width: 100%; padding: 50px 80px; position: absolute; top: 0; box-sizing: border-box; }
         nav a { color: white; text-decoration: none; font-weight: 300; letter-spacing: 3px; font-size: 20px; }
-
         h1 { font-size: 120px; margin: 0; text-transform: uppercase; letter-spacing: -5px; }
-
         #disc { width: 250px; height: 250px; border-radius: 50%; background: url('COVER/cover1.jpg') center/cover; border: 4px solid #333; transition: all 0.5s ease; margin: 50px 0; }
         .playing { animation: rotate 8s linear infinite; border-color: #fff; box-shadow: 0 0 40px rgba(255,255,255,0.2); }
-
         .glass-bar { width: auto; max-width: 90%; background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); padding: 15px 40px; border-radius: 50px; display: flex; align-items: center; justify-content: center; gap: 40px; position: fixed; bottom: 40px; }
         .btn-tablet { height: 50px; min-width: 70px; border-radius: 25px; background: rgba(0,0,0,0.3); border: var(--silver-border); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; transition: 0.3s; }
         .btn-tablet:hover { background: rgba(255,255,255,0.1); }
-
         #playlist { position: fixed; bottom: -100%; width: 100%; height: 60%; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(40px); border-top: 1px solid rgba(255,255,255,0.2); border-radius: 40px 40px 0 0; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 20px; overflow-y: auto; z-index: 100; }
         #playlist.active { bottom: 0; }
         .handle { width: 50px; height: 5px; background: #fff; margin: 10px auto 30px; border-radius: 5px; cursor: pointer; }
-        
         .song-item { display: flex; align-items: center; gap: 20px; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
         .song-cover { width: 60px; height: 60px; border-radius: 8px; background-size: cover; background-position: center; }
-
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
@@ -124,37 +108,31 @@
             audio.src = `MUSIC/music${i}.mp3`;
             disc.style.backgroundImage = `url('${coverPath}')`;
             bgDynamic.style.backgroundImage = `url('${coverPath}')`;
+            
             audio.play();
             disc.classList.add('playing');
+            bgDynamic.classList.add('visible'); // Show
             playBtn.innerText = "||";
             document.getElementById('playlist').classList.remove('active');
         }
 
         function togglePlay() {
             if (audio.paused) { 
-                audio.play().catch(e => console.log("Playback failed:", e)); 
+                audio.play(); 
                 disc.classList.add('playing'); 
+                bgDynamic.classList.add('visible'); // Show
                 playBtn.innerText = "||"; 
             } else { 
                 audio.pause(); 
                 disc.classList.remove('playing'); 
+                bgDynamic.classList.remove('visible'); // Hide
                 playBtn.innerText = "▶"; 
             }
         }
 
-        function nextSong() { 
-            currentTrack = (currentTrack >= 50) ? 1 : currentTrack + 1; 
-            selectSong(currentTrack); 
-        }
-        
-        function prevSong() { 
-            currentTrack = (currentTrack <= 1) ? 50 : currentTrack - 1; 
-            selectSong(currentTrack); 
-        }
-        
-        function togglePlaylist() { 
-            document.getElementById('playlist').classList.toggle('active'); 
-        }
+        function nextSong() { currentTrack = (currentTrack >= 50) ? 1 : currentTrack + 1; selectSong(currentTrack); }
+        function prevSong() { currentTrack = (currentTrack <= 1) ? 50 : currentTrack - 1; selectSong(currentTrack); }
+        function togglePlaylist() { document.getElementById('playlist').classList.toggle('active'); }
     </script>
 </body>
 </html>
