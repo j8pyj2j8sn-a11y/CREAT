@@ -91,23 +91,32 @@
     text-transform: uppercase;
     letter-spacing: -0.05em;
 
-    /* Black Titanium */
+        /* Platinum finish */
     background: linear-gradient(
         180deg,
-        #f0f0f0 0%,
-        #6b6b6b 15%,
-        #1a1a1a 35%,
-        #000000 50%,
-        #2e2e2e 70%,
-        #9a9a9a 100%
+        #ffffff 0%,
+        #f4f4f4 8%,
+        #d7d7d7 20%,
+        #8d8d8d 35%,
+        #ececec 50%,
+        #9f9f9f 65%,
+        #d6d6d6 82%,
+        #ffffff 100%
     );
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
+    /* Dark titanium border */
+    -webkit-text-stroke: 2px #1a1a1a;
+
+    /* Premium depth */
     text-shadow:
-        0 2px 4px rgba(255,255,255,0.12),
-        0 8px 20px rgba(0,0,0,0.7);
+        0 2px 0 #000,
+        0 4px 8px rgba(0,0,0,.45),
+        0 10px 25px rgba(0,0,0,.35);
+
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,.45));
 }
 
      #hint {
