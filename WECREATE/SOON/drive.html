@@ -111,13 +111,16 @@
 }
 
         #hint {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            opacity: 0.6;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
+    margin-top: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color: #d0d0d0;
 
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.15),
+        0 0 20px rgba(255,255,255,0.08);
+}
         @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
         @keyframes rotateBorder { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
     </style>
