@@ -93,7 +93,9 @@ songNames.forEach((name, i) => {
             <img src="COVER/memecover.jpg" crossorigin="anonymous">
             <div class="info"><h3>${name}</h3></div>
             <div class="equalizer"><span></span><span></span><span></span></div>
-            <a class="download" href="DIALOGUES/song${num}.m4a" download onclick="event.stopPropagation()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+            <a class="download"
+   href="#"
+   onclick="event.stopPropagation(); downloadSong('DIALOGUES/song${num}.m4a'); return false;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 3V14" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M8.5 10.5L12 14L15.5 10.5" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18H19" stroke="#00F5FF" stroke-width="2.5" stroke-linecap="round"/></svg></a>
         </div>
     `;
 });
@@ -107,6 +109,20 @@ const searchInput=document.getElementById("searchInput");
 const homeButton=document.getElementById("homeButton");
 const colorThief = new ColorThief();
 let current = null; let currentIndex = -1;
+    
+    const SECRET_CODE = "WECREATE2026";
+
+function downloadSong(file) {
+    const code = prompt("Enter the download code:");
+    if (code === SECRET_CODE) {
+        const a = document.createElement("a");
+        a.href = file;
+        a.download = "";
+        a.click();
+    } else {
+        alert("Incorrect code!");
+    }
+}
 
 function playCard(index){
     const card = cards[index];
